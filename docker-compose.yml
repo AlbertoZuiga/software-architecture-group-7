@@ -1,22 +1,36 @@
 services:
   db:
-    image: postgres:13-alpine
+    image: postgres:16
+    container_name: postgres_container
     environment:
-      POSTGRES_DB: database
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: book_review
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-  
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_container
+    environment:
+        DATABASE_URL: postgres://postgres:postgres@db:5432/book_review
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgres://user:password@db:5432/database
+    restart: unless-stopped
+    volumes:
+      - .:/app
 
+volumes:
+  postgres_data:
