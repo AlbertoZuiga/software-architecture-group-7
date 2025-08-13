@@ -3,5 +3,6 @@ def navbar_links(request):
         'links': {
             'Home': '/',
             'Books': '/books/',
+            'Authors': '/authors/',
         }
     }

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Autores{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Autores</h2>
+
+    <div class="list-group">
+        {% for author in authors %}
+            <a href="{% url 'authors:show' author.id %}" class="list-group-item list-group-item-action">
+                {{ author.name }}
+            </a>
+        {% empty %}
+            <div class="alert alert-info">No hay autores disponibles.</div>
+        {% endfor %}
+    </div>
+
+    <!-- PAGINACIÓN -->
+    {% if authors.has_other_pages %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination">
+            {% if authors.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ authors.previous_page_number }}" aria-label="Anterior">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+            {% endif %}
+
+            {% for num in authors.paginator.page_range %}
+                {% if authors.number == num %}
+                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% elif num > authors.number|add:'-3' and num < authors.number|add:'3' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if authors.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ authors.next_page_number }}" aria-label="Siguiente">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

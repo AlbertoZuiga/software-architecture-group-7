@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}{{ author.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title">{{ author.name }}</h2>
+
+            <p class="card-subtitle mb-2 text-muted">
+                <strong>País:</strong> {{ author.country }}
+            </p>
+
+            <p class="card-text mt-3">
+                <strong>Cantidad de Libros:</strong> {{ author.books_count }}
+            </p>
+
+            <p class="card-text mt-4">
+                <strong>Ventas Totales:</strong> {{ author.total_sales|intcomma }}
+            </p>
+
+            <a href="{% url 'authors:index' %}" class="btn btn-outline-primary mt-4">
+                ← Volver a la lista
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
