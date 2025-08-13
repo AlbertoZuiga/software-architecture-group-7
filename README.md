@@ -27,20 +27,72 @@ docker-compose up --build -d
 
 ```
 ├── apps
-│   ├── authors      # Handles author-related data and views
-│   ├── books        # Handles book-related data and views
-│   ├── common       # Shared models and utilities
-│   ├── reviews      # Handles book reviews
-│   └── sales        # Handles sales data and functionality
-├── book_review_web  # Django project configuration
+│   ├── __init__.py
+│   ├── authors
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── __init__.py
+│   │   │   └── 0001_initial.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── books
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── __init__.py
+│   │   │   └── 0001_initial.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── common
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   └── __init__.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── reviews
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── __init__.py
+│   │   │   └── 0001_initial.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   └── sales
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── migrations
+│       │   ├── __init__.py
+│       │   └── 0001_initial.py
+│       ├── models.py
+│       ├── tests.py
+│       ├── urls.py
+│       └── views.py
+├── book_review_web
+│   ├── __init__.py
+│   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
+│   └── wsgi.py
+├── data_fixture.json
 ├── docker-compose.yml
 ├── Dockerfile
 ├── manage.py
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ---
@@ -51,6 +103,18 @@ docker-compose up --build -d
 
 ```bash
 docker-compose exec backend python manage.py migrate
+```
+
+* Run seeds:
+
+```bash
+docker-compose exec backend python manage.py loaddata data_fixture.json
+```
+
+* Connect to console:
+
+```bash
+docker exec -it nombre_del_contenedor python manage.py shell
 ```
 
 * Create a superuser:
