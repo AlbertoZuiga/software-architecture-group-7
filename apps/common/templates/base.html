@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Book Reviews{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Book Review Platform</h1>
+        <nav>
+            <a href="{% url 'books:index' %}">Books</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Grupo 7</p>
+    </footer>
+</body>
+</html>
