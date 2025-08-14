@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 
 from apps.books.models import Book
 from .models import Review
+from django.db import models
 
 
+@login_required
 @require_POST
 def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 	book = get_object_or_404(Book, id=book_id)
@@ -37,3 +40,11 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 
 	Review.objects.create(book=book, review=review_text, score=score_val)
 	return redirect("books:show", book_id=book.id)
+
+
+@login_required
+@require_POST
+def upvote_review(request: HttpRequest, review_id: int) -> HttpResponse:
+	review = get_object_or_404(Review, id=review_id)
+	Review.objects.filter(id=review.id).update(up_votes=models.F('up_votes') + 1)
+	return redirect('books:show', book_id=review.book_id)

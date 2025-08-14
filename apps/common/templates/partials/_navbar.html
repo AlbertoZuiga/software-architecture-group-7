@@ -9,11 +9,20 @@
             <ul class="navbar-nav ms-auto">
                 {% for name, url in links.items %}
                     <li class="nav-item">
-                        <a class="nav-link{% if request.path == url %} active{% endif %}" href="{{ url }}">
-                            {{ name }}
-                        </a>
+                        <a class="nav-link{% if request.path == url %} active{% endif %}" href="{{ url }}">{{ name }}</a>
                     </li>
                 {% endfor %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button class="nav-link btn btn-link " type="submit">Salir</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Registro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

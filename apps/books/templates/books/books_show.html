@@ -28,16 +28,30 @@
     
     <div class="mt-5">
         <h3>Reseñas</h3>
-    {% include 'reviews/_review_form.html' with book=book %}
+    {% if user.is_authenticated %}
+        {% include 'reviews/_review_form.html' with book=book %}
+    {% else %}
+        <div class="alert alert-info">Inicia sesión para agregar una reseña. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
+    {% endif %}
         {% if reviews %}
             <ul class="list-group">
                 {% for r in reviews %}
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Puntaje: {{ r.score }} / 5</div>
-                        {{ r.review|linebreaksbr }}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <div class="me-3">
+                            <div class="fw-bold">Puntaje: {{ r.score }} / 5</div>
+                            {{ r.review|linebreaksbr }}
+                        </div>
+                        <div class="text-center">
+                            <div><span class="badge bg-secondary">{{ r.up_votes }} 👍</span></div>
+                            {% if user.is_authenticated %}
+                            <form method="post" action="{% url 'reviews:upvote' r.id %}" class="mt-2">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-outline-success" type="submit">Up-vote</button>
+                            </form>
+                            {% endif %}
+                        </div>
                     </div>
-                    <span class="badge text-bg-secondary rounded-pill">👍 {{ r.up_votes }}</span>
                 </li>
                 {% endfor %}
             </ul>
