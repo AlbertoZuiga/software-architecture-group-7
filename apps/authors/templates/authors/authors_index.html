@@ -6,6 +6,9 @@
 <div class="container mt-4">
     <h2 class="mb-4">Lista de Autores</h2>
 
+    {% url 'authors:create' as create_url %}
+    {% include "partials/_authors_form.html" with form_action=create_url submit_label="Agregar autor" initial_name="" initial_country="" %}
+
     <div class="list-group">
         {% for author in authors %}
             <a href="{% url 'authors:show' author.id %}" class="list-group-item list-group-item-action">
@@ -16,7 +19,6 @@
         {% endfor %}
     </div>
 
-    <!-- PAGINACIÓN -->
     {% if authors.has_other_pages %}
     <nav aria-label="Page navigation" class="mt-4">
         <ul class="pagination">

@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
+from django.db import models
 
 from apps.books.models import Book
 from .models import Review
-from django.db import models
 
 
 @login_required

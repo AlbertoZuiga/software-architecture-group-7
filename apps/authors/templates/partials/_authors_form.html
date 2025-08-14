@@ -1,0 +1,37 @@
+<form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input 
+            id="name"
+            type="text"
+            name="name"
+            class="form-control {% if errors.name %}is-invalid{% endif %}"
+            maxlength="200"
+            value="{{ form_values.name|default:initial_name }}"
+            required
+        >
+        {% if errors.name %}
+            <div class="invalid-feedback">{{ errors.name }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        <label for="country" class="form-label">País</label>
+        <input 
+            id="country"
+            type="text"
+            name="country"
+            class="form-control {% if errors.country %}is-invalid{% endif %}"
+            maxlength="100"
+            value="{{ form_values.country|default:initial_country }}"
+            required
+        >
+        {% if errors.country %}
+            <div class="invalid-feedback">{{ errors.country }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+</form>
