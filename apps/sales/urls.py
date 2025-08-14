@@ -4,4 +4,6 @@ from . import views
 
 app_name = "sales"
 
-urlpatterns = []
+urlpatterns = [
+    path("", views.sales_index, name="index"),
+]

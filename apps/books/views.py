@@ -16,5 +16,16 @@ def books_index(request):
 
 def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
+    book.recompute_total_sales()
+
     reviews = book.reviews.all().order_by("-up_votes", "-score")
-    return render(request, "books/books_show.html", {"book": book, "reviews": reviews})
+    sales = book.yearly_sales.all().order_by("-year")
+    return render(
+        request,
+        "books/books_show.html",
+        {
+            "book": book,
+            "reviews": reviews,
+            "sales": sales
+        }
+    )

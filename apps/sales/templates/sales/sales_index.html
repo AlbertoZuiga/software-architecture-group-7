@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Ventas de {{ book.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Ventas del libro "{{ book.name }}"</h2>
+
+    <a href="{% url 'books:show' book.id %}" class="btn btn-secondary mb-3">
+        ← Volver al libro
+    </a>
+
+
+    <div class="alert alert-success">
+        <strong>Ventas totales:</strong> {{ book.total_sales|intcomma }}
+    </div>
+
+    <div class="list-group">
+        {% for sale in sales %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Año:</strong> {{ sale.year }}
+                </div>
+                <div>
+                    <strong>Ventas:</strong> {{ sale.sales }}
+                </div>
+            </div>
+        {% empty %}
+            <div class="alert alert-info">No hay ventas registradas para este libro.</div>
+        {% endfor %}
+    </div>
+
+    <!-- PAGINACIÓN -->
+    {% if sales.has_other_pages %}
+    <nav aria-label="Paginación" class="mt-4">
+        <ul class="pagination">
+            {% if sales.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ sales.previous_page_number }}" aria-label="Anterior">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+            {% endif %}
+
+            {% for num in sales.paginator.page_range %}
+                {% if sales.number == num %}
+                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% elif num > sales.number|add:'-3' and num < sales.number|add:'3' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if sales.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ sales.next_page_number }}" aria-label="Siguiente">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}
