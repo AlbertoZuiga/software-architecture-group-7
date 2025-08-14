@@ -17,7 +17,9 @@
     </div>
 
     {% if user.is_authenticated %}
-        {% include 'partials/_sales_form.html' with book=book %}
+        {% url 'sales:create' book.id as create_url %}
+
+        {% include "partials/_sales_form.html" with form_action=create_url submit_label="Agregar venta" initial_year="" initial_sales="" %}
     {% else %}
         <div class="alert alert-info">Inicia sesión para agregar una venta. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
     {% endif %}
