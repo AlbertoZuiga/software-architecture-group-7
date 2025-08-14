@@ -9,22 +9,37 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('books', '0001_initial'),
+        ("books", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('review', models.TextField()),
-                ('score', models.PositiveSmallIntegerField()),
-                ('up_votes', models.PositiveIntegerField(default=0)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='books.book')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("review", models.TextField()),
+                ("score", models.PositiveSmallIntegerField()),
+                ("up_votes", models.PositiveIntegerField(default=0)),
+                (
+                    "book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="reviews",
+                        to="books.book",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-up_votes', '-score'],
-                'indexes': [models.Index(fields=['book', 'score'], name='reviews_rev_book_id_05cf8c_idx'), models.Index(fields=['up_votes'], name='reviews_rev_up_vote_9eead1_idx')],
+                "ordering": ["-up_votes", "-score"],
+                "indexes": [
+                    models.Index(fields=["book", "score"], name="reviews_rev_book_id_05cf8c_idx"),
+                    models.Index(fields=["up_votes"], name="reviews_rev_up_vote_9eead1_idx"),
+                ],
             },
         ),
     ]

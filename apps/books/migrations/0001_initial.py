@@ -9,23 +9,35 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('authors', '0001_initial'),
+        ("authors", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Book',
+            name="Book",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('summary', models.TextField()),
-                ('published_at', models.DateField()),
-                ('total_sales', models.PositiveIntegerField(default=0)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='books', to='authors.author')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("summary", models.TextField()),
+                ("published_at", models.DateField()),
+                ("total_sales", models.PositiveIntegerField(default=0)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="books",
+                        to="authors.author",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['name'],
-                'indexes': [models.Index(fields=['author'], name='books_book_author__709385_idx')],
+                "ordering": ["name"],
+                "indexes": [models.Index(fields=["author"], name="books_book_author__709385_idx")],
             },
         ),
     ]

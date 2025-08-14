@@ -4,24 +4,23 @@ from apps.authors.models import Author
 
 
 class Book(models.Model):
-	author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
-	name = models.CharField(max_length=200)
-	summary = models.TextField()
-	published_at = models.DateField()
-	
-	total_sales = models.PositiveIntegerField(default=0)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+    name = models.CharField(max_length=200)
+    summary = models.TextField()
+    published_at = models.DateField()
 
-	class Meta:
-		ordering = ["name"]
-		indexes = [
-			models.Index(fields=["author"]),
-		]
+    total_sales = models.PositiveIntegerField(default=0)
 
-	def __str__(self) -> str: 
-		return self.name
+    class Meta:
+        ordering = ["name"]
+        indexes = [
+            models.Index(fields=["author"]),
+        ]
 
-	def recompute_total_sales(self):
-		agg = self.yearly_sales.aggregate(total=models.Sum("sales"))
-		self.total_sales = agg.get("total") or 0
-		self.save(update_fields=["total_sales"])
+    def __str__(self) -> str:
+        return self.name
 
+    def recompute_total_sales(self):
+        agg = self.yearly_sales.aggregate(total=models.Sum("sales"))
+        self.total_sales = agg.get("total") or 0
+        self.save(update_fields=["total_sales"])

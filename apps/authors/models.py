@@ -2,16 +2,15 @@ from django.db import models
 
 
 class Author(models.Model):
-	name = models.CharField(max_length=200)
-	country = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
+    country = models.CharField(max_length=100)
 
-	class Meta:
-		ordering = ["name"]
+    class Meta:
+        ordering = ["name"]
 
-	def __str__(self) -> str:
-		return self.name
+    def __str__(self) -> str:
+        return self.name
 
-	@property
-	def books_count(self) -> int:
-		return self.books.count()
-
+    @property
+    def books_count(self) -> int:
+        return self.books.count()
