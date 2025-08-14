@@ -9,22 +9,37 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('books', '0001_initial'),
+        ("books", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Sale',
+            name="Sale",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('year', models.PositiveIntegerField()),
-                ('sales', models.PositiveIntegerField(default=0)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='yearly_sales', to='books.book')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("year", models.PositiveIntegerField()),
+                ("sales", models.PositiveIntegerField(default=0)),
+                (
+                    "book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="yearly_sales",
+                        to="books.book",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-year'],
-                'indexes': [models.Index(fields=['book', 'year'], name='sales_sale_book_id_a85d02_idx'), models.Index(fields=['year'], name='sales_sale_year_1ca25a_idx')],
-                'unique_together': {('book', 'year')},
+                "ordering": ["-year"],
+                "indexes": [
+                    models.Index(fields=["book", "year"], name="sales_sale_book_id_a85d02_idx"),
+                    models.Index(fields=["year"], name="sales_sale_year_1ca25a_idx"),
+                ],
+                "unique_together": {("book", "year")},
             },
         ),
     ]
