@@ -24,6 +24,10 @@
             <a href="{% url 'authors:index' %}" class="btn btn-outline-primary mt-4">
                 ← Volver a la lista
             </a>
+
+            <a href="{% url 'authors:update' author.id %}" class="btn btn-warning mt-4 ms-2">
+                ✏️ Editar autor
+            </a>
         </div>
     </div>
 </div>
