@@ -31,6 +31,12 @@
                 </div>
 
                 {% if user.is_authenticated %}
+                    <form method="get" action="{% url 'sales:update' book.id sale.id %}">
+                        <button type="submit" class="btn btn-sm btn-warning ms-2">
+                            ✏ Editar
+                        </button>
+                    </form>
+
                     <form method="post" action="{% url 'sales:delete' book.id sale.id %}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta venta?');">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-sm btn-danger">
