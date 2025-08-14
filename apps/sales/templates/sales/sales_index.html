@@ -26,18 +26,25 @@
         {% for sale in sales %}
             <div class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
-                    <strong>Año:</strong> {{ sale.year }}
-                </div>
-                <div>
+                    <strong>Año:</strong> {{ sale.year }} <br>
                     <strong>Ventas:</strong> {{ sale.sales }}
                 </div>
+
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'sales:delete' book.id sale.id %}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta venta?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            🗑 Eliminar
+                        </button>
+                    </form>
+                {% endif %}
             </div>
         {% empty %}
             <div class="alert alert-info">No hay ventas registradas para este libro.</div>
         {% endfor %}
     </div>
 
-    <!-- PAGINACIÓN -->
+
     {% if sales.has_other_pages %}
     <nav aria-label="Paginación" class="mt-4">
         <ul class="pagination">
