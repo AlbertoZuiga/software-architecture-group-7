@@ -16,6 +16,12 @@
         <strong>Ventas totales:</strong> {{ book.total_sales|intcomma }}
     </div>
 
+    {% if user.is_authenticated %}
+        {% include 'partials/_sales_form.html' with book=book %}
+    {% else %}
+        <div class="alert alert-info">Inicia sesión para agregar una venta. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
+    {% endif %}
+
     <div class="list-group">
         {% for sale in sales %}
             <div class="list-group-item d-flex justify-content-between align-items-center">

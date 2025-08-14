@@ -1,0 +1,14 @@
+<form method="post" action="{% url 'sales:create' book.id %}" class="mb-4 border rounded p-3 bg-light">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="year" class="form-label">Año (0-2025)</label>
+        <input id="year" type="number" name="year" min="0" max="2025" class="form-control" value="{{ form_values.year|default:'' }}" required>
+        {% if errors.year %}<div class="text-danger small">{{ errors.year }}</div>{% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="sales" class="form-label">Cantidad de ventas</label>
+        <input id="sales" type="number" name="sales" min="0" class="form-control" value="{{ form_values.sales|default:'' }}" required>
+        {% if errors.sales %}<div class="text-danger small">{{ errors.sales }}</div>{% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar venta</button>
+</form>
