@@ -16,22 +16,41 @@
         <strong>Ventas totales:</strong> {{ book.total_sales|intcomma }}
     </div>
 
+    {% if user.is_authenticated %}
+        {% include 'partials/_sales_form.html' with book=book %}
+    {% else %}
+        <div class="alert alert-info">Inicia sesión para agregar una venta. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
+    {% endif %}
+
     <div class="list-group">
         {% for sale in sales %}
             <div class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
-                    <strong>Año:</strong> {{ sale.year }}
-                </div>
-                <div>
+                    <strong>Año:</strong> {{ sale.year }} <br>
                     <strong>Ventas:</strong> {{ sale.sales }}
                 </div>
+
+                {% if user.is_authenticated %}
+                    <form method="get" action="{% url 'sales:update' book.id sale.id %}">
+                        <button type="submit" class="btn btn-sm btn-warning ms-2">
+                            ✏ Editar
+                        </button>
+                    </form>
+
+                    <form method="post" action="{% url 'sales:delete' book.id sale.id %}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta venta?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            🗑 Eliminar
+                        </button>
+                    </form>
+                {% endif %}
             </div>
         {% empty %}
             <div class="alert alert-info">No hay ventas registradas para este libro.</div>
         {% endfor %}
     </div>
 
-    <!-- PAGINACIÓN -->
+
     {% if sales.has_other_pages %}
     <nav aria-label="Paginación" class="mt-4">
         <ul class="pagination">

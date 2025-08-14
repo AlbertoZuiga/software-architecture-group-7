@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Editar venta{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Editar venta de "{{ book.name }}"</h2>
+
+    <a href="{% url 'sales:index' book.id %}" class="btn btn-secondary mb-3">
+        ← Volver a ventas
+    </a>
+
+    <form method="post" action="{% url 'sales:update' book.id sale.id %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="year" class="form-label">Año</label>
+            <input 
+                type="number" 
+                class="form-control {% if errors.year %}is-invalid{% endif %}" 
+                id="year" 
+                name="year" 
+                value="{{ form_values.year|default:sale.year }}"
+                placeholder="Ej. 2023"
+            >
+            {% if errors.year %}
+                <div class="invalid-feedback">
+                    {{ errors.year }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="sales" class="form-label">Cantidad de ventas</label>
+            <input 
+                type="number" 
+                class="form-control {% if errors.sales %}is-invalid{% endif %}" 
+                id="sales" 
+                name="sales" 
+                value="{{ form_values.sales|default:sale.sales }}"
+                placeholder="Ej. 1500"
+            >
+            {% if errors.sales %}
+                <div class="invalid-feedback">
+                    {{ errors.sales }}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 Guardar cambios</button>
+        <a href="{% url 'sales:index' book.id %}" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
