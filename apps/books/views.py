@@ -13,4 +13,5 @@ def books_index(request):
 
 def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
-    return render(request, 'books/books_show.html', {'book': book})
+    reviews = book.reviews.all().order_by('-up_votes', '-score')
+    return render(request, 'books/books_show.html', {'book': book, 'reviews': reviews})
