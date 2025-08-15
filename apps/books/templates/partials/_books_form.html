@@ -1,0 +1,75 @@
+<form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
+    {% csrf_token %}
+
+     <!-- Name -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre del libro</label>
+        <input 
+            id="name"
+            type="text"
+            name="name"
+            class="form-control {% if errors.name %}is-invalid{% endif %}"
+            maxlength="200"
+            value="{{ form_values.name|default:initial_name }}"
+            required
+        >
+        {% if errors.name %}
+            <div class="invalid-feedback">{{ errors.name }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Author -->
+    <div class="mb-3">
+        <label for="author" class="form-label">Autor</label>
+        <select 
+            id="author"
+            name="author"
+            class="form-select {% if errors.author %}is-invalid{% endif %}"
+            required
+        >
+            {% for author in authors %}
+                <option value="{{ author.id }}"
+                    {% if form_values.author|default:initial_author == author.id %}selected{% endif %}
+                >
+                    {{ author.name }}
+                </option>
+            {% endfor %}
+        </select>
+        {% if errors.author %}
+            <div class="invalid-feedback">{{ errors.author }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Summary -->
+    <div class="mb-3">
+        <label for="summary" class="form-label">Resumen</label>
+        <textarea 
+            id="summary"
+            name="summary"
+            class="form-control {% if errors.summary %}is-invalid{% endif %}"
+            rows="4"
+            required
+        >{{ form_values.summary|default:initial_summary }}</textarea>
+        {% if errors.summary %}
+            <div class="invalid-feedback">{{ errors.summary }}</div>
+        {% endif %}
+    </div>
+
+    <!-- Published at -->
+    <div class="mb-3">
+        <label for="published_at" class="form-label">Fecha de publicación</label>
+        <input 
+            id="published_at"
+            type="date"
+            name="published_at"
+            class="form-control {% if errors.published_at %}is-invalid{% endif %}"
+            value="{{ form_values.published_at|default:initial_published_at|date:'Y-m-d' }}"
+            required
+        >
+        {% if errors.published_at %}
+            <div class="invalid-feedback">{{ errors.published_at }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+</form>
