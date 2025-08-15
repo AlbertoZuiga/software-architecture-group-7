@@ -90,7 +90,7 @@
                             {% endif %}
                         </div>
                         <div class="text-center" style="min-width:90px;">
-                            <div><span class="badge bg-secondary">{{ review.up_votes_count() }} 👍</span></div>
+                            <div><span class="badge bg-secondary">{{ review.up_votes }} 👍</span></div>
                             {% if user.is_authenticated %}
                                 {% if not edit_review_id == review.id %}
                                 {% if user.id not in user_upvoted_review_ids %}

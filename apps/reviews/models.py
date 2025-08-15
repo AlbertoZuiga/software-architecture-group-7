@@ -9,6 +9,8 @@ class Review(models.Model):
     review = models.TextField()
     score = models.PositiveSmallIntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
+    up_votes = models.PositiveIntegerField(default=0)
+
 
     class Meta:
         ordering = ["-score"]
@@ -26,8 +28,9 @@ class Review(models.Model):
         except IntegrityError:
             return False
 
-    def up_votes_count(self):
-        return self.reviewupvotes.count()
+    def recompute_up_votes_count(self):
+        self.up_votes = self.reviewupvotes.count()
+        self.save()
 
 class ReviewUpvote(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="reviewupvotes")

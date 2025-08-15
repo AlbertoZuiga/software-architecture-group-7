@@ -34,14 +34,18 @@ def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
     book.recompute_total_sales()
 
-    # Obtener reviews y votar del usuario actual
+    user_upvoted_review_ids = set()
     reviews = Review.objects.filter(book=book).prefetch_related('reviewupvotes', 'user')
-    user_upvoted_review_ids = set(
-        ReviewUpvote.objects.filter(
-            user=request.user,
-            review__in=reviews
-        ).values_list('review_id', flat=True)
-    )
+    for review in reviews:
+        review.recompute_up_votes_count()
+
+    if request.user.is_authenticated:
+        user_upvoted_review_ids = set(
+            ReviewUpvote.objects.filter(
+                user=request.user,
+                review__in=reviews
+            ).values_list('review_id', flat=True)
+        )
 
     sales = book.yearly_sales.all().order_by("-year")
     return render(
@@ -138,7 +142,6 @@ def books_update(request, book_id):
             book.save()
             return redirect("books:index")
     else:
-        # Valores iniciales para el formulario
         form_values = {
             "name": book.name,
             "summary": book.summary,
