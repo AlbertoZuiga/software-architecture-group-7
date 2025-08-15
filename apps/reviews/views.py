@@ -38,7 +38,7 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 			status=400,
 		)
 
-	Review.objects.create(book=book, review=review_text, score=score_val)
+	Review.objects.create(book=book, review=review_text, score=score_val, user=request.user)
 	return redirect("books:show", book_id=book.id)
 
 
@@ -47,4 +47,57 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 def upvote_review(request: HttpRequest, review_id: int) -> HttpResponse:
 	review = get_object_or_404(Review, id=review_id)
 	Review.objects.filter(id=review.id).update(up_votes=models.F('up_votes') + 1)
+	return redirect('books:show', book_id=review.book_id)
+
+
+@login_required
+def edit_review(request: HttpRequest, review_id: int) -> HttpResponse:
+	review = get_object_or_404(Review, id=review_id)
+	if not (request.user.is_superuser or review.user_id == request.user.id):
+		return redirect('books:show', book_id=review.book_id)
+	if request.method == 'POST':
+		text = (request.POST.get('review') or '').strip()
+		score_raw = request.POST.get('score')
+		errors = {}
+		if not text:
+			errors['review'] = 'El texto es requerido'
+		try:
+			score_val = int(score_raw)
+			if score_val < 1 or score_val > 5:
+				errors['score'] = 'Debe estar entre 1 y 5'
+		except (TypeError, ValueError):
+			errors['score'] = 'Puntaje inválido'
+		if not errors:
+			review.review = text
+			review.score = score_val
+			review.save(update_fields=['review', 'score'])
+			return redirect('books:show', book_id=review.book_id)
+		book = review.book
+		reviews = book.reviews.all()
+		return render(request, 'books/books_show.html', {
+			'book': book,
+			'reviews': reviews,
+			'edit_review_id': review.id,
+			'errors': errors,
+			'form_values': {'review': text, 'score': score_raw or ''},
+		}, status=400)
+	# GET: show inline edit form within book page
+	book = review.book
+	reviews = book.reviews.all()
+	return render(request, 'books/books_show.html', {
+		'book': book,
+		'reviews': reviews,
+		'edit_review_id': review.id,
+		'form_values': {'review': review.review, 'score': review.score},
+	})
+
+
+@login_required
+@require_POST
+def delete_review(request: HttpRequest, review_id: int) -> HttpResponse:
+	review = get_object_or_404(Review, id=review_id)
+	if request.user.is_superuser or review.user_id == request.user.id:
+		book_id = review.book_id
+		review.delete()
+		return redirect('books:show', book_id=book_id)
 	return redirect('books:show', book_id=review.book_id)

@@ -8,6 +8,9 @@ class Review(models.Model):
     review = models.TextField()
     score = models.PositiveSmallIntegerField()
     up_votes = models.PositiveIntegerField(default=0)
+    user = models.ForeignKey(
+        "auth.User", on_delete=models.CASCADE, related_name="reviews", null=False, default=1
+    )
 
     class Meta:
         ordering = ["-up_votes", "-score"]
