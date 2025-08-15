@@ -54,18 +54,57 @@
             <ul class="list-group">
                 {% for r in reviews %}
                 <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <div class="me-3">
-                            <div class="fw-bold">Puntaje: {{ r.score }} / 5</div>
-                            {{ r.review|linebreaksbr }}
+                    <div class="d-flex justify-content-between gap-3">
+                        <div class="flex-grow-1">
+                            {% if edit_review_id == r.id %}
+                                <form method="post" action="{% url 'reviews:edit' r.id %}" class="mb-2">
+                                    {% csrf_token %}
+                                    <div class="row g-2 align-items-end">
+                                        <div class="col-auto">
+                                            <label class="form-label mb-1 small">Puntaje</label>
+                                            <input type="number" name="score" min="1" max="5" class="form-control form-control-sm" value="{{ form_values.score|default:r.score }}" required>
+                                            {% if errors.score and edit_review_id == r.id %}<div class="text-danger small">{{ errors.score }}</div>{% endif %}
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label mb-1 small">Reseña</label>
+                                            <textarea name="review" rows="2" class="form-control form-control-sm" required>{{ form_values.review|default:r.review }}</textarea>
+                                            {% if errors.review and edit_review_id == r.id %}<div class="text-danger small">{{ errors.review }}</div>{% endif %}
+                                        </div>
+                                        <div class="col-auto d-flex gap-1">
+                                            <button class="btn btn-sm btn-success" type="submit">Guardar</button>
+                                            <a class="btn btn-sm btn-secondary" href="{% url 'books:show' book.id %}">Cancelar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <div class="fw-bold">Puntaje: {{ r.score }} / 5</div>
+                                <div class="small text-secondary mb-1">por <span class="fw-semibold">{{ r.user.username }}</span></div>
+                                <div class="small">{{ r.review|linebreaksbr }}</div>
+                            {% endif %}
                         </div>
-                        <div class="text-center">
+                        <div class="text-center" style="min-width:90px;">
                             <div><span class="badge bg-secondary">{{ r.up_votes }} 👍</span></div>
                             {% if user.is_authenticated %}
-                            <form method="post" action="{% url 'reviews:upvote' r.id %}" class="mt-2">
-                                {% csrf_token %}
-                                <button class="btn btn-sm btn-outline-success" type="submit">Up-vote</button>
-                            </form>
+                                {% if not edit_review_id == r.id %}
+                                <form method="post" action="{% url 'reviews:upvote' r.id %}" class="mt-2">
+                                    {% csrf_token %}
+                                    <button class="btn btn-sm btn-outline-success" type="submit">+1</button>
+                                </form>
+                                {% endif %}
+                                {% if user.is_superuser or user.id == r.user_id %}
+                                <div class="dropdown mt-2">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="{% url 'reviews:edit' r.id %}">Editar</a></li>
+                                        <li>
+                                            <form method="post" action="{% url 'reviews:delete' r.id %}" onsubmit="return confirm('¿Eliminar reseña?');">
+                                                {% csrf_token %}
+                                                <button class="dropdown-item text-danger" type="submit">Eliminar</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>

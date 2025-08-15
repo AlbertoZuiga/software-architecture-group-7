@@ -4,7 +4,7 @@
     "pk": 3,
     "fields": {
       "username": "admin",
-      "password": "pbkdf2_sha256$260000$8Sc3L1BFt7Z1kFb0w4CW8E$T4AGW2gKyFg9UWyV7SlD5aQ/wGqMuoIh5Qbg5IKp1HE=",
+      "password": "pbkdf2_sha256$1000000$EQY5cTfv5PF94CqbnZ7evj$IpUSG+OtHxU41l1P6uxzjx16dWNajsgRf9VQDL0nyDo=", 
       "is_superuser": true,
       "is_staff": true,
       "is_active": true,
@@ -20,7 +20,7 @@
     "pk": 2,
     "fields": {
       "username": "maria.garcia",
-      "password": "pbkdf2_sha256$260000$WJWuEDFuZDt74K96vWSbMF$K7AUkFrK8AZTTctIziZkNUbF5qlRg0pBGn0xxgAr6GQ=",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
       "is_superuser": false,
       "is_staff": false,
       "is_active": true,
@@ -36,7 +36,7 @@
     "pk": 1,
     "fields": {
       "username": "juanperez",
-      "password": "pbkdf2_sha256$260000$WJWuEDFuZDt74K96vWSbMF$K7AUkFrK8AZTTctIziZkNUbF5qlRg0pBGn0xxgAr6GQ=",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
       "is_superuser": false,
       "is_staff": false,
       "is_active": true,
