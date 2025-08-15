@@ -6,8 +6,10 @@
 <div class="container mt-4">
     <h2 class="mb-4">Lista de Autores</h2>
 
-    {% url 'authors:create' as create_url %}
-    {% include "partials/_authors_form.html" with form_action=create_url submit_label="Agregar autor" initial_name="" initial_country="" %}
+    {% if user.is_authenticated %}
+        {% url 'authors:create' as create_url %}
+        {% include "partials/_authors_form.html" with form_action=create_url submit_label="Agregar autor" initial_name="" initial_country="" %}
+    {% endif %}
 
     <div class="list-group">
         {% for author in authors %}
