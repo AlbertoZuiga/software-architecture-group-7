@@ -48,7 +48,20 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 @require_POST
 def upvote_review(request: HttpRequest, review_id: int) -> HttpResponse:
     review = get_object_or_404(Review, id=review_id)
-    review.add_upvote(user=request.user)
+    success = review.add_upvote(user=request.user)
+    if success:
+        review.recompute_up_votes_count()
+
+    return redirect("books:show", book_id=review.book_id)
+
+
+@login_required
+@require_POST
+def delete_upvote_review(request: HttpRequest, review_id: int) -> HttpResponse:
+    review = get_object_or_404(Review, id=review_id)
+    success = review.remove_upvote(user=request.user)
+    if success:
+        review.recompute_up_votes_count()
 
     return redirect("books:show", book_id=review.book_id)
 

@@ -117,20 +117,22 @@
                             </div>
                             {% if user.is_authenticated %}
                                 {% if not edit_review_id == review.id %}
-                                    {% if user.id not in user_upvoted_review_ids %}
+                                    {% if review.id not in user_upvoted_review_ids %}
                                         <form method="post" action="{% url 'reviews:upvote' review.id %}">
                                             {% csrf_token %}
                                             <button class="btn btn-outline-success btn-sm px-3 shadow-sm hover-scale" type="submit" 
                                                     title="Dale un voto positivo a esta reseña">
-                                                <i class="bi bi-hand-thumbs-up-fill me-1"></i>Votar
+                                                <i class="bi bi-hand-thumbs-up me-1"></i>Votar
                                             </button>
                                         </form>
                                     {% else %}
-                                        <div class="badge bg-success-subtle text-success-emphasis border border-success px-3 py-2" 
-                                             title="Ya has votado esta reseña">
-                                            <i class="bi bi-check-circle-fill me-1"></i>
-                                            <span class="fw-medium">Votado</span>
-                                        </div>
+                                        <form method="post" action="{% url 'reviews:delete_upvote' review.id %}" class="d-grid">
+                                            {% csrf_token %}
+                                            <button class="btn btn-success btn-sm px-3 shadow-sm hover-scale" type="submit" 
+                                                    title="Quitar tu voto de esta reseña">
+                                                <i class="bi bi-hand-thumbs-up-fill me-1"></i>Votado
+                                            </button>
+                                        </form>
                                     {% endif %}
                                 {% endif %}
                                 {% if user.is_superuser or user.id == review.user_id %}

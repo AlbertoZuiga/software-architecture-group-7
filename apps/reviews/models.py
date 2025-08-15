@@ -28,6 +28,14 @@ class Review(models.Model):
         except IntegrityError:
             return False
 
+    def remove_upvote(self, user):
+        try:
+            upvote = ReviewUpvote.objects.get(review=self, user=user)
+            upvote.delete()
+            return True
+        except ReviewUpvote.DoesNotExist:
+            return False
+
     def recompute_up_votes_count(self):
         self.up_votes = self.reviewupvotes.count()
         self.save()

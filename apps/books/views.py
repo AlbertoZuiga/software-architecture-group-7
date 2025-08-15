@@ -34,13 +34,16 @@ def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
     book.recompute_total_sales()
 
-    user_upvoted_review_ids = set()
     reviews = Review.objects.filter(book=book).prefetch_related('reviewupvotes', 'user')
+    
+    # Recompute votes count for all reviews
     for review in reviews:
         review.recompute_up_votes_count()
 
+    # Get the IDs of reviews that the current user has upvoted
+    user_upvoted_review_ids = []
     if request.user.is_authenticated:
-        user_upvoted_review_ids = set(
+        user_upvoted_review_ids = list(
             ReviewUpvote.objects.filter(
                 user=request.user,
                 review__in=reviews
@@ -54,7 +57,7 @@ def books_show(request, book_id):
         {
             "book": book,
             "reviews": reviews,
-            "user_upvoted_review_ids": user_upvoted_review_ids,
+            "user_upvoted_review_ids": list(user_upvoted_review_ids),
             "sales": sales,
         }
     )
