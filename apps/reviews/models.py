@@ -11,7 +11,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
 
     class Meta:
-        ordering = ["-reviewupvotes__count", "-score"]  # opcional, ver nota abajo
+        ordering = ["-score"]
         indexes = [
             models.Index(fields=["book", "score"]),
         ]

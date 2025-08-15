@@ -2,8 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.postgres.search import SearchVector, SearchQuery
 
+from apps.reviews.models import Review, ReviewUpvote
 from .models import Book, Author
-
 
 def books_index(request):
     query = (request.GET.get("q") or "").strip()
@@ -34,7 +34,15 @@ def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
     book.recompute_total_sales()
 
-    reviews = book.reviews.all().order_by("-up_votes", "-score")
+    # Obtener reviews y votar del usuario actual
+    reviews = Review.objects.filter(book=book).prefetch_related('reviewupvotes', 'user')
+    user_upvoted_review_ids = set(
+        ReviewUpvote.objects.filter(
+            user=request.user,
+            review__in=reviews
+        ).values_list('review_id', flat=True)
+    )
+
     sales = book.yearly_sales.all().order_by("-year")
     return render(
         request,
@@ -42,7 +50,8 @@ def books_show(request, book_id):
         {
             "book": book,
             "reviews": reviews,
-            "sales": sales
+            "user_upvoted_review_ids": user_upvoted_review_ids,
+            "sales": sales,
         }
     )
 

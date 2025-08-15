@@ -51,30 +51,31 @@
 
     <div class="mt-5">
         <h3>Reseñas</h3>
-    {% if user.is_authenticated %}
-        {% include 'reviews/_review_form.html' with book=book %}
-    {% else %}
-        <div class="alert alert-info">Inicia sesión para agregar una reseña. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
-    {% endif %}
+        {% if user.is_authenticated %}
+            {% include 'reviews/_review_form.html' with book=book %}
+        {% else %}
+            <div class="alert alert-info">Inicia sesión para agregar una reseña. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
+        {% endif %}
+
         {% if reviews %}
             <ul class="list-group">
-                {% for r in reviews %}
+                {% for review in reviews %}
                 <li class="list-group-item">
                     <div class="d-flex justify-content-between gap-3">
                         <div class="flex-grow-1">
-                            {% if edit_review_id == r.id %}
-                                <form method="post" action="{% url 'reviews:edit' r.id %}" class="mb-2">
+                            {% if edit_review_id == review.id %}
+                                <form method="post" action="{% url 'reviews:edit' review.id %}" class="mb-2">
                                     {% csrf_token %}
                                     <div class="row g-2 align-items-end">
                                         <div class="col-auto">
-                                            <label for="score-{{ r.id }}" class="form-label mb-1 small">Puntaje</label>
-                                            <input type="number" id="score-{{ r.id }}" name="score" min="1" max="5" class="form-control form-control-sm" value="{{ form_values.score|default:r.score }}" required>
-                                            {% if errors.score and edit_review_id == r.id %}<div class="text-danger small">{{ errors.score }}</div>{% endif %}
+                                            <label for="score-{{ review.id }}" class="form-label mb-1 small">Puntaje</label>
+                                            <input type="number" id="score-{{ review.id }}" name="score" min="1" max="5" class="form-control form-control-sm" value="{{ form_values.score|default:review.score }}" required>
+                                            {% if errors.score and edit_review_id == review.id %}<div class="text-danger small">{{ errors.score }}</div>{% endif %}
                                         </div>
                                         <div class="col">
-                                            <label for="review-{{ r.id }}" class="form-label mb-1 small">Reseña</label>
-                                            <textarea id="review-{{ r.id }}" name="review" rows="2" class="form-control form-control-sm" required>{{ form_values.review|default:r.review }}</textarea>
-                                            {% if errors.review and edit_review_id == r.id %}<div class="text-danger small">{{ errors.review }}</div>{% endif %}
+                                            <label for="review-{{ review.id }}" class="form-label mb-1 small">Reseña</label>
+                                            <textarea id="review-{{ review.id }}" name="review" rows="2" class="form-control form-control-sm" required>{{ form_values.review|default:review.review }}</textarea>
+                                            {% if errors.review and edit_review_id == review.id %}<div class="text-danger small">{{ errors.review }}</div>{% endif %}
                                         </div>
                                         <div class="col-auto d-flex gap-1">
                                             <button class="btn btn-sm btn-success" type="submit">Guardar</button>
@@ -83,27 +84,32 @@
                                     </div>
                                 </form>
                             {% else %}
-                                <div class="fw-bold">Puntaje: {{ r.score }} / 5</div>
-                                <div class="small text-secondary mb-1">por <span class="fw-semibold">{{ r.user.username }}</span></div>
-                                <div class="small">{{ r.review|linebreaksbr }}</div>
+                                <div class="fw-bold">Puntaje: {{ review.score }} / 5</div>
+                                <div class="small text-secondary mb-1">por <span class="fw-semibold">{{ review.user.username }}</span></div>
+                                <div class="small">{{ review.review|linebreaksbr }}</div>
                             {% endif %}
                         </div>
                         <div class="text-center" style="min-width:90px;">
-                            <div><span class="badge bg-secondary">{{ r.up_votes }} 👍</span></div>
+                            <div><span class="badge bg-secondary">{{ review.up_votes_count() }} 👍</span></div>
                             {% if user.is_authenticated %}
-                                {% if not edit_review_id == r.id %}
-                                <form method="post" action="{% url 'reviews:upvote' r.id %}" class="mt-2">
-                                    {% csrf_token %}
-                                    <button class="btn btn-sm btn-outline-success" type="submit">+1</button>
-                                </form>
+                                {% if not edit_review_id == review.id %}
+                                {% if user.id not in user_upvoted_review_ids %}
+                                    <form method="post" action="{% url 'reviews:upvote' review.id %}" class="mt-2">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-outline-success" type="submit">+1</button>
+                                    </form>
+                                {% else %}
+                                    <div class="text-muted small mt-2">Ya votaste</div>
                                 {% endif %}
-                                {% if user.is_superuser or user.id == r.user_id %}
+
+                                {% endif %}
+                                {% if user.is_superuser or user.id == review.user_id %}
                                 <div class="dropdown mt-2">
                                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="{% url 'reviews:edit' r.id %}">Editar</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'reviews:edit' review.id %}">Editar</a></li>
                                         <li>
-                                            <form method="post" action="{% url 'reviews:delete' r.id %}" onsubmit="return confirm('¿Eliminar reseña?');">
+                                            <form method="post" action="{% url 'reviews:delete' review.id %}" onsubmit="return confirm('¿Eliminar reseña?');">
                                                 {% csrf_token %}
                                                 <button class="dropdown-item text-danger" type="submit">Eliminar</button>
                                             </form>
