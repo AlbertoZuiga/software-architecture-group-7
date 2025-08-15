@@ -50,75 +50,125 @@
 
 
     <div class="mt-5">
-        <h3>Reseñas</h3>
-    {% if user.is_authenticated %}
-        {% include 'reviews/_review_form.html' with book=book %}
-    {% else %}
-        <div class="alert alert-info">Inicia sesión para agregar una reseña. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
-    {% endif %}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0">Reseñas</h3>
+            {% if reviews %}
+            <div class="badge bg-primary rounded-pill fs-6">{{ reviews|length }}</div>
+            {% endif %}
+        </div>
+
+        {% if user.is_authenticated %}
+            {% include 'reviews/_review_form.html' with book=book %}
+        {% else %}
+            <div class="alert alert-info border-0 shadow-sm">
+                <i class="bi bi-info-circle me-2"></i>
+                Inicia sesión para agregar una reseña. 
+                <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a>
+            </div>
+        {% endif %}
+
         {% if reviews %}
-            <ul class="list-group">
-                {% for r in reviews %}
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between gap-3">
+            <div class="list-group">
+                {% for review in reviews %}
+                <div class="list-group-item list-group-item-action p-4 mb-2 rounded shadow-sm border">
+                    <div class="d-flex justify-content-between gap-4">
                         <div class="flex-grow-1">
-                            {% if edit_review_id == r.id %}
-                                <form method="post" action="{% url 'reviews:edit' r.id %}" class="mb-2">
+                            {% if edit_review_id == review.id %}
+                                <form method="post" action="{% url 'reviews:edit' review.id %}" class="mb-2">
                                     {% csrf_token %}
-                                    <div class="row g-2 align-items-end">
+                                    <div class="row g-3 align-items-end">
                                         <div class="col-auto">
-                                            <label for="score-{{ r.id }}" class="form-label mb-1 small">Puntaje</label>
-                                            <input type="number" id="score-{{ r.id }}" name="score" min="1" max="5" class="form-control form-control-sm" value="{{ form_values.score|default:r.score }}" required>
-                                            {% if errors.score and edit_review_id == r.id %}<div class="text-danger small">{{ errors.score }}</div>{% endif %}
+                                            <label for="score-{{ review.id }}" class="form-label mb-2 fw-medium">Puntaje</label>
+                                            <input type="number" id="score-{{ review.id }}" name="score" min="1" max="5" 
+                                                class="form-control form-control-lg shadow-sm" 
+                                                value="{{ form_values.score|default:review.score }}" required>
+                                            {% if errors.score and edit_review_id == review.id %}
+                                                <div class="text-danger small mt-1">{{ errors.score }}</div>
+                                            {% endif %}
                                         </div>
                                         <div class="col">
-                                            <label for="review-{{ r.id }}" class="form-label mb-1 small">Reseña</label>
-                                            <textarea id="review-{{ r.id }}" name="review" rows="2" class="form-control form-control-sm" required>{{ form_values.review|default:r.review }}</textarea>
-                                            {% if errors.review and edit_review_id == r.id %}<div class="text-danger small">{{ errors.review }}</div>{% endif %}
+                                            <label for="review-{{ review.id }}" class="form-label mb-2 fw-medium">Reseña</label>
+                                            <textarea id="review-{{ review.id }}" name="review" rows="3" 
+                                                class="form-control shadow-sm" required>{{ form_values.review|default:review.review }}</textarea>
+                                            {% if errors.review and edit_review_id == review.id %}
+                                                <div class="text-danger small mt-1">{{ errors.review }}</div>
+                                            {% endif %}
                                         </div>
-                                        <div class="col-auto d-flex gap-1">
-                                            <button class="btn btn-sm btn-success" type="submit">Guardar</button>
-                                            <a class="btn btn-sm btn-secondary" href="{% url 'books:show' book.id %}">Cancelar</a>
+                                        <div class="col-auto d-flex gap-2">
+                                            <button class="btn btn-success px-4 shadow-sm" type="submit">
+                                                <i class="bi bi-check-lg me-1"></i>Guardar
+                                            </button>
+                                            <a class="btn btn-light px-3 shadow-sm" href="{% url 'books:show' book.id %}">Cancelar</a>
                                         </div>
                                     </div>
                                 </form>
                             {% else %}
-                                <div class="fw-bold">Puntaje: {{ r.score }} / 5</div>
-                                <div class="small text-secondary mb-1">por <span class="fw-semibold">{{ r.user.username }}</span></div>
-                                <div class="small">{{ r.review|linebreaksbr }}</div>
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <div class="badge bg-primary rounded-pill px-3 py-2 fs-6">{{ review.score }}/5 ⭐</div>
+                                    <span class="text-secondary">•</span>
+                                    <span class="text-secondary">por <span class="fw-medium text-dark">{{ review.user.username }}</span></span>
+                                </div>
+                                <div class="mt-2 mb-3 text-body-secondary">{{ review.review|linebreaksbr }}</div>
                             {% endif %}
                         </div>
-                        <div class="text-center" style="min-width:90px;">
-                            <div><span class="badge bg-secondary">{{ r.up_votes }} 👍</span></div>
+                        <div class="text-center d-flex flex-column gap-2" style="min-width:100px;">
+                            <div class="badge bg-light text-dark border px-3 py-2 fs-6">
+                                {{ review.up_votes }} 👍
+                            </div>
                             {% if user.is_authenticated %}
-                                {% if not edit_review_id == r.id %}
-                                <form method="post" action="{% url 'reviews:upvote' r.id %}" class="mt-2">
-                                    {% csrf_token %}
-                                    <button class="btn btn-sm btn-outline-success" type="submit">+1</button>
-                                </form>
+                                {% if not edit_review_id == review.id %}
+                                    {% if review.id not in user_upvoted_review_ids %}
+                                        <form method="post" action="{% url 'reviews:upvote' review.id %}">
+                                            {% csrf_token %}
+                                            <button class="btn btn-outline-success btn-sm px-3 shadow-sm hover-scale" type="submit" 
+                                                    title="Dale un voto positivo a esta reseña">
+                                                <i class="bi bi-hand-thumbs-up me-1"></i>Votar
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form method="post" action="{% url 'reviews:delete_upvote' review.id %}" class="d-grid">
+                                            {% csrf_token %}
+                                            <button class="btn btn-success btn-sm px-3 shadow-sm hover-scale" type="submit" 
+                                                    title="Quitar tu voto de esta reseña">
+                                                <i class="bi bi-hand-thumbs-up-fill me-1"></i>Votado
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                 {% endif %}
-                                {% if user.is_superuser or user.id == r.user_id %}
-                                <div class="dropdown mt-2">
-                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="{% url 'reviews:edit' r.id %}">Editar</a></li>
-                                        <li>
-                                            <form method="post" action="{% url 'reviews:delete' r.id %}" onsubmit="return confirm('¿Eliminar reseña?');">
-                                                {% csrf_token %}
-                                                <button class="dropdown-item text-danger" type="submit">Eliminar</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
+                                {% if user.is_superuser or user.id == review.user_id %}
+                                    <div class="dropdown">
+                                        <button class="btn btn-light btn-sm dropdown-toggle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'reviews:edit' review.id %}">
+                                                    <i class="bi bi-pencil me-2"></i>Editar
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form method="post" action="{% url 'reviews:delete' review.id %}" 
+                                                    onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta reseña?');">
+                                                    {% csrf_token %}
+                                                    <button class="dropdown-item text-danger">
+                                                        <i class="bi bi-trash me-2"></i>Eliminar
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 {% endif %}
                             {% endif %}
                         </div>
                     </div>
-                </li>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
-            <p class="text-muted">No hay reseñas todavía.</p>
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-chat-square-text fs-1 mb-3 d-block"></i>
+                <p class="mb-0">No hay reseñas todavía.</p>
+            </div>
         {% endif %}
     </div>
 </div>

@@ -2,8 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.postgres.search import SearchVector, SearchQuery
 
+from apps.reviews.models import Review, ReviewUpvote
 from .models import Book, Author
-
 
 def books_index(request):
     query = (request.GET.get("q") or "").strip()
@@ -34,7 +34,22 @@ def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
     book.recompute_total_sales()
 
-    reviews = book.reviews.all().order_by("-up_votes", "-score")
+    reviews = Review.objects.filter(book=book).prefetch_related('reviewupvotes', 'user')
+    
+    # Recompute votes count for all reviews
+    for review in reviews:
+        review.recompute_up_votes_count()
+
+    # Get the IDs of reviews that the current user has upvoted
+    user_upvoted_review_ids = []
+    if request.user.is_authenticated:
+        user_upvoted_review_ids = list(
+            ReviewUpvote.objects.filter(
+                user=request.user,
+                review__in=reviews
+            ).values_list('review_id', flat=True)
+        )
+
     sales = book.yearly_sales.all().order_by("-year")
     return render(
         request,
@@ -42,7 +57,8 @@ def books_show(request, book_id):
         {
             "book": book,
             "reviews": reviews,
-            "sales": sales
+            "user_upvoted_review_ids": list(user_upvoted_review_ids),
+            "sales": sales,
         }
     )
 
@@ -129,7 +145,6 @@ def books_update(request, book_id):
             book.save()
             return redirect("books:index")
     else:
-        # Valores iniciales para el formulario
         form_values = {
             "name": book.name,
             "summary": book.summary,
