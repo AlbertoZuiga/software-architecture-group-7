@@ -6,6 +6,11 @@
 <div class="container mt-4">
     <h2 class="mb-4">Lista de Libros</h2>
 
+    {% if user.is_authenticated %}
+        {% url 'books:create' as create_url %}
+        {% include "partials/_books_form.html" with form_action=create_url submit_label="Agregar libro" initial_name="" initial_summary="" initial_published_at="" initial_author="" %}
+    {% endif %}
+
     <form method="get" class="row g-2 mb-4">
         <div class="col-sm-10">
             <input name="q" value="{{ q|default:'' }}" class="form-control" placeholder="Buscar por palabras en resumen o título">
@@ -29,7 +34,6 @@
         {% endfor %}
     </div>
 
-    <!-- PAGINACIÓN -->
     {% if books.has_other_pages %}
     <nav aria-label="Page navigation" class="mt-4">
         <ul class="pagination">
