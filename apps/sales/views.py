@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
@@ -8,6 +10,8 @@ from apps.books.models import Book
 
 from .models import Sale
 
+CURRENT_YEAR = datetime.now().year
+MAX_SALES = 2147483647
 
 def sales_index(request, book_id):
     book = Book.objects.get(id=book_id)
@@ -18,7 +22,11 @@ def sales_index(request, book_id):
     page_number = request.GET.get("page")
     sales = paginator.get_page(page_number)
 
-    return render(request, "sales/sales_index.html", {"book": book, "sales": sales})
+    return render(
+        request,
+        "sales/sales_index.html",
+        {"book": book, "sales": sales, "current_year": CURRENT_YEAR}
+    )
 
 
 @login_required
@@ -33,8 +41,8 @@ def sales_create(request: HttpRequest, book_id: int) -> HttpResponse:
 
     try:
         year_val = int(year_raw)
-        if year_val < 0 or year_val > 2025:
-            errors["year"] = "Debe estar entre 0 y 2025"
+        if year_val < book.published_at.year or year_val > CURRENT_YEAR:
+            errors["year"] = "Debe estar entre el año de publicación y el año actual"
     except (TypeError, ValueError):
         errors["year"] = "Año inválido"
 
@@ -46,6 +54,8 @@ def sales_create(request: HttpRequest, book_id: int) -> HttpResponse:
         sales_val = int(sales_raw)
         if sales_val < 0:
             errors["sales"] = "Debe ser un número positivo"
+        elif sales_val > MAX_SALES:
+                errors["sales"] = f"No puede superar {MAX_SALES} ventas"
     except (TypeError, ValueError):
         errors["sales"] = "Cantidad de ventas inválida"
 
@@ -63,6 +73,7 @@ def sales_create(request: HttpRequest, book_id: int) -> HttpResponse:
                 "sales": sales,
                 "errors": errors,
                 "form_values": form_values,
+                "current_year": CURRENT_YEAR,
             },
             status=400,
         )
@@ -84,8 +95,8 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
 
         try:
             year_val = int(year_raw)
-            if year_val < 0 or year_val > 2025:
-                errors["year"] = "Debe estar entre 0 y 2025"
+            if year_val < book.published_at.year or year_val > CURRENT_YEAR:
+                errors["year"] = f"Debe estar entre {book.published_at.year} y {CURRENT_YEAR}"
         except (TypeError, ValueError):
             errors["year"] = "Año inválido"
 
@@ -97,6 +108,8 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
             sales_val = int(sales_raw)
             if sales_val < 0:
                 errors["sales"] = "Debe ser un número positivo"
+            elif sales_val > MAX_SALES:
+                errors["sales"] = f"No puede superar {MAX_SALES} ventas"
         except (TypeError, ValueError):
             errors["sales"] = "Cantidad de ventas inválida"
 
@@ -109,6 +122,7 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
                     "sale": sale,
                     "errors": errors,
                     "form_values": form_values,
+                    "current_year": CURRENT_YEAR,
                 },
                 status=400,
             )
@@ -125,6 +139,7 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
         {
             "book": book,
             "sale": sale,
+            "current_year": CURRENT_YEAR,
         },
     )
 

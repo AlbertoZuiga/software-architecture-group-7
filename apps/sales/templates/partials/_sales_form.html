@@ -1,13 +1,13 @@
 <form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
     {% csrf_token %}
     <div class="mb-3">
-        <label for="year" class="form-label">Año (0-2025)</label>
+        <label for="year" class="form-label">Año ({{book.published_at.year}}-{{ current_year }})</label>
         <input 
             id="year" 
             type="number" 
             name="year" 
-            min="0" 
-            max="2025" 
+            min="{{ book.published_at.year }}" 
+            max="{{ current_year }}" 
             class="form-control {% if errors.year %}is-invalid{% endif %}" 
             value="{{ form_values.year|default:initial_year }}" 
             required
