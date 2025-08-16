@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Statistics</h2>
+
+    <!-- Table 1: Authors Statistics -->
+    <h3 class="mt-4">Authors Statistics</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>
+                        <a href="?sort=name&direction={% if current_sort_field == 'name' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Author
+                            {% if current_sort_field == 'name' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="?sort=number_of_books&direction={% if current_sort_field == 'number_of_books' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Number of Books
+                            {% if current_sort_field == 'number_of_books' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="?sort=average_score&direction={% if current_sort_field == 'average_score' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Average Score
+                            {% if current_sort_field == 'average_score' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="?sort=total_sales&direction={% if current_sort_field == 'total_sales' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Total Sales
+                            {% if current_sort_field == 'total_sales' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors_stats %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ author.name }}</td>
+                    <td>{{ author.number_of_books }}</td>
+                    <td>{{ author.average_score|floatformat:2 }}</td>
+                    <td>{{ author.total_sales }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Table 2: Top 10 Rated Books -->
+    <h3 class="mt-4">Top 10 Rated Books</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Book Name</th>
+                    <th>Average Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in top_rated_books %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.average_score|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Table 3: Top 50 Selling Books -->
+    <h3 class="mt-4">Top 50 Selling Books</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Book Name</th>
+                    <th>Total Sales</th>
+                    <th>Author Total Sales</th>
+                    <th>Top 5 in Year of Publication</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in top_selling_books %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.calculated_total_sales }}</td>
+                    <td>{{ book.author_total_sales }}</td>
+                    <td>
+                        {% if book.is_top_5_in_year %}
+                            <span class="badge bg-success">Yes</span>
+                        {% else %}
+                            <span class="badge bg-danger">No</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
