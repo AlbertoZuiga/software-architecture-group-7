@@ -5,8 +5,8 @@ from apps.authors.models import Author
 
 class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
-    name = models.CharField(max_length=200)
-    summary = models.TextField()
+    name = models.CharField(max_length=255)
+    summary = models.TextField(max_length=2000)
     published_at = models.DateField()
 
     total_sales = models.PositiveIntegerField(default=0)

@@ -36,12 +36,10 @@ def books_show(request, book_id):
     book.recompute_total_sales()
 
     reviews = Review.objects.filter(book=book).prefetch_related('reviewupvotes', 'user')
-    
-    # Recompute votes count for all reviews
+
     for review in reviews:
         review.recompute_up_votes_count()
 
-    # Get the IDs of reviews that the current user has upvoted
     user_upvoted_review_ids = []
     if request.user.is_authenticated:
         user_upvoted_review_ids = list(
@@ -70,6 +68,14 @@ def books_create(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         summary = request.POST.get("summary", "").strip()
+        MAX_NAME_LENGTH = 255
+        MAX_SUMMARY_LENGTH = 2000
+
+        if len(name) > MAX_NAME_LENGTH:
+            errors["name"] = f"El nombre no puede exceder {MAX_NAME_LENGTH} caracteres."
+        if len(summary) > MAX_SUMMARY_LENGTH:
+            errors["summary"] = f"El resumen no puede exceder {MAX_SUMMARY_LENGTH} caracteres."
+
         published_at = request.POST.get("published_at", "").strip()
         author_id = request.POST.get("author", "").strip()
 
