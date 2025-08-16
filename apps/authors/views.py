@@ -1,13 +1,17 @@
+from datetime import datetime
+
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from .models import Author
 
+CURRENT_YEAR = datetime.now().year
+
 
 def authors_index(request):
     author_list = Author.objects.all()
-    paginator = Paginator(author_list, 10)  # 10 libros por página
+    paginator = Paginator(author_list, 10)
 
     page_number = request.GET.get("page")
     authors = paginator.get_page(page_number)
@@ -42,17 +46,30 @@ def authors_create(request):
 
         dob = None
         if date_of_birth_raw:
-            from datetime import datetime
             try:
                 dob = datetime.strptime(date_of_birth_raw, "%Y-%m-%d").date()
+                if dob > datetime.now().date():
+                    errors["date_of_birth"] = "La fecha de nacimiento no puede ser futura."
             except ValueError:
                 errors["date_of_birth"] = "Fecha inválida (YYYY-MM-DD)"
 
         if not errors:
-            Author.objects.create(name=name, country=country, date_of_birth=dob, description=description)
+            Author.objects.create(
+                name=name,
+                country=country,
+                date_of_birth=dob,
+                description=description
+            )
             return redirect("authors:index")
 
-    return render(request, "authors/authors_create.html", {
+    author_list = Author.objects.all()
+    paginator = Paginator(author_list, 10)
+
+    page_number = request.GET.get("page")
+    authors = paginator.get_page(page_number)
+
+    return render(request, "authors/authors_index.html", {
+        "authors": authors,
         "errors": errors,
         "form_values": form_values
     })
@@ -80,9 +97,10 @@ def authors_update(request, author_id):
 
         dob = None
         if date_of_birth_raw:
-            from datetime import datetime
             try:
                 dob = datetime.strptime(date_of_birth_raw, "%Y-%m-%d").date()
+                if dob > datetime.now().date():
+                    errors["date_of_birth"] = "La fecha de nacimiento no puede ser futura."
             except ValueError:
                 errors["date_of_birth"] = "Fecha inválida (YYYY-MM-DD)"
 
@@ -104,7 +122,5 @@ def authors_update(request, author_id):
 @require_POST
 def authors_delete(request, author_id):
     author = get_object_or_404(Author, id=author_id)
-    # Podrías restringir a staff/superuser si deseas:
-    # if not request.user.is_superuser: return redirect('authors:show', author_id=author.id)
     author.delete()
     return redirect('authors:index')
