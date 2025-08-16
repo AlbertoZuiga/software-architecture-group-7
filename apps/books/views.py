@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.postgres.search import SearchVector, SearchQuery
+from django.views.decorators.http import require_http_methods
 
 from apps.reviews.models import Review, ReviewUpvote
 from .models import Book, Author
@@ -160,3 +161,17 @@ def books_update(request, book_id):
         "authors": authors,
         "submit_label": "Actualizar"
     })
+
+
+@require_http_methods(["GET", "POST"])
+def books_delete(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+
+    if not request.user.is_authenticated or not request.user.is_superuser:
+        return redirect("books:show", book_id=book.id)
+
+    if request.method == "POST":
+        book.delete()
+        return redirect("books:index")
+
+    return render(request, "books/books_confirm_delete.html", {"book": book})

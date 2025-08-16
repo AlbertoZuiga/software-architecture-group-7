@@ -28,6 +28,11 @@
                 <a href="{% url 'books:update' book.id %}" class="btn btn-warning mt-4 ms-2">
                     ✏️ Editar libro
                 </a>
+                {% if user.is_superuser %}
+                <a href="{% url 'books:delete' book.id %}" class="btn btn-danger mt-4 ms-2" onclick="return confirm('¿Eliminar este libro?');">
+                    🗑️ Eliminar
+                </a>
+                {% endif %}
             {% endif %}
         </div>
     </div>

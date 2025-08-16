@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from apps.common.views import signup
+from apps.books.views import books_delete  # alias direct import for un-namespaced route
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,8 @@ urlpatterns = [
     path('accounts/signup/', signup, name='signup'),
     path('', include('apps.common.urls')),
     path('books/', include('apps.books.urls')),
+    # Un-namespaced legacy alias for book delete (to satisfy templates expecting 'delete')
+    path('books/<int:book_id>/delete/', books_delete, name='delete'),
     path('authors/', include('apps.authors.urls')),
     path('reviews/', include('apps.reviews.urls')),
     path('book/<int:book_id>/sales/', include('apps.sales.urls')),
