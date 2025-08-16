@@ -14,11 +14,15 @@ def stats_page(request):
     ).order_by('-average_score')[:10]
 
     # Table 1: Authors with number of books, average score, and total sales
+    sort_field = request.GET.get('sort', 'total_sales')  # Default sort by total_sales
+    sort_direction = request.GET.get('direction', 'desc')  # Default sort direction is descending
+    sort_order = f"-{sort_field}" if sort_direction == 'desc' else sort_field
+
     authors_stats = Author.objects.annotate(
         number_of_books=Count('books'),  # Use 'books' based on the related name
         average_score=Avg('books__reviews__score'),  # Use 'books__reviews__score'
         total_sales=Sum('books__yearly_sales__sales')  # Use 'books__yearly_sales__sales'
-    ).order_by('-total_sales')
+    ).order_by(sort_order)
 
     # Table 3: Top 50 selling books of all time
     top_selling_books = Book.objects.annotate(
@@ -37,5 +41,7 @@ def stats_page(request):
         'top_rated_books': top_rated_books,
         'authors_stats': authors_stats,
         'top_selling_books': top_selling_books,
+        'current_sort_field': sort_field,
+        'current_sort_direction': sort_direction,
     }
     return render(request, 'stats/stats_index.html', context)

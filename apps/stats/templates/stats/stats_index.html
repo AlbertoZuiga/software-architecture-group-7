@@ -13,10 +13,54 @@
             <thead class="table-primary">
                 <tr>
                     <th>#</th>
-                    <th>Author</th>
-                    <th>Number of Books</th>
-                    <th>Average Score</th>
-                    <th>Total Sales</th>
+                    <th>
+                        <a href="?sort=name&direction={% if current_sort_field == 'name' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Author
+                            {% if current_sort_field == 'name' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="?sort=number_of_books&direction={% if current_sort_field == 'number_of_books' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Number of Books
+                            {% if current_sort_field == 'number_of_books' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="?sort=average_score&direction={% if current_sort_field == 'average_score' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Average Score
+                            {% if current_sort_field == 'average_score' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>
+                        <a href="?sort=total_sales&direction={% if current_sort_field == 'total_sales' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                            Total Sales
+                            {% if current_sort_field == 'total_sales' %}
+                                {% if current_sort_direction == 'asc' %}
+                                    <i class="bi bi-arrow-up"></i>
+                                {% else %}
+                                    <i class="bi bi-arrow-down"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
