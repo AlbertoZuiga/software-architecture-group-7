@@ -3,17 +3,20 @@
 {% block title %}Statistics{% endblock %}
 
 {% block content %}
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
 <div class="container mt-4">
     <h2 class="mb-4">Statistics</h2>
 
     <!-- Table 1: Authors Statistics -->
     <h3 class="mt-4">Authors Statistics</h3>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table id="authorsTable" class="table table-bordered table-striped">
             <thead class="table-primary">
                 <tr>
-                    <th>#</th>
-                    <th>
+                    <th scope="col">#</th>
+                    <th scope="col">
                         <a href="?sort=name&direction={% if current_sort_field == 'name' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
                             Author
                             {% if current_sort_field == 'name' %}
@@ -25,7 +28,7 @@
                             {% endif %}
                         </a>
                     </th>
-                    <th>
+                    <th scope="col">
                         <a href="?sort=number_of_books&direction={% if current_sort_field == 'number_of_books' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
                             Number of Books
                             {% if current_sort_field == 'number_of_books' %}
@@ -37,7 +40,7 @@
                             {% endif %}
                         </a>
                     </th>
-                    <th>
+                    <th scope="col">
                         <a href="?sort=average_score&direction={% if current_sort_field == 'average_score' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
                             Average Score
                             {% if current_sort_field == 'average_score' %}
@@ -49,7 +52,7 @@
                             {% endif %}
                         </a>
                     </th>
-                    <th>
+                    <th scope="col">
                         <a href="?sort=total_sales&direction={% if current_sort_field == 'total_sales' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
                             Total Sales
                             {% if current_sort_field == 'total_sales' %}
@@ -60,6 +63,50 @@
                                 {% endif %}
                             {% endif %}
                         </a>
+                    </th>
+                </tr>
+                <tr class="filter-row">
+                    <th scope="col"></th>
+                    <th scope="col">
+                        <div class="filter-container">
+                            <input type="text" class="filter-input text-filter form-control form-control-sm" placeholder="Filter Author" style="width: 100%;">
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div class="filter-container d-flex align-items-center" style="gap: 4px;">
+                            <select class="filter-operator form-select form-select-sm" style="width: 60px;">
+                                <option value="=">=</option>
+                                <option value=">">&gt;</option>
+                                <option value="<">&lt;</option>
+                                <option value=">=">&ge;</option>
+                                <option value="<=">&le;</option>
+                            </select>
+                            <input type="number" class="filter-input numeric-filter form-control form-control-sm" placeholder="Filter" style="flex: 1;">
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div class="filter-container d-flex align-items-center" style="gap: 4px;">
+                            <select class="filter-operator form-select form-select-sm" style="width: 60px;">
+                                <option value="=">=</option>
+                                <option value=">">&gt;</option>
+                                <option value="<">&lt;</option>
+                                <option value=">=">&ge;</option>
+                                <option value="<=">&le;</option>
+                            </select>
+                            <input type="number" step="0.01" class="filter-input numeric-filter form-control form-control-sm" placeholder="Filter" style="flex: 1;">
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div class="filter-container d-flex align-items-center" style="gap: 4px;">
+                            <select class="filter-operator form-select form-select-sm" style="width: 60px;">
+                                <option value="=">=</option>
+                                <option value=">">&gt;</option>
+                                <option value="<">&lt;</option>
+                                <option value=">=">&ge;</option>
+                                <option value="<=">&le;</option>
+                            </select>
+                            <input type="number" class="filter-input numeric-filter form-control form-control-sm" placeholder="Filter" style="flex: 1;">
+                        </div>
                     </th>
                 </tr>
             </thead>
@@ -83,9 +130,9 @@
         <table class="table table-bordered table-striped">
             <thead class="table-primary">
                 <tr>
-                    <th>#</th>
-                    <th>Book Name</th>
-                    <th>Average Score</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Average Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -106,11 +153,11 @@
         <table class="table table-bordered table-striped">
             <thead class="table-primary">
                 <tr>
-                    <th>#</th>
-                    <th>Book Name</th>
-                    <th>Total Sales</th>
-                    <th>Author Total Sales</th>
-                    <th>Top 5 in Year of Publication</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Total Sales</th>
+                    <th scope="col">Author Total Sales</th>
+                    <th scope="col">Top 5 in Year of Publication</th>
                 </tr>
             </thead>
             <tbody>
@@ -133,4 +180,88 @@
         </table>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    let table = $('#authorsTable').DataTable({
+        paging: true,
+        ordering: true,
+        searching: true,
+        initComplete: function () {
+            var api = this.api();
+
+            api.columns().every(function (index) {
+                var column = this;
+                var header = $(column.header());
+                var filterRow = header.closest('thead').find('tr.filter-row');
+                var filterCell = $(filterRow).find('th').eq(index);
+
+                if (filterCell.length === 0) return;
+
+                if (index === 1) {
+                    var input = filterCell.find('input.text-filter');
+                    input.on('keyup change clear', function () {
+                        if (column.search() !== this.value) {
+                            column.search(this.value).draw();
+                        }
+                    });
+                } else if (index === 2 || index === 3 || index === 4) {
+                    var input = filterCell.find('input.numeric-filter');
+                    var operatorSelect = filterCell.find('select.filter-operator');
+
+                    function filterFunction(settings, data, dataIndex) {
+                        var val = data[index];
+                        var filterVal = input.val();
+                        var operator = operatorSelect.val();
+
+                        if (filterVal === '') {
+                            return true;
+                        }
+
+                        var cellValue = parseFloat(val);
+                        var filterNumber = parseFloat(filterVal);
+
+                        if (isNaN(cellValue) || isNaN(filterNumber)) {
+                            return false;
+                        }
+
+                        switch(operator) {
+                            case '=':
+                                return cellValue === filterNumber;
+                            case '>':
+                                return cellValue > filterNumber;
+                            case '<':
+                                return cellValue < filterNumber;
+                            case '>=':
+                                return cellValue >= filterNumber;
+                            case '<=':
+                                return cellValue <= filterNumber;
+                            default:
+                                return true;
+                        }
+                    }
+
+                    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                        if (settings.nTable !== table.table().node()) {
+                            return true;
+                        }
+                        return filterFunction(settings, data, dataIndex);
+                    });
+
+                    function redrawTable() {
+                        table.draw();
+                    }
+
+                    input.on('keyup change clear', redrawTable);
+                    operatorSelect.on('change', redrawTable);
+                }
+            });
+        }
+    });
+});
+</script>
+
 {% endblock %}
