@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Crear autor{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Nuevo autor</h2>
+    {% url 'authors:create' as create_url %}
+    {% include "partials/_authors_form.html" with form_action=create_url submit_label="➕ Crear autor" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
+</div>
+{% endblock %}
