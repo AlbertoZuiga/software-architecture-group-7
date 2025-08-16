@@ -4,7 +4,7 @@
     "pk": 3,
     "fields": {
       "username": "admin",
-      "password": "pbkdf2_sha256$1000000$EQY5cTfv5PF94CqbnZ7evj$IpUSG+OtHxU41l1P6uxzjx16dWNajsgRf9VQDL0nyDo=", 
+      "password": "pbkdf2_sha256$1000000$EQY5cTfv5PF94CqbnZ7evj$IpUSG+OtHxU41l1P6uxzjx16dWNajsgRf9VQDL0nyDo=",
       "is_superuser": true,
       "is_staff": true,
       "is_active": true,
@@ -52,7 +52,9 @@
     "pk": 1,
     "fields": {
       "name": "Gabriel García Márquez",
-      "country": "Colombia"
+      "country": "Colombia",
+      "date_of_birth": "1917-09-25",
+      "description": "Aut a atque error."
     }
   },
   {
@@ -60,7 +62,9 @@
     "pk": 2,
     "fields": {
       "name": "Isabel Allende",
-      "country": "Chile"
+      "country": "Chile",
+      "date_of_birth": "1906-02-22",
+      "description": "Fugit alias excepturi ea ex inventore. Ipsa molestias accusantium nisi."
     }
   },
   {
@@ -68,7 +72,9 @@
     "pk": 3,
     "fields": {
       "name": "Julio Cortázar",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1943-04-05",
+      "description": "Quos sapiente itaque sed odio numquam aliquid nesciunt. Nemo autem velit repellat eius."
     }
   },
   {
@@ -76,7 +82,9 @@
     "pk": 4,
     "fields": {
       "name": "Jorge Luis Borges",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1992-04-25",
+      "description": "Expedita aliquid culpa exercitationem nisi. Sequi iure vel nemo impedit cupiditate."
     }
   },
   {
@@ -84,7 +92,9 @@
     "pk": 5,
     "fields": {
       "name": "Mario Vargas Llosa",
-      "country": "Perú"
+      "country": "Perú",
+      "date_of_birth": "1978-11-14",
+      "description": "Impedit magnam molestias blanditiis qui eos. Ullam laborum rerum id autem tenetur. Maxime voluptatum ipsa totam sunt incidunt temporibus."
     }
   },
   {
@@ -92,7 +102,9 @@
     "pk": 6,
     "fields": {
       "name": "Carlos Ruiz Zafón",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1951-06-22",
+      "description": "Vitae reprehenderit eos porro labore totam amet. Reprehenderit dignissimos officia fugit reprehenderit vero nisi. Ea ipsum quae iste assumenda ex fuga quis."
     }
   },
   {
@@ -100,7 +112,9 @@
     "pk": 7,
     "fields": {
       "name": "Miguel de Cervantes",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1974-03-13",
+      "description": "Vero quas reprehenderit pariatur. Esse neque vel corrupti illum mollitia. Vel assumenda eos."
     }
   },
   {
@@ -108,7 +122,9 @@
     "pk": 8,
     "fields": {
       "name": "Laura Esquivel",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1916-02-18",
+      "description": "Incidunt ea dolores et quaerat error mollitia. Praesentium exercitationem officia aut dolorum consectetur."
     }
   },
   {
@@ -116,7 +132,9 @@
     "pk": 9,
     "fields": {
       "name": "Eduardo Galeano",
-      "country": "Uruguay"
+      "country": "Uruguay",
+      "date_of_birth": "1947-12-27",
+      "description": "Porro nesciunt optio recusandae saepe minus at."
     }
   },
   {
@@ -124,7 +142,9 @@
     "pk": 10,
     "fields": {
       "name": "Pablo Neruda",
-      "country": "Chile"
+      "country": "Chile",
+      "date_of_birth": "1920-10-17",
+      "description": "Culpa odit aut harum commodi in accusantium. Consectetur occaecati molestiae consectetur autem. Labore temporibus perspiciatis vel."
     }
   },
   {
@@ -132,7 +152,9 @@
     "pk": 11,
     "fields": {
       "name": "Octavio Paz",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1911-10-12",
+      "description": "Ad libero dolore quisquam quis numquam. Doloremque numquam beatae id fuga alias corrupti accusamus. Totam repellendus velit maxime deserunt. Sit quibusdam quod laboriosam officia."
     }
   },
   {
@@ -140,7 +162,9 @@
     "pk": 12,
     "fields": {
       "name": "Juan Rulfo",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1982-03-06",
+      "description": "Maxime quas eaque similique fugit."
     }
   },
   {
@@ -148,7 +172,9 @@
     "pk": 13,
     "fields": {
       "name": "Roberto Bolaño",
-      "country": "Chile"
+      "country": "Chile",
+      "date_of_birth": "1954-11-20",
+      "description": "Eligendi nemo totam qui. Dolor sint exercitationem sint repellat quia perferendis. Excepturi nulla excepturi rem voluptates accusantium."
     }
   },
   {
@@ -156,7 +182,9 @@
     "pk": 14,
     "fields": {
       "name": "Carlos Fuentes",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1926-05-02",
+      "description": "Dolores iure molestias atque labore. Laboriosam aliquid voluptatem animi repellendus sequi ipsa. Totam voluptas a numquam earum deserunt autem. Quae quidem aspernatur beatae."
     }
   },
   {
@@ -164,7 +192,9 @@
     "pk": 15,
     "fields": {
       "name": "Ana María Matute",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1941-12-25",
+      "description": "Sed non tempora ratione. Distinctio molestias animi id unde."
     }
   },
   {
@@ -172,7 +202,9 @@
     "pk": 16,
     "fields": {
       "name": "Almudena Grandes",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1971-01-15",
+      "description": "Et fugit voluptate officia. Aut nam non omnis eius minima animi labore."
     }
   },
   {
@@ -180,7 +212,9 @@
     "pk": 17,
     "fields": {
       "name": "Rosa Montero",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1937-09-28",
+      "description": "Minima reiciendis blanditiis quasi fugit. Aliquid optio odio iste. Vel praesentium possimus vel illo ipsum. Minus nobis explicabo aspernatur."
     }
   },
   {
@@ -188,7 +222,9 @@
     "pk": 18,
     "fields": {
       "name": "Arturo Pérez-Reverte",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1900-04-19",
+      "description": "Architecto voluptatibus distinctio voluptate occaecati natus quaerat. Non ducimus quae nulla. Sunt laboriosam optio."
     }
   },
   {
@@ -196,7 +232,9 @@
     "pk": 19,
     "fields": {
       "name": "Antonio Muñoz Molina",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1982-06-16",
+      "description": "Dolores voluptas dolorem quibusdam maxime sint. Deleniti perspiciatis quae delectus repellendus."
     }
   },
   {
@@ -204,7 +242,9 @@
     "pk": 20,
     "fields": {
       "name": "Ángeles Mastretta",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1977-06-17",
+      "description": "Occaecati beatae provident praesentium quam vero minima. Nulla ducimus excepturi qui mollitia suscipit facere. Pariatur dicta vitae."
     }
   },
   {
@@ -212,7 +252,9 @@
     "pk": 21,
     "fields": {
       "name": "Laura Restrepo",
-      "country": "Colombia"
+      "country": "Colombia",
+      "date_of_birth": "1934-07-31",
+      "description": "Nostrum temporibus libero cumque repellat reiciendis asperiores. Repellat dignissimos quisquam distinctio iure ipsa. Ex delectus nemo modi harum."
     }
   },
   {
@@ -220,7 +262,9 @@
     "pk": 22,
     "fields": {
       "name": "Sergio Pitol",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1977-12-17",
+      "description": "Animi officiis illo cupiditate reiciendis quod. Sapiente eum provident atque mollitia hic natus."
     }
   },
   {
@@ -228,7 +272,9 @@
     "pk": 23,
     "fields": {
       "name": "Alejo Carpentier",
-      "country": "Cuba"
+      "country": "Cuba",
+      "date_of_birth": "1905-07-19",
+      "description": "Optio fugit tempora. Est animi facilis."
     }
   },
   {
@@ -236,7 +282,9 @@
     "pk": 24,
     "fields": {
       "name": "José Lezama Lima",
-      "country": "Cuba"
+      "country": "Cuba",
+      "date_of_birth": "1934-07-20",
+      "description": "Rem autem veritatis molestias sed accusantium corrupti."
     }
   },
   {
@@ -244,7 +292,9 @@
     "pk": 25,
     "fields": {
       "name": "Reinaldo Arenas",
-      "country": "Cuba"
+      "country": "Cuba",
+      "date_of_birth": "1926-09-09",
+      "description": "Quaerat distinctio pariatur in. Officiis culpa illum deleniti tempore veniam. Placeat officiis at consequuntur magnam magnam vitae."
     }
   },
   {
@@ -252,7 +302,9 @@
     "pk": 26,
     "fields": {
       "name": "Horacio Quiroga",
-      "country": "Uruguay"
+      "country": "Uruguay",
+      "date_of_birth": "1900-07-28",
+      "description": "Repellendus debitis provident laborum omnis."
     }
   },
   {
@@ -260,7 +312,9 @@
     "pk": 27,
     "fields": {
       "name": "Leopoldo Alas «Clarín»",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1974-06-05",
+      "description": "Possimus voluptate impedit dignissimos accusantium minima. Autem quasi tempora sapiente dolor optio nam."
     }
   },
   {
@@ -268,7 +322,9 @@
     "pk": 28,
     "fields": {
       "name": "Benito Pérez Galdós",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1959-03-22",
+      "description": "Impedit aliquam ratione laudantium eaque. Minus ab veniam impedit ut dolore."
     }
   },
   {
@@ -276,7 +332,9 @@
     "pk": 29,
     "fields": {
       "name": "Pío Baroja",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1966-08-25",
+      "description": "Nisi accusamus temporibus at voluptatibus mollitia eius. Iste facere a neque. Facere quia voluptatem eum."
     }
   },
   {
@@ -284,7 +342,9 @@
     "pk": 30,
     "fields": {
       "name": "Emilia Pardo Bazán",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1909-01-20",
+      "description": "Natus enim assumenda nobis."
     }
   },
   {
@@ -292,7 +352,9 @@
     "pk": 31,
     "fields": {
       "name": "Camilo José Cela",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1993-03-09",
+      "description": "Porro vitae ex aut. Consequatur rerum ipsam minima necessitatibus consectetur tenetur."
     }
   },
   {
@@ -300,7 +362,9 @@
     "pk": 32,
     "fields": {
       "name": "Javier Marías",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1989-08-12",
+      "description": "Illum quam numquam consequuntur expedita autem. Tempore dicta et beatae earum repellat voluptates. Reprehenderit commodi doloribus ratione quo."
     }
   },
   {
@@ -308,7 +372,9 @@
     "pk": 33,
     "fields": {
       "name": "Fernando Aramburu",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1941-04-02",
+      "description": "Aperiam repellat doloribus officiis. Repudiandae architecto laboriosam assumenda ab reprehenderit ipsa. Enim fugiat corrupti ipsa dolores ducimus."
     }
   },
   {
@@ -316,7 +382,9 @@
     "pk": 34,
     "fields": {
       "name": "Antonio Skármeta",
-      "country": "Chile"
+      "country": "Chile",
+      "date_of_birth": "1977-02-09",
+      "description": "Veritatis possimus ipsa doloremque in fugiat impedit vitae. Dignissimos accusamus nemo animi a aspernatur nihil ratione."
     }
   },
   {
@@ -324,7 +392,9 @@
     "pk": 35,
     "fields": {
       "name": "Manuel Rivas",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1933-11-16",
+      "description": "Temporibus distinctio voluptas fugiat alias. Inventore cum excepturi eius dolorum repellendus. Ipsum accusamus sed delectus laboriosam ad."
     }
   },
   {
@@ -332,7 +402,9 @@
     "pk": 36,
     "fields": {
       "name": "Ricardo Piglia",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1959-11-05",
+      "description": "Dolorem laborum voluptatum amet blanditiis veniam optio. Illum debitis enim cumque eius quia doloribus nam. Qui eos temporibus ut accusamus explicabo."
     }
   },
   {
@@ -340,7 +412,9 @@
     "pk": 37,
     "fields": {
       "name": "Ernesto Sabato",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1934-03-06",
+      "description": "Natus eaque eius molestias. Libero aperiam iste."
     }
   },
   {
@@ -348,7 +422,9 @@
     "pk": 38,
     "fields": {
       "name": "Adolfo Bioy Casares",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1984-04-08",
+      "description": "Molestiae iusto veniam repellendus quidem distinctio quisquam."
     }
   },
   {
@@ -356,7 +432,9 @@
     "pk": 39,
     "fields": {
       "name": "Eduardo Mendoza",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1917-05-23",
+      "description": "Ipsum id rerum quis atque nemo. Reprehenderit impedit velit laudantium."
     }
   },
   {
@@ -364,7 +442,9 @@
     "pk": 40,
     "fields": {
       "name": "Javier Cercas",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1956-10-17",
+      "description": "Assumenda sit pariatur temporibus rem commodi nostrum quas. Blanditiis inventore dicta consequuntur aspernatur. Ea porro mollitia tempore dolorum earum ipsa. Molestias corporis dicta porro ratione tempore similique praesentium."
     }
   },
   {
@@ -372,7 +452,9 @@
     "pk": 41,
     "fields": {
       "name": "Juan Marsé",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1982-11-29",
+      "description": "Impedit fuga amet aut. Repellat dolorem numquam natus similique."
     }
   },
   {
@@ -380,7 +462,9 @@
     "pk": 42,
     "fields": {
       "name": "Laura Gallego",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1943-12-19",
+      "description": "Corporis culpa rem tempore magni eligendi maxime."
     }
   },
   {
@@ -388,7 +472,9 @@
     "pk": 43,
     "fields": {
       "name": "Mariana Enríquez",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1954-02-12",
+      "description": "Asperiores eos sequi vero accusamus eum iure. Cupiditate aperiam officia iure vel eligendi illo. Animi eum numquam error aliquid exercitationem itaque."
     }
   },
   {
@@ -396,7 +482,9 @@
     "pk": 44,
     "fields": {
       "name": "Samanta Schweblin",
-      "country": "Argentina"
+      "country": "Argentina",
+      "date_of_birth": "1903-07-11",
+      "description": "Corporis molestias id vitae animi reiciendis dignissimos. Deserunt inventore inventore deserunt ea. Consequuntur repellat necessitatibus sequi alias."
     }
   },
   {
@@ -404,7 +492,9 @@
     "pk": 45,
     "fields": {
       "name": "Valeria Luiselli",
-      "country": "México"
+      "country": "México",
+      "date_of_birth": "1910-05-08",
+      "description": "Dolorem amet excepturi optio. Quae at pariatur autem."
     }
   },
   {
@@ -412,7 +502,9 @@
     "pk": 46,
     "fields": {
       "name": "Dolores Redondo",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1948-09-12",
+      "description": "Rerum placeat non dolorem suscipit culpa veniam. Magnam unde doloribus minima."
     }
   },
   {
@@ -420,7 +512,9 @@
     "pk": 47,
     "fields": {
       "name": "Eva García Sáenz de Urturi",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1932-02-10",
+      "description": "Perspiciatis quis quidem accusamus sequi. Porro delectus tenetur velit aliquam voluptatem ullam. Odio possimus eaque officia."
     }
   },
   {
@@ -428,7 +522,9 @@
     "pk": 48,
     "fields": {
       "name": "Carmen Laforet",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1956-06-07",
+      "description": "Maxime vero nulla necessitatibus nulla magnam. Aliquid dignissimos odio natus rem beatae exercitationem."
     }
   },
   {
@@ -436,7 +532,9 @@
     "pk": 49,
     "fields": {
       "name": "Mercè Rodoreda",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1912-04-03",
+      "description": "A laudantium debitis quo tenetur. Saepe modi maxime dolorum. Fuga explicabo dolore pariatur totam fugiat. Sapiente aperiam repellendus natus."
     }
   },
   {
@@ -444,7 +542,9 @@
     "pk": 50,
     "fields": {
       "name": "Miguel Delibes",
-      "country": "España"
+      "country": "España",
+      "date_of_birth": "1931-05-19",
+      "description": "Facilis quas eos error. Necessitatibus alias repellendus corporis atque sapiente aliquam sapiente. A maxime aut voluptate eveniet temporibus magni assumenda."
     }
   },
   {
