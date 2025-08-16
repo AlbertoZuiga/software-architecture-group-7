@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 
 from .models import Author
 
@@ -26,17 +27,29 @@ def authors_create(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         country = request.POST.get("country", "").strip()
+        date_of_birth_raw = request.POST.get("date_of_birth", "").strip()
+        description = request.POST.get("description", "").strip()
 
         form_values["name"] = name
         form_values["country"] = country
+        form_values["date_of_birth"] = date_of_birth_raw
+        form_values["description"] = description
 
         if not name:
             errors["name"] = "El nombre es obligatorio."
         if not country:
             errors["country"] = "El país es obligatorio."
 
+        dob = None
+        if date_of_birth_raw:
+            from datetime import datetime
+            try:
+                dob = datetime.strptime(date_of_birth_raw, "%Y-%m-%d").date()
+            except ValueError:
+                errors["date_of_birth"] = "Fecha inválida (YYYY-MM-DD)"
+
         if not errors:
-            Author.objects.create(name=name, country=country)
+            Author.objects.create(name=name, country=country, date_of_birth=dob, description=description)
             return redirect("authors:index")
 
     return render(request, "authors/authors_create.html", {
@@ -52,19 +65,33 @@ def authors_update(request, author_id):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         country = request.POST.get("country", "").strip()
+        date_of_birth_raw = request.POST.get("date_of_birth", "").strip()
+        description = request.POST.get("description", "").strip()
 
         form_values["name"] = name
         form_values["country"] = country
+        form_values["date_of_birth"] = date_of_birth_raw
+        form_values["description"] = description
 
         if not name:
             errors["name"] = "El nombre es obligatorio."
         if not country:
             errors["country"] = "El país es obligatorio."
 
+        dob = None
+        if date_of_birth_raw:
+            from datetime import datetime
+            try:
+                dob = datetime.strptime(date_of_birth_raw, "%Y-%m-%d").date()
+            except ValueError:
+                errors["date_of_birth"] = "Fecha inválida (YYYY-MM-DD)"
+
         if not errors:
             author.name = name
             author.country = country
-            author.save()
+            author.date_of_birth = dob
+            author.description = description
+            author.save(update_fields=["name", "country", "date_of_birth", "description"])
             return redirect("authors:index")
 
     return render(request, "authors/authors_update.html", {
@@ -72,3 +99,12 @@ def authors_update(request, author_id):
         "errors": errors,
         "form_values": form_values
     })
+
+
+@require_POST
+def authors_delete(request, author_id):
+    author = get_object_or_404(Author, id=author_id)
+    # Podrías restringir a staff/superuser si deseas:
+    # if not request.user.is_superuser: return redirect('authors:show', author_id=author.id)
+    author.delete()
+    return redirect('authors:index')

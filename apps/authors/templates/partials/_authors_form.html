@@ -33,5 +33,32 @@
         {% endif %}
     </div>
 
+    <div class="mb-3">
+        <label for="date_of_birth" class="form-label">Fecha de nacimiento</label>
+        <input 
+            id="date_of_birth"
+            type="date"
+            name="date_of_birth"
+            class="form-control {% if errors.date_of_birth %}is-invalid{% endif %}"
+            value="{{ form_values.date_of_birth|default:initial_date_of_birth }}"
+        >
+        {% if errors.date_of_birth %}
+            <div class="invalid-feedback">{{ errors.date_of_birth }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea
+            id="description"
+            name="description"
+            rows="3"
+            class="form-control {% if errors.description %}is-invalid{% endif %}"
+        >{{ form_values.description|default:initial_description }}</textarea>
+        {% if errors.description %}
+            <div class="invalid-feedback">{{ errors.description }}</div>
+        {% endif %}
+    </div>
+
     <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
 </form>
