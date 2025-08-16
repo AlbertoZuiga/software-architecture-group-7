@@ -133,6 +133,8 @@
                     <th scope="col">#</th>
                     <th scope="col">Book Name</th>
                     <th scope="col">Average Score</th>
+                    <th scope="col">Best review with most upvotes</th>
+                    <th scope="col">Worst review with most upvotes</th>
                 </tr>
             </thead>
             <tbody>
@@ -141,6 +143,8 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ book.name }}</td>
                     <td>{{ book.average_score|floatformat:2 }}</td>
+                    <td>{{ book.best_review_upvotes }}</td>
+                    <td>{{ book.worst_review_upvotes }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

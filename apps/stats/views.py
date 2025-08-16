@@ -10,6 +10,12 @@ def stats_page(request):
         average_score=Avg("reviews__score")
     ).order_by("-average_score")[:10]
 
+    for book in top_rated_books:
+        best_review = book.reviews.order_by("-score", "-up_votes").first()
+        worst_review = book.reviews.order_by("score", "-up_votes").first()
+        book.best_review_upvotes = best_review.review if best_review else "N/A"
+        book.worst_review_upvotes = worst_review.review if worst_review else "N/A"
+
     sort_field = request.GET.get("sort", "total_sales")
     sort_direction = request.GET.get("direction", "desc")
     sort_order = f"-{sort_field}" if sort_direction == "desc" else sort_field
