@@ -30,4 +30,5 @@ urlpatterns = [
     path('authors/', include('apps.authors.urls')),
     path('reviews/', include('apps.reviews.urls')),
     path('book/<int:book_id>/sales/', include('apps.sales.urls')),
+    path("stats/", include("apps.stats.urls")),
 ]
