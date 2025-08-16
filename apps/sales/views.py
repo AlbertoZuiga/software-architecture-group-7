@@ -55,7 +55,7 @@ def sales_create(request: HttpRequest, book_id: int) -> HttpResponse:
         if sales_val < 0:
             errors["sales"] = "Debe ser un número positivo"
         elif sales_val > MAX_SALES:
-                errors["sales"] = f"No puede superar {MAX_SALES} ventas"
+            errors["sales"] = f"No puede superar {MAX_SALES} ventas"
     except (TypeError, ValueError):
         errors["sales"] = "Cantidad de ventas inválida"
 
