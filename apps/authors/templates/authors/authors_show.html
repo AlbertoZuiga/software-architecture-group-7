@@ -17,6 +17,19 @@
                 <strong>Cantidad de Libros:</strong> {{ author.books_count }}
             </p>
 
+            {% if author.date_of_birth %}
+            <p class="card-text mt-2">
+                <strong>Fecha de nacimiento:</strong> {{ author.date_of_birth|date:"d/m/Y" }}
+            </p>
+            {% endif %}
+
+            {% if author.description %}
+            <div class="card-text mt-2">
+                <strong>Descripción:</strong><br>
+                <div class="small text-muted">{{ author.description|linebreaksbr }}</div>
+            </div>
+            {% endif %}
+
             <p class="card-text mt-4">
                 <strong>Ventas Totales:</strong> {{ author.total_sales|intcomma }}
             </p>
@@ -29,6 +42,10 @@
                 <a href="{% url 'authors:update' author.id %}" class="btn btn-warning mt-4 ms-2">
                     ✏️ Editar autor
                 </a>
+                <form method="post" action="{% url 'authors:delete' author.id %}" class="d-inline mt-4 ms-2" onsubmit="return confirm('¿Eliminar autor? Esta acción no se puede deshacer.');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger mt-4 ms-2">🗑️ Eliminar</button>
+                </form>
             {% endif %}
         </div>
     </div>

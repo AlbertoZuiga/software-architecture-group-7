@@ -8,7 +8,7 @@
 
     {% if user.is_authenticated %}
         {% url 'authors:create' as create_url %}
-        {% include "partials/_authors_form.html" with form_action=create_url submit_label="Agregar autor" initial_name="" initial_country="" %}
+    {% include "partials/_authors_form.html" with form_action=create_url submit_label="Agregar autor" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
     {% endif %}
 
     <div class="list-group">
