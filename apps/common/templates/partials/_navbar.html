@@ -12,6 +12,9 @@
                         <a class="nav-link{% if request.path == url %} active{% endif %}" href="{{ url }}">{{ name }}</a>
                     </li>
                 {% endfor %}
+                <li class="nav-item">
+                    <a class="nav-link{% if request.path == '/stats/' %} active{% endif %}" href="/stats/">Stats</a>
+                </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <span class="nav-link disabled">

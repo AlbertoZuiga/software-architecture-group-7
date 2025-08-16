@@ -1,97 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statistics</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
-</head>
-<body>
-    <h1>Statistics</h1>
+{% extends "base.html" %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Statistics</h2>
 
     <!-- Table 1: Authors Statistics -->
-    <h2>Authors Statistics</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Author</th>
-                <th>Number of Books</th>
-                <th>Average Score</th>
-                <th>Total Sales</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for author in authors_stats %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ author.name }}</td>
-                <td>{{ author.number_of_books }}</td>
-                <td>{{ author.average_score|floatformat:2 }}</td>
-                <td>{{ author.total_sales }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h3 class="mt-4">Authors Statistics</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Author</th>
+                    <th>Number of Books</th>
+                    <th>Average Score</th>
+                    <th>Total Sales</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors_stats %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ author.name }}</td>
+                    <td>{{ author.number_of_books }}</td>
+                    <td>{{ author.average_score|floatformat:2 }}</td>
+                    <td>{{ author.total_sales }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Table 2: Top 10 Rated Books -->
-    <h2>Top 10 Rated Books</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Book Name</th>
-                <th>Average Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in top_rated_books %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ book.name }}</td>
-                <td>{{ book.average_score|floatformat:2 }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h3 class="mt-4">Top 10 Rated Books</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Book Name</th>
+                    <th>Average Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in top_rated_books %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.average_score|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Table 3: Top 50 Selling Books -->
-    <h2>Top 50 Selling Books</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Book Name</th>
-                <th>Total Sales</th>
-                <th>Author Total Sales</th>
-                <th>Top 5 in Year of Publication</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in top_selling_books %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ book.name }}</td>
-                <td>{{ book.calculated_total_sales }}</td>
-                <td>{{ book.author_total_sales }}</td>
-                <td>{{ book.is_top_5_in_year }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+    <h3 class="mt-4">Top 50 Selling Books</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Book Name</th>
+                    <th>Total Sales</th>
+                    <th>Author Total Sales</th>
+                    <th>Top 5 in Year of Publication</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in top_selling_books %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.calculated_total_sales }}</td>
+                    <td>{{ book.author_total_sales }}</td>
+                    <td>
+                        {% if book.is_top_5_in_year %}
+                            <span class="badge bg-success">Yes</span>
+                        {% else %}
+                            <span class="badge bg-danger">No</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
