@@ -8,8 +8,7 @@ def navbar_links(_request):
     """
     return {
         "links": {
-            "Home": "/",
-            "Books": "/books/",
             "Authors": "/authors/",
+            "Books": "/books/",
         }
     }
