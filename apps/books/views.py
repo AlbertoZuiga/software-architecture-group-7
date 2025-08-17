@@ -93,7 +93,10 @@ def books_create(request):
         }
 
         try:
-            published_at = timezone.datetime.strptime(published_at_str, "%Y-%m-%d").date() if published_at_str else None
+            published_at = timezone.datetime.strptime(
+                published_at_str,
+                "%Y-%m-%d"
+            ).date() if published_at_str else None
         except ValueError:
             errors["published_at"] = "Formato de fecha inválido. Use YYYY-MM-DD."
             published_at = None
@@ -110,10 +113,13 @@ def books_create(request):
             errors["author"] = "El autor es obligatorio."
         elif not author:
             errors["author"] = "El autor seleccionado no existe."
-        
+
         if published_at and author and author.date_of_birth:
             if published_at < author.date_of_birth:
-                errors["published_at"] = "La fecha de publicación no puede ser anterior a la fecha de nacimiento del autor."
+                errors["published_at"] = (
+                    "La fecha de publicación no puede ser anterior"
+                    " a la fecha de nacimiento del autor."
+                )
             elif published_at > timezone.now().date():
                 errors["published_at"] = "La fecha de publicación no puede ser en el futuro."
 
@@ -130,11 +136,17 @@ def books_create(request):
 
     page_number = request.GET.get("page")
     books = paginator.get_page(page_number)
-    
+
     return render(
         request,
         "books/books_index.html",
-        {"errors": errors, "form_values": form_values, "authors": authors, "books": books, "submit_label": "Crear"},
+        {
+            "errors": errors,
+            "form_values": form_values,
+            "authors": authors,
+            "books": books,
+            "submit_label": "Crear"
+        },
     )
 
 
@@ -157,7 +169,10 @@ def books_update(request, book_id):
         }
 
         try:
-            published_at = timezone.datetime.strptime(published_at_str, "%Y-%m-%d").date() if published_at_str else None
+            published_at = timezone.datetime.strptime(
+                published_at_str,
+                "%Y-%m-%d"
+            ).date() if published_at_str else None
         except ValueError:
             errors["published_at"] = "Formato de fecha inválido. Use YYYY-MM-DD."
             published_at = None
@@ -176,7 +191,10 @@ def books_update(request, book_id):
             author = Author.objects.get(id=author_id)
             if published_at and author.date_of_birth:
                 if published_at < author.date_of_birth:
-                    errors["published_at"] = "La fecha de publicación no puede ser anterior a la fecha de nacimiento del autor."
+                    errors["published_at"] = (
+                    "La fecha de publicación no puede ser anterior "
+                    "a la fecha de nacimiento del autor."
+                    )
                 elif published_at > timezone.now().date():
                     errors["published_at"] = "La fecha de publicación no puede ser en el futuro."
 
