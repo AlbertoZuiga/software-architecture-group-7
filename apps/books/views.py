@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
 from apps.reviews.models import Review, ReviewUpvote
+from apps.common.utils import render_book_detail
 
 from .models import Author, Book
 
@@ -56,7 +57,6 @@ def books_show(request, book_id):
         )
 
     sales = book.yearly_sales.all().order_by("-year")
-    from apps.common.utils import render_book_detail
     return render_book_detail(
         request,
         book,

@@ -1,3 +1,2 @@
-from django.test import TestCase
-
-# Create your tests here.
+# This file is required for Django app configuration
+# Tests will be added as needed
