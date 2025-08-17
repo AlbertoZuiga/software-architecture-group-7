@@ -6,9 +6,9 @@ from apps.books.models import Book
 
 
 def stats_page(request):
-    top_rated_books = Book.objects.annotate(
-        average_score=Avg("reviews__score")
-    ).order_by("-average_score")[:10]
+    top_rated_books = Book.objects.annotate(average_score=Avg("reviews__score")).order_by(
+        "-average_score"
+    )[:10]
 
     for book in top_rated_books:
         best_review = book.reviews.order_by("-score", "-up_votes").first()

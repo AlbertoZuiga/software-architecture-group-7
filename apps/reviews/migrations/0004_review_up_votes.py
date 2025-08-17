@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reviews', '0003_reviewupvote_alter_review_options_and_more'),
+        ("reviews", "0003_reviewupvote_alter_review_options_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='review',
-            name='up_votes',
+            model_name="review",
+            name="up_votes",
             field=models.PositiveIntegerField(default=0),
         ),
     ]

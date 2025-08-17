@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from .models import Author
@@ -55,10 +55,7 @@ def authors_create(request):
 
         if not errors:
             Author.objects.create(
-                name=name,
-                country=country,
-                date_of_birth=dob,
-                description=description
+                name=name, country=country, date_of_birth=dob, description=description
             )
             return redirect("authors:index")
 
@@ -68,11 +65,12 @@ def authors_create(request):
     page_number = request.GET.get("page")
     authors = paginator.get_page(page_number)
 
-    return render(request, "authors/authors_index.html", {
-        "authors": authors,
-        "errors": errors,
-        "form_values": form_values
-    })
+    return render(
+        request,
+        "authors/authors_index.html",
+        {"authors": authors, "errors": errors, "form_values": form_values},
+    )
+
 
 def authors_update(request, author_id):
     author = get_object_or_404(Author, id=author_id)
@@ -112,15 +110,15 @@ def authors_update(request, author_id):
             author.save(update_fields=["name", "country", "date_of_birth", "description"])
             return redirect("authors:index")
 
-    return render(request, "authors/authors_update.html", {
-        "author": author,
-        "errors": errors,
-        "form_values": form_values
-    })
+    return render(
+        request,
+        "authors/authors_update.html",
+        {"author": author, "errors": errors, "form_values": form_values},
+    )
 
 
 @require_POST
 def authors_delete(request, author_id):
     author = get_object_or_404(Author, id=author_id)
     author.delete()
-    return redirect('authors:index')
+    return redirect("authors:index")

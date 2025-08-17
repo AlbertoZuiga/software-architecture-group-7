@@ -1,8 +1,8 @@
-from django.db import models
 from django.contrib.auth.models import User
-from django.db import IntegrityError
+from django.db import IntegrityError, models
 
 from apps.books.models import Book
+
 
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
@@ -10,7 +10,6 @@ class Review(models.Model):
     score = models.PositiveSmallIntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
     up_votes = models.PositiveIntegerField(default=0)
-
 
     class Meta:
         ordering = ["-score"]
@@ -40,10 +39,11 @@ class Review(models.Model):
         self.up_votes = self.reviewupvotes.count()
         self.save()
 
+
 class ReviewUpvote(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="reviewupvotes")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="upvoted_reviews")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('review', 'user')
+        unique_together = ("review", "user")

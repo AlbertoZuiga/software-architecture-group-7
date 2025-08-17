@@ -1,17 +1,19 @@
+from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.postgres.search import SearchVector, SearchQuery
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
 from apps.reviews.models import Review, ReviewUpvote
-from .models import Book, Author
+
+from .models import Author, Book
+
 
 def books_index(request):
     query = (request.GET.get("q") or "").strip()
     book_list = Book.objects.all()
 
     if query:
-        vector = SearchVector('summary', 'name')
+        vector = SearchVector("summary", "name")
         search_query = SearchQuery(query)
         book_list = book_list.annotate(search=vector).filter(search=search_query)
 
@@ -22,20 +24,25 @@ def books_index(request):
 
     authors = Author.objects.all()
 
-    return render(request, "books/books_index.html", {
-        "books": books,
-        "q": query,
-        "erorrs": {},
-        "form_values": {},
-        "authors": authors,
-        "submit_label": "Crear"
-    })
+    return render(
+        request,
+        "books/books_index.html",
+        {
+            "books": books,
+            "q": query,
+            "erorrs": {},
+            "form_values": {},
+            "authors": authors,
+            "submit_label": "Crear",
+        },
+    )
+
 
 def books_show(request, book_id):
     book = Book.objects.get(id=book_id)
     book.recompute_total_sales()
 
-    reviews = Review.objects.filter(book=book).prefetch_related('reviewupvotes', 'user')
+    reviews = Review.objects.filter(book=book).prefetch_related("reviewupvotes", "user")
 
     for review in reviews:
         review.recompute_up_votes_count()
@@ -43,10 +50,9 @@ def books_show(request, book_id):
     user_upvoted_review_ids = []
     if request.user.is_authenticated:
         user_upvoted_review_ids = list(
-            ReviewUpvote.objects.filter(
-                user=request.user,
-                review__in=reviews
-            ).values_list('review_id', flat=True)
+            ReviewUpvote.objects.filter(user=request.user, review__in=reviews).values_list(
+                "review_id", flat=True
+            )
         )
 
     sales = book.yearly_sales.all().order_by("-year")
@@ -58,8 +64,9 @@ def books_show(request, book_id):
             "reviews": reviews,
             "user_upvoted_review_ids": list(user_upvoted_review_ids),
             "sales": sales,
-        }
+        },
     )
+
 
 def books_create(request):
     errors = {}
@@ -83,7 +90,7 @@ def books_create(request):
             "name": name,
             "summary": summary,
             "published_at": published_at,
-            "author": author_id
+            "author": author_id,
         }
 
         if not name:
@@ -99,20 +106,16 @@ def books_create(request):
 
         if not errors:
             Book.objects.create(
-                name=name,
-                summary=summary,
-                published_at=published_at,
-                author_id=author_id
+                name=name, summary=summary, published_at=published_at, author_id=author_id
             )
             return redirect("books:index")
 
     authors = Author.objects.all()
-    return render(request, "books/books_index.html", {
-        "errors": errors,
-        "form_values": form_values,
-        "authors": authors,
-        "submit_label": "Crear"
-    })
+    return render(
+        request,
+        "books/books_index.html",
+        {"errors": errors, "form_values": form_values, "authors": authors, "submit_label": "Crear"},
+    )
 
 
 def books_update(request, book_id):
@@ -130,7 +133,7 @@ def books_update(request, book_id):
             "name": name,
             "summary": summary,
             "published_at": published_at,
-            "author": author_id
+            "author": author_id,
         }
 
         if not name:
@@ -156,17 +159,21 @@ def books_update(request, book_id):
             "name": book.name,
             "summary": book.summary,
             "published_at": book.published_at,
-            "author": str(book.author_id)
+            "author": str(book.author_id),
         }
 
     authors = Author.objects.all()
-    return render(request, "books/books_update.html", {
-        "book": book,
-        "errors": errors,
-        "form_values": form_values,
-        "authors": authors,
-        "submit_label": "Actualizar"
-    })
+    return render(
+        request,
+        "books/books_update.html",
+        {
+            "book": book,
+            "errors": errors,
+            "form_values": form_values,
+            "authors": authors,
+            "submit_label": "Actualizar",
+        },
+    )
 
 
 @require_http_methods(["GET", "POST"])

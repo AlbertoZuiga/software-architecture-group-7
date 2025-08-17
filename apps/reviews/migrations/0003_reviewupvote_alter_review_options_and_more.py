@@ -8,47 +8,64 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reviews', '0002_review_user'),
+        ("reviews", "0002_review_user"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ReviewUpvote',
+            name="ReviewUpvote",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.AlterModelOptions(
-            name='review',
-            options={'ordering': ['-score']},
+            name="review",
+            options={"ordering": ["-score"]},
         ),
         migrations.RemoveIndex(
-            model_name='review',
-            name='reviews_rev_up_vote_9eead1_idx',
+            model_name="review",
+            name="reviews_rev_up_vote_9eead1_idx",
         ),
         migrations.RemoveField(
-            model_name='review',
-            name='up_votes',
+            model_name="review",
+            name="up_votes",
         ),
         migrations.AlterField(
-            model_name='review',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to=settings.AUTH_USER_MODEL),
+            model_name="review",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="reviews",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='reviewupvote',
-            name='review',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviewupvotes', to='reviews.review'),
+            model_name="reviewupvote",
+            name="review",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="reviewupvotes",
+                to="reviews.review",
+            ),
         ),
         migrations.AddField(
-            model_name='reviewupvote',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='upvoted_reviews', to=settings.AUTH_USER_MODEL),
+            model_name="reviewupvote",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="upvoted_reviews",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='reviewupvote',
-            unique_together={('review', 'user')},
+            name="reviewupvote",
+            unique_together={("review", "user")},
         ),
     ]

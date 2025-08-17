@@ -38,9 +38,7 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
             status=400,
         )
 
-    Review.objects.create(
-        book=book, review=review_text, score=score_val, user=request.user
-    )
+    Review.objects.create(book=book, review=review_text, score=score_val, user=request.user)
     return redirect("books:show", book_id=book.id)
 
 

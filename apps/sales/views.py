@@ -13,6 +13,7 @@ from .models import Sale
 CURRENT_YEAR = datetime.now().year
 MAX_SALES = 2147483647
 
+
 def sales_index(request, book_id):
     book = Book.objects.get(id=book_id)
     book.recompute_total_sales()
@@ -25,7 +26,7 @@ def sales_index(request, book_id):
     return render(
         request,
         "sales/sales_index.html",
-        {"book": book, "sales": sales, "current_year": CURRENT_YEAR}
+        {"book": book, "sales": sales, "current_year": CURRENT_YEAR},
     )
 
 
