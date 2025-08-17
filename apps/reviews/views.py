@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from apps.books.models import Book
+from apps.common.utils import render_book_detail
 
 from .models import Review
 
@@ -26,15 +27,12 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 
     if errors:
         reviews = book.reviews.all().order_by("-up_votes", "-score")
-        return render(
+        return render_book_detail(
             request,
-            "books/books_show.html",
-            {
-                "book": book,
-                "reviews": reviews,
-                "errors": errors,
-                "form_values": {"review": review_text, "score": score_raw or ""},
-            },
+            book,
+            reviews,
+            errors=errors,
+            form_values={"review": review_text, "score": score_raw or ""},
             status=400,
         )
 
