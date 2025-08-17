@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="container">
         <h1>Welcome to the Book Review Platform</h1>
         <p>This is the homepage.</p>
+        <img src="{% static 'images/bookshelf.jpg' %}" alt="Homepage Image" class="img-fluid mt-4">
     </div>
 {% endblock %}
