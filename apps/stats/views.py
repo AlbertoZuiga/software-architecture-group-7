@@ -21,7 +21,7 @@ def stats_page(request):
     sort_order = f"-{sort_field}" if sort_direction == "desc" else sort_field
 
     authors_stats = Author.objects.annotate(
-        number_of_books=Count("books"),
+        number_of_books=Count("books", distinct=True),
         average_score=Avg("books__reviews__score"),
         total_sales=Sum("books__yearly_sales__sales"),
     ).order_by(sort_order)
