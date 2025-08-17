@@ -25,8 +25,7 @@ class Book(models.Model):
         total = agg.get("total") or 0
 
         MAX_POSITIVE_INT = 2147483647
-        if total > MAX_POSITIVE_INT:
-            total = MAX_POSITIVE_INT
+        total = min(total, MAX_POSITIVE_INT)
 
         self.total_sales = total
         self.save(update_fields=["total_sales"])
