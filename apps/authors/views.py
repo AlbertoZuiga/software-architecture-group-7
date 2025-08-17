@@ -118,7 +118,7 @@ def authors_update(request, author_id):
 
 
 @require_POST
-def authors_delete(request, author_id):
+def authors_delete(_request, author_id):
     author = get_object_or_404(Author, id=author_id)
     author.delete()
     return redirect("authors:index")

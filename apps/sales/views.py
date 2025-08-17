@@ -147,7 +147,7 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
 
 @login_required
 @require_POST
-def sales_delete(request: HttpRequest, book_id: int, sale_id: int) -> HttpResponse:
+def sales_delete(_request: HttpRequest, book_id: int, sale_id: int) -> HttpResponse:
     book = get_object_or_404(Book, id=book_id)
     sale = get_object_or_404(Sale, id=sale_id, book=book)
     sale.delete()
