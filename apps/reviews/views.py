@@ -26,15 +26,13 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
 
     if errors:
         reviews = book.reviews.all().order_by("-up_votes", "-score")
-        return render(
+        from apps.common.utils import render_book_detail
+        return render_book_detail(
             request,
-            "books/books_show.html",
-            {
-                "book": book,
-                "reviews": reviews,
-                "errors": errors,
-                "form_values": {"review": review_text, "score": score_raw or ""},
-            },
+            book,
+            reviews,
+            errors=errors,
+            form_values={"review": review_text, "score": score_raw or ""},
             status=400,
         )
 

@@ -56,15 +56,13 @@ def books_show(request, book_id):
         )
 
     sales = book.yearly_sales.all().order_by("-year")
-    return render(
+    from apps.common.utils import render_book_detail
+    return render_book_detail(
         request,
-        "books/books_show.html",
-        {
-            "book": book,
-            "reviews": reviews,
-            "user_upvoted_review_ids": list(user_upvoted_review_ids),
-            "sales": sales,
-        },
+        book,
+        reviews,
+        user_upvoted_review_ids=list(user_upvoted_review_ids),
+        sales=sales,
     )
 
 
