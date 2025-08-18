@@ -1,18 +1,52 @@
-{% extends "base.html" %}
-{% load humanize %}
+{{% extends "base.html" %}
 
-{% block title %}Edit sale{% endblock %}
+{% block title %}Edit Sale for {{ book.name }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4">Edit sale of "{{ book.name }}"</h2>
+<div class="container mt-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'books:index' %}" class="text-primary">
+                    <i class="bi bi-book me-1"></i>Books
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'books:show' book.id %}" class="text-primary">
+                    {{ book.name }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'sales:index' book.id %}" class="text-primary">
+                    Sales History
+                </a>
+            </li>
+            <li class="breadcrumb-item active text-light" aria-current="page">Edit Record</li>
+        </ol>
+    </nav>
 
-    <a href="{% url 'sales:index' book.id %}" class="btn btn-secondary mb-3">
-        ← Back to sales
-    </a>
-
-    {% url 'sales:update' book.id sale.id as update_url %}
-
-    {% include "partials/_sales_form.html" with form_action=update_url submit_label="💾 Save changes" initial_year=sale.year initial_sales=sale.sales %}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-secondary">
+                <div class="card-header border-secondary p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="rounded-circle bg-warning bg-opacity-15 p-3">
+                                <i class="bi bi-pencil-square text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h1 class="h3 mb-1 text-light">Edit Sales Record</h1>
+                            <p class="text-secondary mb-0">Update sales information for {{ book.name }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    {% url 'sales:update' book.id sale.id as update_url %}
+                    {% include "partials/_sales_form.html" with form_action=update_url submit_label="Update Record" initial_year=sale.year initial_sales=sale.sales %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

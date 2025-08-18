@@ -1,33 +1,71 @@
-<form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
+<form method="post" action="{{ form_action }}" class="needs-validation" novalidate>
     {% csrf_token %}
-    <div class="mb-3">
-        <label for="year" class="form-label">Year ({{book.published_at.year}}-{{ current_year }})</label>
-        <input 
-            id="year" 
-            type="number" 
-            name="year" 
-            min="{{ book.published_at.year }}" 
-            max="{{ current_year }}" 
-            class="form-control {% if errors.year %}is-invalid{% endif %}" 
-            value="{{ form_values.year|default:initial_year }}" 
-            required
-        >
-        {% if errors.year %}<div class="invalid-feedback">{{ errors.year }}</div>{% endif %}
-    </div>
+    <div class="row g-3">
+        <div class="col-12">
+            <div class="form-floating">
+                <input type="number" 
+                       class="form-control bg-dark text-light border-secondary {% if errors.year %}is-invalid{% endif %}" 
+                       id="year" 
+                       name="year" 
+                       min="{{ book.published_at.year }}" 
+                       max="{{ current_year }}" 
+                       value="{{ form_values.year|default:initial_year }}" 
+                       placeholder="Enter year"
+                       required>
+                <label for="year" class="text-secondary">Year ({{book.published_at.year}}-{{ current_year }})</label>
+                {% if errors.year %}
+                    <div class="invalid-feedback">{{ errors.year }}</div>
+                {% else %}
+                    <div class="invalid-feedback">
+                        Please enter a valid year between {{book.published_at.year}} and {{ current_year }}.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label for="sales" class="form-label">Number of Sales</label>
-        <input 
-            id="sales" 
-            type="number" 
-            name="sales" 
-            min="0" 
-            class="form-control {% if errors.sales %}is-invalid{% endif %}" 
-            value="{{ form_values.sales|default:initial_sales }}" 
-            required
-        >
-        {% if errors.sales %}<div class="invalid-feedback">{{ errors.sales }}</div>{% endif %}
+        <div class="col-12">
+            <div class="form-floating">
+                <input type="number" 
+                       class="form-control bg-dark text-light border-secondary {% if errors.sales %}is-invalid{% endif %}" 
+                       id="sales" 
+                       name="sales" 
+                       min="0" 
+                       value="{{ form_values.sales|default:initial_sales }}" 
+                       placeholder="Enter sales"
+                       required>
+                <label for="sales" class="text-secondary">Number of Sales</label>
+                {% if errors.sales %}
+                    <div class="invalid-feedback">{{ errors.sales }}</div>
+                {% else %}
+                    <div class="invalid-feedback">
+                        Please enter a valid number of sales (0 or greater).
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-
-    <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+    
+    <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-check-circle me-2"></i>{{ submit_label }}
+        </button>
+    </div>
 </form>
+
+<script>
+// Form validation
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+</script>
