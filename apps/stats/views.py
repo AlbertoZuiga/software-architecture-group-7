@@ -27,9 +27,6 @@ def stats_page(request):
             book.best_review_upvotes = "N/A"
             book.worst_review_upvotes = "N/A"
 
-    sort_field = request.GET.get("sort", "total_sales")
-    sort_direction = request.GET.get("direction", "desc")
-    sort_order = f"-{sort_field}" if sort_direction == "desc" else sort_field
 
     authors_stats = (
         Author.objects
@@ -38,7 +35,6 @@ def stats_page(request):
             average_score=Avg("books__reviews__score"),
             total_sales=Sum("books__yearly_sales__sales"),
         )
-        .order_by(sort_order)
     )
 
     author_total_sales_subquery = (
@@ -95,8 +91,6 @@ def stats_page(request):
     context = {
         "top_rated_books": top_rated_books,
         "authors_stats": authors_stats,
-        "top_selling_books": top_selling_books,
-        "current_sort_field": sort_field,
-        "current_sort_direction": sort_direction,
+        "top_selling_books": top_selling_books
     }
     return render(request, "stats/stats_index.html", context)
