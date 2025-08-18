@@ -1,64 +1,146 @@
-<form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
+<form method="post" action="{{ form_action }}">
     {% csrf_token %}
     
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input 
-            id="name"
-            type="text"
-            name="name"
-            class="form-control {% if errors.name %}is-invalid{% endif %}"
-            maxlength="200"
-            value="{{ form_values.name|default:initial_name }}"
-            required
-        >
-        {% if errors.name %}
-            <div class="invalid-feedback">{{ errors.name }}</div>
-        {% endif %}
-    </div>
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="name" class="form-label text-light">
+                    <i class="bi bi-person me-2"></i>Author Name
+                </label>
+                <input 
+                    id="name"
+                    type="text"
+                    name="name"
+                    class="form-control bg-dark border-secondary text-light {% if errors.name %}is-invalid{% endif %}"
+                    maxlength="200"
+                    value="{{ form_values.name|default:initial_name }}"
+                    placeholder="Enter author's full name"
+                    required
+                >
+                {% if errors.name %}
+                    <div class="invalid-feedback">{{ errors.name }}</div>
+                {% endif %}
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label for="country" class="form-label">Country</label>
-        <input 
-            id="country"
-            type="text"
-            name="country"
-            class="form-control {% if errors.country %}is-invalid{% endif %}"
-            maxlength="100"
-            value="{{ form_values.country|default:initial_country }}"
-            required
-        >
-        {% if errors.country %}
-            <div class="invalid-feedback">{{ errors.country }}</div>
-        {% endif %}
-    </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="country" class="form-label text-light">
+                    <i class="bi bi-geo-alt me-2"></i>Country
+                </label>
+                <input 
+                    id="country"
+                    type="text"
+                    name="country"
+                    class="form-control bg-dark border-secondary text-light {% if errors.country %}is-invalid{% endif %}"
+                    maxlength="100"
+                    value="{{ form_values.country|default:initial_country }}"
+                    placeholder="Author's country"
+                    required
+                >
+                {% if errors.country %}
+                    <div class="invalid-feedback">{{ errors.country }}</div>
+                {% endif %}
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label for="date_of_birth" class="form-label">Date of Birth</label>
-        <input 
-            id="date_of_birth"
-            type="date"
-            name="date_of_birth"
-            class="form-control {% if errors.date_of_birth %}is-invalid{% endif %}"
-            value="{{ form_values.date_of_birth|default:initial_date_of_birth }}"
-        >
-        {% if errors.date_of_birth %}
-            <div class="invalid-feedback">{{ errors.date_of_birth }}</div>
-        {% endif %}
-    </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="date_of_birth" class="form-label text-light">
+                    <i class="bi bi-calendar me-2"></i>Date of Birth
+                </label>
+                <input 
+                    id="date_of_birth"
+                    type="date"
+                    name="date_of_birth"
+                    class="form-control bg-dark border-secondary text-light {% if errors.date_of_birth %}is-invalid{% endif %}"
+                    value="{{ form_values.date_of_birth|default:initial_date_of_birth }}"
+                >
+                {% if errors.date_of_birth %}
+                    <div class="invalid-feedback">{{ errors.date_of_birth }}</div>
+                {% endif %}
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea
-            id="description"
-            name="description"
-            rows="3"
-            class="form-control {% if errors.description %}is-invalid{% endif %}"
-        >{{ form_values.description|default:initial_description }}</textarea>
-        {% if errors.description %}
-            <div class="invalid-feedback">{{ errors.description }}</div>
-        {% endif %}
-    </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="description" class="form-label text-light">
+                    <i class="bi bi-file-text me-2"></i>Author Biography
+                </label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    class="form-control bg-dark border-secondary text-light {% if errors.description %}is-invalid{% endif %}"
+                    placeholder="Write a brief biography of the author"
+                >{{ form_values.description|default:initial_description }}</textarea>
+                {% if errors.description %}
+                    <div class="invalid-feedback">{{ errors.description }}</div>
+                {% endif %}
+            </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg me-2"></i>{{ submit_label }}
+            </button>
+        </div>
+    </div>
 </form>
+
+<style>
+    /* Form Styles */
+    .form-control {
+        transition: var(--transition);
+    }
+    
+    .form-control:focus {
+        background-color: var(--bg-dark);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+        color: var(--text-primary);
+    }
+    
+    .form-control::placeholder {
+        color: var(--text-muted);
+    }
+    
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .invalid-feedback {
+        color: #ff6b6b;
+        font-size: 0.875rem;
+    }
+    
+    /* Button Enhancements */
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        transition: var(--transition);
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        transform: translateY(-2px);
+    }
+    
+    .btn-primary:focus {
+        box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+    }
+    
+    /* Input Field Improvements */
+    input[type="date"].form-control {
+        color-scheme: dark;
+    }
+    
+    textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+    }
+</style>

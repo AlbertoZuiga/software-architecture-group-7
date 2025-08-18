@@ -1,18 +1,54 @@
 {% extends "base.html" %}
 {% load humanize %}
 
-{% block title %}Edit Author{% endblock %}
+{% block title %}Edit {{ author.name }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4">Edit author "{{ author.name }}"</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'authors:index' %}" class="text-primary">
+                            <i class="bi bi-people me-1"></i>Authors
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'authors:show' author.id %}" class="text-primary">
+                            {{ author.name }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">Edit</li>
+                </ol>
+            </nav>
 
-    <a href="{% url 'authors:show' author.id %}" class="btn btn-secondary mb-3">
-        ← Back
-    </a>
+            <div class="card bg-dark border-secondary">
+                <div class="card-header border-secondary p-4">
+                    <h4 class="mb-1 text-light">Edit Author</h4>
+                    <p class="text-secondary mb-0">Update information for {{ author.name }}</p>
+                </div>
+                
+                <div class="card-body p-4">
+                    {% url 'authors:update' author.id as update_url %}
+                    {% include "partials/_authors_form.html" with form_action=update_url submit_label="Save Changes" initial_name=author.name initial_country=author.country initial_date_of_birth=author.date_of_birth|date:'Y-m-d' initial_description=author.description %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    {% url 'authors:update' author.id as update_url %}
-
-    {% include "partials/_authors_form.html" with form_action=update_url submit_label="💾 Save changes" initial_name=author.name initial_country=author.country initial_date_of_birth=author.date_of_birth|date:'Y-m-d' initial_description=author.description %}
+    <style>
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--text-primary);
+        }
+        
+        .card {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+    </style>
 </div>
 {% endblock %}

@@ -20,9 +20,24 @@
 
     {% if user.is_authenticated %}
     <div class="collapse mb-4" id="addAuthorForm">
-        <div class="card card-body">
-            {% url 'authors:create' as create_url %}
-            {% include "partials/_authors_form.html" with form_action=create_url submit_label="Add Author" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
+        <div class="card bg-dark border-secondary">
+            <div class="card-header border-secondary p-4">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <div class="rounded-circle bg-primary bg-opacity-15 p-3">
+                            <i class="bi bi-person-plus text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h4 class="mb-1 text-light">Add New Author</h4>
+                        <p class="text-secondary mb-0">Fill in the details to add a new author</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                {% url 'authors:create' as create_url %}
+                {% include "partials/_authors_form.html" with form_action=create_url submit_label="Add Author" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
+            </div>
         </div>
     </div>
     {% endif %}
@@ -110,6 +125,7 @@
     {% endif %}
 
     <style>
+        /* Pagination Styles */
         .page-link {
             background-color: var(--bg-secondary);
             border-color: var(--bg-accent);
@@ -132,6 +148,48 @@
             background-color: var(--bg-secondary);
             border-color: var(--bg-accent);
             color: var(--text-muted);
+        }
+
+        /* Form Animation Styles */
+        .collapse {
+            transition: var(--transition);
+        }
+
+        #addAuthorForm {
+            transform-origin: top;
+        }
+
+        #addAuthorForm.collapsing {
+            transform: scaleY(0);
+            opacity: 0;
+        }
+
+        #addAuthorForm.collapse.show {
+            transform: scaleY(1);
+            opacity: 1;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Card Enhancements */
+        .card {
+            transition: var(--transition);
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:focus {
+            box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+        }
+
+        .rounded-circle {
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover .rounded-circle {
+            transform: scale(1.1);
         }
     </style>
 </div>
