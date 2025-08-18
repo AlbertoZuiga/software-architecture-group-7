@@ -6,70 +6,225 @@
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <style>
-    /* Dark theme overrides for DataTables */
+    /* DataTables Dark Theme */
     .dataTables_wrapper {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.9);
     }
     .dataTables_length select,
     .dataTables_filter input {
         background-color: #2b3035 !important;
         border: 1px solid #495057 !important;
-        color: rgba(255, 255, 255, 0.8) !important;
+        color: #fff !important;
+        border-radius: 6px !important;
+        padding: 0.5rem !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    .dataTables_length select:focus,
+    .dataTables_filter input:focus {
+        border-color: #0d6efd !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
     }
     .dataTables_length select option {
         background-color: #2b3035;
+        padding: 8px;
     }
     .dataTables_info {
-        color: rgba(255, 255, 255, 0.6) !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        padding: 1rem 0 !important;
+    }
+    .dataTables_paginate {
+        padding: 1rem 0 !important;
     }
     .paginate_button {
-        color: rgba(255, 255, 255, 0.8) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        padding: 0.5rem 0.75rem !important;
+        margin: 0 0.25rem !important;
+        border-radius: 6px !important;
+        transition: all 0.2s ease-in-out !important;
     }
     .paginate_button.current {
         background: #0d6efd !important;
         border-color: #0d6efd !important;
         color: white !important;
+        font-weight: 600 !important;
     }
     .paginate_button:hover:not(.current) {
         background: #2b3035 !important;
         border-color: #495057 !important;
     }
+    
+    /* Table Styling */
+    table.dataTable {
+        border-collapse: separate !important;
+        border-spacing: 0 0.5rem !important;
+        margin: 1rem 0 !important;
+    }
+    table.dataTable thead th {
+        border-bottom: 2px solid #495057 !important;
+        padding: 1rem !important;
+        font-weight: 600 !important;
+        color: #fff !important;
+    }
     table.dataTable tbody tr {
-        background-color: #212529 !important;
+        background-color: #2b3035 !important;
+        transition: transform 0.2s ease-in-out !important;
     }
     table.dataTable tbody tr:hover {
-        background-color: #2b3035 !important;
+        background-color: #343a40 !important;
+        transform: translateY(-2px);
     }
-    .table-dark {
-        --bs-table-striped-bg: #2b3035;
+    table.dataTable tbody td {
+        padding: 1rem !important;
+        vertical-align: middle !important;
+        border-top: 1px solid #495057 !important;
     }
-    .filter-input, .filter-operator {
+    
+    /* Filters Styling */
+    .filter-input, 
+    .filter-operator {
         background-color: #2b3035 !important;
-        border-color: #495057 !important;
-        color: rgba(255, 255, 255, 0.8) !important;
+        border: 1px solid #6c757d !important;
+        color: #fff !important;
+        font-weight: 500;
+        border-radius: 6px !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    .filter-input:focus, 
+    .filter-operator:focus {
+        border-color: #0d6efd !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    }
+    .filter-input::placeholder {
+        color: rgba(255, 255, 255, 0.6) !important;
+        font-weight: normal;
+    }
+    .filter-operator {
+        background-color: #343a40 !important;
     }
     .filter-operator option {
-        background-color: #2b3035;
+        background-color: #343a40;
+        color: #fff;
+        padding: 8px;
+    }
+    .filter-container {
+        margin-bottom: 0.5rem;
+    }
+    .filter-container label {
+        color: #0d6efd !important;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    .filter-container label i {
+        margin-right: 0.5rem;
+    }
+    .filter-row th {
+        padding: 1rem !important;
+        background-color: #212529 !important;
+        border-bottom: none !important;
+    }
+    
+    /* Card Enhancements */
+    .stats-card {
+        transition: transform 0.2s ease-in-out;
+    }
+    .stats-card:hover {
+        transform: translateY(-4px);
+    }
+    .card-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Badges and Icons */
+    .badge {
+        padding: 0.5rem 0.75rem !important;
+        font-weight: 500 !important;
+    }
+    .icon-circle {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    
+    /* Utilities */
+    .text-gradient {
+        background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .shadow-soft {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     }
 </style>
 
 <div class="container mt-5">
-    <div class="row mb-4">
-        <div class="col">
-            <div class="d-flex align-items-center">
-                <div class="rounded-circle bg-primary bg-opacity-15 p-3 me-3">
+    <!-- Header Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="d-flex align-items-center mb-4">
+                <div class="icon-circle bg-primary bg-opacity-15 p-3 me-3">
                     <i class="bi bi-bar-chart-line text-primary fs-4"></i>
                 </div>
                 <div>
-                    <h1 class="h2 mb-1 text-light">Statistics Dashboard</h1>
+                    <h1 class="display-6 mb-1 text-light text-gradient">Statistics Dashboard</h1>
                     <p class="text-secondary mb-0">Comprehensive overview of books, authors, and sales performance</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Summary Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card bg-dark border-primary border-opacity-25 stats-card shadow-soft">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-circle bg-primary bg-opacity-15 me-3">
+                            <i class="bi bi-people text-primary"></i>
+                        </div>
+                        <h5 class="card-title mb-0 text-light">Total Authors</h5>
+                    </div>
+                    <h2 class="display-6 mb-2 text-light">{{ authors_stats|length }}</h2>
+                    <p class="text-secondary mb-0">Active content creators</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark border-warning border-opacity-25 stats-card shadow-soft">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-circle bg-warning bg-opacity-15 me-3">
+                            <i class="bi bi-book text-warning"></i>
+                        </div>
+                        <h5 class="card-title mb-0 text-light">Top Rated Books</h5>
+                    </div>
+                    <h2 class="display-6 mb-2 text-light">{{ top_rated_books|length }}</h2>
+                    <p class="text-secondary mb-0">Highest rated publications</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark border-success border-opacity-25 stats-card shadow-soft">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-circle bg-success bg-opacity-15 me-3">
+                            <i class="bi bi-graph-up-arrow text-success"></i>
+                        </div>
+                        <h5 class="card-title mb-0 text-light">Best Sellers</h5>
+                    </div>
+                    <h2 class="display-6 mb-2 text-light">{{ top_selling_books|length }}</h2>
+                    <p class="text-secondary mb-0">Top performing books</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Table 1: Authors Statistics -->
-    <div class="card bg-dark border-secondary mb-4">
+    <div class="card bg-dark border-secondary mb-4 shadow-soft">
         <div class="card-header border-secondary p-3">
             <div class="d-flex align-items-center">
                 <div class="rounded-circle bg-info bg-opacity-15 p-2 me-3">
@@ -138,31 +293,65 @@
                     <th scope="col"></th>
                     <th scope="col">
                         <div class="filter-container">
-                            <input type="text" class="filter-input text-filter form-control form-control-sm" placeholder="Filter Author" style="width: 100%;">
+                            <label for="authorFilter" class="d-block text-primary mb-2">
+                                <i class="bi bi-funnel me-1"></i>Filter by Author
+                            </label>
+                            <input type="text" 
+                                   id="authorFilter"
+                                   class="filter-input text-filter form-control form-control-sm" 
+                                   placeholder="Enter author name" 
+                                   aria-label="Filter by author name"
+                                   style="width: 100%;">
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="filter-container d-flex align-items-center" style="gap: 4px;">
-                            <select class="filter-operator form-select form-select-sm" style="width: 60px;">
-                                <option value="=">=</option>
-                                <option value=">">&gt;</option>
-                                <option value="<">&lt;</option>
-                                <option value=">=">&ge;</option>
-                                <option value="<=">&le;</option>
-                            </select>
-                            <input type="number" class="filter-input numeric-filter form-control form-control-sm" placeholder="Filter" style="flex: 1;">
+                        <div class="filter-container">
+                            <label for="booksFilter" class="d-block text-primary mb-2">
+                                <i class="bi bi-funnel me-1"></i>Filter by Books
+                            </label>
+                            <div class="d-flex align-items-center" style="gap: 4px;">
+                                <select id="booksFilterOp" 
+                                        class="filter-operator form-select form-select-sm" 
+                                        style="width: 60px;"
+                                        aria-label="Select comparison operator for books">
+                                    <option value="=">=</option>
+                                    <option value=">">&gt;</option>
+                                    <option value="<">&lt;</option>
+                                    <option value=">=">&ge;</option>
+                                    <option value="<=">&le;</option>
+                                </select>
+                                <input type="number" 
+                                       id="booksFilter"
+                                       class="filter-input numeric-filter form-control form-control-sm" 
+                                       placeholder="Enter number" 
+                                       aria-label="Filter by number of books"
+                                       style="flex: 1;">
+                            </div>
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="filter-container d-flex align-items-center" style="gap: 4px;">
-                            <select class="filter-operator form-select form-select-sm" style="width: 60px;">
-                                <option value="=">=</option>
-                                <option value=">">&gt;</option>
-                                <option value="<">&lt;</option>
-                                <option value=">=">&ge;</option>
-                                <option value="<=">&le;</option>
-                            </select>
-                            <input type="number" step="0.01" class="filter-input numeric-filter form-control form-control-sm" placeholder="Filter" style="flex: 1;">
+                        <div class="filter-container">
+                            <label for="scoreFilter" class="d-block text-primary mb-2">
+                                <i class="bi bi-funnel me-1"></i>Filter by Score
+                            </label>
+                            <div class="d-flex align-items-center" style="gap: 4px;">
+                                <select id="scoreFilterOp"
+                                        class="filter-operator form-select form-select-sm" 
+                                        style="width: 60px;"
+                                        aria-label="Select comparison operator for score">
+                                    <option value="=">=</option>
+                                    <option value=">">&gt;</option>
+                                    <option value="<">&lt;</option>
+                                    <option value=">=">&ge;</option>
+                                    <option value="<=">&le;</option>
+                                </select>
+                                <input type="number" 
+                                       id="scoreFilter"
+                                       step="0.01" 
+                                       class="filter-input numeric-filter form-control form-control-sm" 
+                                       placeholder="Enter score" 
+                                       aria-label="Filter by average score"
+                                       style="flex: 1;">
                         </div>
                     </th>
                     <th scope="col">
@@ -197,13 +386,21 @@
     </div>
 
     <!-- Table 2: Top 10 Rated Books -->
-    <div class="card bg-dark border-secondary mb-4">
-        <div class="card-header border-secondary p-3">
-            <div class="d-flex align-items-center">
-                <div class="rounded-circle bg-warning bg-opacity-15 p-2 me-3">
-                    <i class="bi bi-star text-warning"></i>
+    <div class="card bg-dark border-warning border-opacity-25 mb-4 shadow-soft">
+        <div class="card-header border-warning border-opacity-25 p-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="icon-circle bg-warning bg-opacity-15 me-3">
+                        <i class="bi bi-star text-warning"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title h4 mb-1 text-light">Top 10 Rated Books</h3>
+                        <p class="text-secondary mb-0">Highest rated books based on user reviews</p>
+                    </div>
                 </div>
-                <h3 class="card-title mb-0 text-light">Top 10 Rated Books</h3>
+                <div class="badge bg-warning bg-opacity-25 text-warning border border-warning">
+                    <i class="bi bi-trophy me-2"></i>Top Performers
+                </div>
             </div>
         </div>
         <div class="card-body p-4">
@@ -244,13 +441,21 @@
     </div>
 
     <!-- Table 3: Top 50 Selling Books -->
-    <div class="card bg-dark border-secondary mb-4">
-        <div class="card-header border-secondary p-3">
-            <div class="d-flex align-items-center">
-                <div class="rounded-circle bg-success bg-opacity-15 p-2 me-3">
-                    <i class="bi bi-graph-up-arrow text-success"></i>
+    <div class="card bg-dark border-success border-opacity-25 mb-4 shadow-soft">
+        <div class="card-header border-success border-opacity-25 p-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="icon-circle bg-success bg-opacity-15 me-3">
+                        <i class="bi bi-graph-up-arrow text-success"></i>
+                    </div>
+                    <div>
+                        <h3 class="card-title h4 mb-1 text-light">Top 50 Selling Books</h3>
+                        <p class="text-secondary mb-0">Best-selling books ranked by total sales</p>
+                    </div>
                 </div>
-                <h3 class="card-title mb-0 text-light">Top 50 Selling Books</h3>
+                <div class="badge bg-success bg-opacity-25 text-success border border-success">
+                    <i class="bi bi-cash-stack me-2"></i>Sales Leaders
+                </div>
             </div>
         </div>
         <div class="card-body p-4">
