@@ -48,6 +48,166 @@
     }
   },
   {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "username": "carlos.rodriguez",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Carlos",
+      "last_name": "Rodriguez",
+      "email": "carlos.r@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "username": "ana.martinez",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Ana",
+      "last_name": "Martinez",
+      "email": "ana.m@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "username": "david.sanchez",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "David",
+      "last_name": "Sanchez",
+      "email": "david.s@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 7,
+    "fields": {
+      "username": "laura.lopez",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Laura",
+      "last_name": "Lopez",
+      "email": "laura.l@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 8,
+    "fields": {
+      "username": "pedro.torres",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Pedro",
+      "last_name": "Torres",
+      "email": "pedro.t@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 9,
+    "fields": {
+      "username": "sofia.ramirez",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Sofia",
+      "last_name": "Ramirez",
+      "email": "sofia.r@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 10,
+    "fields": {
+      "username": "miguel.flores",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Miguel",
+      "last_name": "Flores",
+      "email": "miguel.f@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 11,
+    "fields": {
+      "username": "carmen.diaz",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Carmen",
+      "last_name": "Diaz",
+      "email": "carmen.d@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+      "username": "roberto.morales",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Roberto",
+      "last_name": "Morales",
+      "email": "roberto.m@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 13,
+    "fields": {
+      "username": "lucia.herrera",
+      "password": "pbkdf2_sha256$1000000$mLMzUNU2G6fZ6H9OMZQD3q$d0MySO+eoixnBSNrAvBfFgm3eHSrgs+k5T0PPyeFbI0=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "first_name": "Lucia",
+      "last_name": "Herrera",
+      "email": "lucia.h@example.com",
+      "last_login": null,
+      "date_joined": "2025-08-15T16:50:54.833833Z"
+    }
+  },
+  {
     "model": "authors.author",
     "pk": 1,
     "fields": {
@@ -33842,9 +34002,144 @@
     "pk": 1690,
     "fields": {
       "book": 299,
-      "review": "La trama es confusa y el ritmo, flojo.",
+      "review": "The plot is confusing and the pacing is slow.",
       "score": 1,
       "user": 3
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 1,
+    "fields": {
+      "review": 1,
+      "user": 4,
+      "created_at": "2025-08-17T12:00:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 2,
+    "fields": {
+      "review": 1,
+      "user": 5,
+      "created_at": "2025-08-17T12:01:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 3,
+    "fields": {
+      "review": 2,
+      "user": 6,
+      "created_at": "2025-08-17T12:02:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 4,
+    "fields": {
+      "review": 2,
+      "user": 7,
+      "created_at": "2025-08-17T12:03:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 5,
+    "fields": {
+      "review": 3,
+      "user": 8,
+      "created_at": "2025-08-17T12:04:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 6,
+    "fields": {
+      "review": 4,
+      "user": 9,
+      "created_at": "2025-08-17T12:05:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 7,
+    "fields": {
+      "review": 5,
+      "user": 10,
+      "created_at": "2025-08-17T12:06:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 8,
+    "fields": {
+      "review": 5,
+      "user": 11,
+      "created_at": "2025-08-17T12:07:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 9,
+    "fields": {
+      "review": 6,
+      "user": 12,
+      "created_at": "2025-08-17T12:08:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 10,
+    "fields": {
+      "review": 7,
+      "user": 13,
+      "created_at": "2025-08-17T12:09:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 11,
+    "fields": {
+      "review": 8,
+      "user": 4,
+      "created_at": "2025-08-17T12:10:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 12,
+    "fields": {
+      "review": 9,
+      "user": 5,
+      "created_at": "2025-08-17T12:11:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 13,
+    "fields": {
+      "review": 10,
+      "user": 6,
+      "created_at": "2025-08-17T12:12:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 14,
+    "fields": {
+      "review": 10,
+      "user": 7,
+      "created_at": "2025-08-17T12:13:00.000Z"
+    }
+  },
+  {
+    "model": "reviews.reviewupvote",
+    "pk": 15,
+    "fields": {
+      "review": 11,
+      "user": 8,
+      "created_at": "2025-08-17T12:14:00.000Z"
     }
   },
   {

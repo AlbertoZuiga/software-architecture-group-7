@@ -108,7 +108,7 @@ docker-compose exec backend python manage.py migrate
 * Run seeds:
 
 ```bash
-docker-compose exec backend python manage.py loaddata data_fixture.json
+docker-compose exec backend python manage.py loaddata fixtures/*
 ```
 
 * Connect to console:
