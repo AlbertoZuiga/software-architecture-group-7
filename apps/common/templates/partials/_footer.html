@@ -46,10 +46,14 @@
                 <ul class="list-unstyled mb-0">
                     {% if user.is_authenticated %}
                         <li class="mb-3">
-                            <a href="{% url 'logout' %}" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
-                                <i class="bi bi-box-arrow-right me-2"></i>
-                                <span>Logout</span>
-                            </a>
+                            <form method="post" action="{% url 'logout' %}" class="m-0">
+                                {% csrf_token %}
+                                <button type="submit" 
+                                        class="btn btn-link text-secondary text-decoration-none hover-text-light d-flex align-items-center p-0">
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    <span>Logout</span>
+                                </button>
+                            </form>
                         </li>
                     {% else %}
                         <li class="mb-3">
@@ -120,5 +124,16 @@
     }
     footer .list-inline-item:not(:last-child) {
         margin-right: 0;
+    }
+    footer .btn-link {
+        transition: all 0.2s ease-in-out;
+        font-size: inherit;
+    }
+    footer .btn-link:hover {
+        color: #ffffff !important;
+        transform: translateX(4px);
+    }
+    footer .btn-link:focus {
+        box-shadow: none;
     }
 </style>
