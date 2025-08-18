@@ -1,39 +1,124 @@
-<footer class="mt-5 py-4">
+<footer class="mt-5 py-5 bg-dark border-top border-secondary">
     <div class="container">
-        <div class="row g-4 text-center text-md-start">
-            <div class="col-md-4">
-                <h5 class="mb-3 text-primary">Book Review Platform</h5>
-                <p class="text-muted mb-0">Discover your next favorite book through our community's honest reviews and ratings.</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="mb-3 text-primary">Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{% url 'books:index' %}" class="text-muted text-decoration-none mb-2 d-block">Books</a></li>
-                    <li><a href="{% url 'authors:index' %}" class="text-muted text-decoration-none mb-2 d-block">Authors</a></li>
-                    <li><a href="/stats/" class="text-muted text-decoration-none mb-2 d-block">Statistics</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5 class="mb-3 text-primary">Connect</h5>
-                <div class="d-flex gap-3 justify-content-center justify-content-md-start">
-                    <a href="#" class="text-muted text-decoration-none">
-                        <i class="bi bi-twitter fs-5"></i>
-                    </a>
-                    <a href="#" class="text-muted text-decoration-none">
-                        <i class="bi bi-facebook fs-5"></i>
-                    </a>
-                    <a href="#" class="text-muted text-decoration-none">
-                        <i class="bi bi-instagram fs-5"></i>
-                    </a>
-                    <a href="#" class="text-muted text-decoration-none">
-                        <i class="bi bi-github fs-5"></i>
-                    </a>
+        <!-- Main Footer Content -->
+        <div class="row g-4 mb-5">
+            <!-- Brand Section -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pe-lg-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-circle bg-primary bg-opacity-15 p-3 me-3">
+                            <i class="bi bi-book text-primary fs-4"></i>
+                        </div>
+                        <h5 class="h4 text-light mb-0">Book Review</h5>
+                    </div>
+                    <p class="text-secondary mb-0">Discover your next favorite book through our community's honest reviews and ratings. Join us in creating a vibrant reading community.</p>
                 </div>
             </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-4 col-md-6">
+                <h6 class="text-primary mb-4">Quick Links</h6>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-3">
+                        <a href="{% url 'books:index' %}" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
+                            <i class="bi bi-book-half me-2"></i>
+                            <span>Books</span>
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="{% url 'authors:index' %}" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
+                            <i class="bi bi-person-badge me-2"></i>
+                            <span>Authors</span>
+                        </a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="/stats/" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
+                            <i class="bi bi-graph-up me-2"></i>
+                            <span>Statistics</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Account Links -->
+            <div class="col-lg-4 col-md-6">
+                <h6 class="text-primary mb-4">Account</h6>
+                <ul class="list-unstyled mb-0">
+                    {% if user.is_authenticated %}
+                        <li class="mb-3">
+                            <a href="{% url 'logout' %}" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
+                                <i class="bi bi-box-arrow-right me-2"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="mb-3">
+                            <a href="{% url 'login' %}" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                <span>Login</span>
+                            </a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="{% url 'signup' %}" class="text-secondary text-decoration-none hover-text-light d-flex align-items-center">
+                                <i class="bi bi-person-plus me-2"></i>
+                                <span>Sign Up</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <hr class="my-4" style="border-color: var(--bg-accent);">
-        <div class="text-center text-muted">
-            <p class="mb-0">&copy; 2025 Book Review Platform - Group 7. All rights reserved.</p>
+
+        <!-- Divider -->
+        <hr class="border-secondary my-4">
+
+        <!-- Copyright Section -->
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="text-secondary small mb-3 mb-md-0">
+                    &copy; {% now "Y" %} Book Review Platform - Group 7. All rights reserved.
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a href="#" class="text-secondary text-decoration-none small hover-text-light">Privacy Policy</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <span class="text-secondary mx-2">&middot;</span>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-secondary text-decoration-none small hover-text-light">Terms of Service</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <span class="text-secondary mx-2">&middot;</span>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-secondary text-decoration-none small hover-text-light">Cookie Policy</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </footer>
+
+<style>
+    /* Footer Styles */
+    .hover-text-light {
+        transition: color 0.2s ease-in-out;
+    }
+    .hover-text-light:hover {
+        color: #ffffff !important;
+    }
+    .icon-circle {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    footer .list-inline-item:not(:last-child) {
+        margin-right: 0;
+    }
+</style>
