@@ -1,6 +1,8 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator
+from django.db.models import Sum
+from django.db.models.functions import Coalesce
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
@@ -20,7 +22,11 @@ def authors_index(request):
 
 
 def authors_show(request, author_id):
-    author = Author.objects.get(id=author_id)
+    author = (
+        Author.objects
+        .annotate(total_sales=Coalesce(Sum("books__yearly_sales__sales"), 0))
+        .get(id=author_id)
+    )
     return render(request, "authors/authors_show.html", {"author": author})
 
 
