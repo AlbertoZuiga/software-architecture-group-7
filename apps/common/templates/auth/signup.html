@@ -1,21 +1,92 @@
 {% extends 'base.html' %}
 {% block title %}Sign Up{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-wrapper { min-height: 70vh; }
+  .auth-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--bg-accent);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+  }
+  .auth-title { font-weight: 600; }
+  .auth-subtle { color: var(--text-muted); }
+  .form-footer-link { display: block; text-align: center; margin-top: 1rem; }
+  .brand-accent { color: var(--primary-color); }
+  .input-hint { color: var(--text-muted); font-size: .9rem; }
+  .divider { height: 1px; background: var(--bg-accent); margin: 1rem 0 1.25rem; }
+  .header-icon { font-size: 1.5rem; margin-right: .5rem; color: var(--primary-color); }
+  .btn-primary { width: 100%; }
+  .alert-danger { border-radius: var(--border-radius); }
+  label.form-label { font-weight: 500; }
+  /* Style native inputs like .form-control */
+  .auth-card input[type="text"],
+  .auth-card input[type="password"],
+  .auth-card input[type="email"],
+  .auth-card input[type="search"],
+  .auth-card select,
+  .auth-card textarea {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--bg-accent);
+    color: var(--text-primary);
+    border-radius: var(--border-radius);
+  }
+  .auth-card input:focus,
+  .auth-card select:focus,
+  .auth-card textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center mt-5">
-  <div class="col-md-5">
-    <h3 class="mb-3">Create Account</h3>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-      {% for field in form %}
-        <div class="mb-3">
-          <label class="form-label" for="id_{{ field.name }}">{{ field.label }}</label>
-          {{ field }}
-          {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
-        </div>
-      {% endfor %}
-      <button class="btn btn-success w-100" type="submit">Sign Up</button>
-    </form>
+<div class="row justify-content-center align-items-center auth-wrapper">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+    <div class="auth-card">
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-person-plus header-icon"></i>
+        <h3 class="auth-title mb-0">Create account</h3>
+      </div>
+      <p class="auth-subtle mb-3">Join the community to post reviews and track your reading.</p>
+      <div class="divider"></div>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger py-2">
+            {{ form.non_field_errors|join:', ' }}
+          </div>
+        {% endif %}
+
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label" for="id_{{ field.name }}">{{ field.label }}</label>
+            {{ field }}
+
+            {% if field.help_text %}
+              <div class="input-hint">{{ field.help_text|safe }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+      </form>
+
+      <div class="form-footer-link">
+        <span class="auth-subtle">Already have an account?</span>
+        <a href="{% url 'login' %}" class="brand-accent">Log in</a>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -1,24 +1,98 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center mt-5">
-  <div class="col-md-4">
-    <h3 class="mb-3">Log in</h3>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-      <div class="mb-3">
-        <label class="form-label" for="id_username">Username</label>
-        {{ form.username }}
-        {% if form.username.errors %}<div class="text-danger small">{{ form.username.errors.0 }}</div>{% endif %}
+<style>
+  .auth-wrapper { min-height: 70vh; }
+  .auth-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--bg-accent);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+  }
+  .auth-title { font-weight: 600; }
+  .auth-subtle { color: var(--text-muted); }
+  .form-footer-link { display: block; text-align: center; margin-top: 1rem; }
+  .brand-accent { color: var(--primary-color); }
+  .input-hint { color: var(--text-muted); font-size: .9rem; }
+  .divider { height: 1px; background: var(--bg-accent); margin: 1rem 0 1.25rem; }
+  .header-icon { font-size: 1.5rem; margin-right: .5rem; color: var(--primary-color); }
+  .btn-primary { width: 100%; }
+  .alert-danger { border-radius: var(--border-radius); }
+  label.form-label { font-weight: 500; }
+  /* Style native inputs like .form-control */
+  .auth-card input[type="text"],
+  .auth-card input[type="password"],
+  .auth-card input[type="email"],
+  .auth-card input[type="search"],
+  .auth-card select,
+  .auth-card textarea {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--bg-accent);
+    color: var(--text-primary);
+    border-radius: var(--border-radius);
+  }
+  .auth-card input:focus,
+  .auth-card select:focus,
+  .auth-card textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+  }
+</style>
+
+<div class="row justify-content-center align-items-center auth-wrapper">
+  <div class="col-12 col-md-8 col-lg-5 col-xl-4">
+    <div class="auth-card">
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-box-arrow-in-right header-icon"></i>
+        <h3 class="auth-title mb-0">Log in</h3>
       </div>
-      <div class="mb-3">
-        <label class="form-label" for="id_password">Password</label>
-        {{ form.password }}
-        {% if form.password.errors %}<div class="text-danger small">{{ form.password.errors.0 }}</div>{% endif %}
+      <p class="auth-subtle mb-3">Welcome back. Please enter your credentials to continue.</p>
+      <div class="divider"></div>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger py-2">
+            {{ form.non_field_errors|join:', ' }}
+          </div>
+        {% endif %}
+
+        <div class="mb-3">
+          <label class="form-label" for="id_username">Username</label>
+          {{ form.username }}
+          {% if form.username.help_text %}
+            <div class="input-hint">{{ form.username.help_text }}</div>
+          {% endif %}
+          {% if form.username.errors %}
+            <div class="text-danger small">{{ form.username.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="id_password">Password</label>
+          {{ form.password }}
+          {% if form.password.help_text %}
+            <div class="input-hint">{{ form.password.help_text }}</div>
+          {% endif %}
+          {% if form.password.errors %}
+            <div class="text-danger small">{{ form.password.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <button class="btn btn-primary" type="submit">Enter</button>
+      </form>
+
+      <div class="form-footer-link">
+        <span class="auth-subtle">Don't have an account?</span>
+        <a href="{% url 'signup' %}" class="brand-accent">Create one</a>
       </div>
-      <button class="btn btn-primary w-100" type="submit">Enter</button>
-    </form>
+    </div>
   </div>
+  
 </div>
 {% endblock %}
