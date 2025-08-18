@@ -6,6 +6,12 @@
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <style>
+    html {
+        scroll-behavior: smooth;
+    }
+    [id] {
+        scroll-margin-top: 2rem;
+    }
     /* DataTables Dark Theme */
     .dataTables_wrapper {
         color: rgba(255, 255, 255, 0.9);
@@ -127,10 +133,41 @@
     
     /* Card Enhancements */
     .stats-card {
-        transition: transform 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        position: relative;
     }
     .stats-card:hover {
         transform: translateY(-4px);
+        border-color: var(--bs-primary) !important;
+    }
+    .stats-card::after {
+        content: '';
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        width: 24px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease-in-out;
+    }
+    .stats-card:hover::after {
+        background: rgba(13, 110, 253, 0.2);
+        transform: scale(1.2);
+    }
+    .stats-card .arrow-icon {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        opacity: 0.7;
+        transition: all 0.2s ease-in-out;
+    }
+    .stats-card:hover .arrow-icon {
+        opacity: 1;
+        transform: translateX(4px);
     }
     .card-header {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -180,46 +217,61 @@
     <!-- Summary Cards -->
     <div class="row g-4 mb-5">
         <div class="col-md-4">
-            <div class="card bg-dark border-primary border-opacity-25 stats-card shadow-soft">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-circle bg-primary bg-opacity-15 me-3">
-                            <i class="bi bi-people text-primary"></i>
+            <a href="#authors-stats" class="text-decoration-none">
+                <div class="card bg-dark border-primary border-opacity-25 stats-card shadow-soft">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icon-circle bg-primary bg-opacity-15 me-3">
+                                <i class="bi bi-people text-primary"></i>
+                            </div>
+                            <h5 class="card-title mb-0 text-light">Total Authors</h5>
                         </div>
-                        <h5 class="card-title mb-0 text-light">Total Authors</h5>
+                        <h2 class="display-6 mb-2 text-light">{{ authors_stats|length }}</h2>
+                        <p class="text-secondary mb-0">
+                            Active content creators
+                        </p>
+                        <i class="bi bi-arrow-right-circle arrow-icon"></i>
                     </div>
-                    <h2 class="display-6 mb-2 text-light">{{ authors_stats|length }}</h2>
-                    <p class="text-secondary mb-0">Active content creators</p>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-md-4">
-            <div class="card bg-dark border-warning border-opacity-25 stats-card shadow-soft">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-circle bg-warning bg-opacity-15 me-3">
-                            <i class="bi bi-book text-warning"></i>
+            <a href="#top-rated" class="text-decoration-none">
+                <div class="card bg-dark border-warning border-opacity-25 stats-card shadow-soft">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icon-circle bg-warning bg-opacity-15 me-3">
+                                <i class="bi bi-book text-warning"></i>
+                            </div>
+                            <h5 class="card-title mb-0 text-light">Top Rated Books</h5>
                         </div>
-                        <h5 class="card-title mb-0 text-light">Top Rated Books</h5>
+                        <h2 class="display-6 mb-2 text-light">{{ top_rated_books|length }}</h2>
+                        <p class="text-secondary mb-0">
+                            Highest rated publications
+                        </p>
+                        <i class="bi bi-arrow-right-circle arrow-icon"></i>
                     </div>
-                    <h2 class="display-6 mb-2 text-light">{{ top_rated_books|length }}</h2>
-                    <p class="text-secondary mb-0">Highest rated publications</p>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-md-4">
-            <div class="card bg-dark border-success border-opacity-25 stats-card shadow-soft">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="icon-circle bg-success bg-opacity-15 me-3">
-                            <i class="bi bi-graph-up-arrow text-success"></i>
+            <a href="#best-sellers" class="text-decoration-none">
+                <div class="card bg-dark border-success border-opacity-25 stats-card shadow-soft">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icon-circle bg-success bg-opacity-15 me-3">
+                                <i class="bi bi-graph-up-arrow text-success"></i>
+                            </div>
+                            <h5 class="card-title mb-0 text-light">Best Sellers</h5>
                         </div>
-                        <h5 class="card-title mb-0 text-light">Best Sellers</h5>
+                        <h2 class="display-6 mb-2 text-light">{{ top_selling_books|length }}</h2>
+                        <p class="text-secondary mb-0">
+                            Top performing books
+                        </p>
+                        <i class="bi bi-arrow-right-circle arrow-icon"></i>
                     </div>
-                    <h2 class="display-6 mb-2 text-light">{{ top_selling_books|length }}</h2>
-                    <p class="text-secondary mb-0">Top performing books</p>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -372,7 +424,16 @@
                 {% for author in authors_stats %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ author.name }}</td>
+                    <td>
+                        <a href="{% url 'authors:show' author.id %}" class="text-decoration-none text-light">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-circle bg-primary bg-opacity-10 p-2 me-2" style="width: 35px; height: 35px;">
+                                    <i class="bi bi-person text-primary"></i>
+                                </div>
+                                <span>{{ author.name }}</span>
+                            </div>
+                        </a>
+                    </td>
                     <td>{{ author.number_of_books }}</td>
                     <td>{{ author.average_score|floatformat:2 }}</td>
                     <td>{{ author.total_sales }}</td>
@@ -386,7 +447,7 @@
     </div>
 
     <!-- Table 2: Top 10 Rated Books -->
-    <div class="card bg-dark border-warning border-opacity-25 mb-4 shadow-soft">
+    <div id="top-rated" class="card bg-dark border-warning border-opacity-25 mb-4 shadow-soft">
         <div class="card-header border-warning border-opacity-25 p-4">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
@@ -427,10 +488,40 @@
                 {% for book in top_rated_books %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ book.name }}</td>
-                    <td>{{ book.average_score|floatformat:2 }}</td>
-                    <td>{{ book.best_review_upvotes }}</td>
-                    <td>{{ book.worst_review_upvotes }}</td>
+                    <td>
+                        <a href="{% url 'books:show' book.id %}" class="text-decoration-none text-light">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-circle bg-warning bg-opacity-10 p-2 me-2" style="width: 35px; height: 35px;">
+                                    <i class="bi bi-book text-warning"></i>
+                                </div>
+                                <span>{{ book.name }}</span>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="text-warning me-2">
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            {{ book.average_score|floatformat:2 }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="text-success me-2">
+                                <i class="bi bi-hand-thumbs-up-fill"></i>
+                            </div>
+                            {{ book.best_review_upvotes }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="text-danger me-2">
+                                <i class="bi bi-hand-thumbs-down-fill"></i>
+                            </div>
+                            {{ book.worst_review_upvotes }}
+                        </div>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -441,7 +532,7 @@
     </div>
 
     <!-- Table 3: Top 50 Selling Books -->
-    <div class="card bg-dark border-success border-opacity-25 mb-4 shadow-soft">
+    <div id="best-sellers" class="card bg-dark border-success border-opacity-25 mb-4 shadow-soft">
         <div class="card-header border-success border-opacity-25 p-4">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
@@ -482,17 +573,42 @@
                 {% for book in top_selling_books %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ book.name }}</td>
-                    <td>{{ book.calculated_total_sales }}</td>
-                    <td>{{ book.author_total_sales }}</td>
+                    <td>
+                        <a href="{% url 'books:show' book.id %}" class="text-decoration-none text-light">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-circle bg-success bg-opacity-10 p-2 me-2" style="width: 35px; height: 35px;">
+                                    <i class="bi bi-book text-success"></i>
+                                </div>
+                                <span>{{ book.name }}</span>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="text-success me-2">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            {{ book.calculated_total_sales }}
+                        </div>
+                    </td>
+                    <td>
+                        <a href="{% url 'authors:show' book.author.id %}" class="text-decoration-none text-light">
+                            <div class="d-flex align-items-center">
+                                <div class="text-primary me-2">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                {{ book.author_total_sales }}
+                            </div>
+                        </a>
+                    </td>
                     <td>
                         {% if book.is_top_5_in_year %}
                             <span class="badge bg-success bg-opacity-25 text-success border border-success">
-                                <i class="bi bi-check-circle me-1"></i>Yes
+                                <i class="bi bi-trophy-fill me-1"></i>Top 5
                             </span>
                         {% else %}
-                            <span class="badge bg-danger bg-opacity-25 text-danger border border-danger">
-                                <i class="bi bi-x-circle me-1"></i>No
+                            <span class="badge bg-secondary bg-opacity-25 text-secondary border border-secondary">
+                                <i class="bi bi-dash-circle me-1"></i>Not in Top 5
                             </span>
                         {% endif %}
                     </td>
