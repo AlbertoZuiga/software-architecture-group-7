@@ -3,38 +3,86 @@ from django.shortcuts import render
 
 from apps.authors.models import Author
 from apps.books.models import Book
+from apps.sales.models import Sale
 
 
 def stats_page(request):
-    top_rated_books = Book.objects.annotate(average_score=Avg("reviews__score")).order_by(
-        "-average_score"
-    )[:10]
+    top_rated_books_qs = (
+        Book.objects
+        .annotate(average_score=Avg("reviews__score"))
+        .order_by("-average_score")[:10]
+    )
 
+    top_rated_books = list(
+        top_rated_books_qs.prefetch_related("reviews")
+    )
     for book in top_rated_books:
-        best_review = book.reviews.order_by("-score", "-up_votes").first()
-        worst_review = book.reviews.order_by("score", "-up_votes").first()
-        book.best_review_upvotes = best_review.review if best_review else "N/A"
-        book.worst_review_upvotes = worst_review.review if worst_review else "N/A"
+        reviews = list(book.reviews.all())
+        if reviews:
+            best = max(reviews, key=lambda r: (r.score, r.up_votes))
+            worst = min(reviews, key=lambda r: (r.score, -r.up_votes))
+            book.best_review_upvotes = best.review
+            book.worst_review_upvotes = worst.review
+        else:
+            book.best_review_upvotes = "N/A"
+            book.worst_review_upvotes = "N/A"
 
     sort_field = request.GET.get("sort", "total_sales")
     sort_direction = request.GET.get("direction", "desc")
     sort_order = f"-{sort_field}" if sort_direction == "desc" else sort_field
 
-    authors_stats = Author.objects.annotate(
-        number_of_books=Count("books", distinct=True),
-        average_score=Avg("books__reviews__score"),
-        total_sales=Sum("books__yearly_sales__sales"),
-    ).order_by(sort_order)
+    authors_stats = (
+        Author.objects
+        .annotate(
+            number_of_books=Count("books", distinct=True),
+            average_score=Avg("books__reviews__score"),
+            total_sales=Sum("books__yearly_sales__sales"),
+        )
+        .order_by(sort_order)
+    )
 
-    top_selling_books = Book.objects.annotate(
-        calculated_total_sales=Sum("yearly_sales__sales"),
-        author_total_sales=Sum("author__books__yearly_sales__sales"),
-    ).order_by("-calculated_total_sales")[:50]
+    top_selling_books_qs = (
+        Book.objects
+        .annotate(
+            calculated_total_sales=Sum("yearly_sales__sales"),
+            author_total_sales=Sum("author__books__yearly_sales__sales"),
+        )
+        .order_by("-calculated_total_sales")[:50]
+        .select_related("author")
+    )
+    top_selling_books = list(top_selling_books_qs)
 
-    for book in top_selling_books:
-        yearly_sales = book.yearly_sales.all()
-        top_5_sales = yearly_sales.order_by("-sales")[:5]
-        book.is_top_5_in_year = any(sale.book_id == book.id for sale in top_5_sales)
+    publication_years = set()
+    book_ids = []
+    for b in top_selling_books:
+        if b.published_at:
+            publication_years.add(b.published_at.year)
+        book_ids.append(b.id)
+
+    if publication_years:
+        sales_qs = (
+            Sale.objects
+            .filter(year__in=publication_years)
+            .values("year", "book_id", "sales")
+            .order_by("year", "-sales", "book_id")
+        )
+        top5_book_ids = set()
+        current_year = None
+        count_in_year = 0
+        for row in sales_qs:
+            y = row["year"]
+            if y != current_year:
+                current_year = y
+                count_in_year = 0
+            if count_in_year < 5:
+                top5_book_ids.add(row["book_id"])
+                count_in_year += 1
+    else:
+        top5_book_ids = set()
+
+    for b in top_selling_books:
+        pub_year = b.published_at.year if b.published_at else None
+        b.is_top_5_in_year = (b.id in top5_book_ids) if pub_year else False
 
     context = {
         "top_rated_books": top_rated_books,
