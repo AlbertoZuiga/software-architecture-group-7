@@ -80471,5 +80471,2552 @@
       "user": 10,
       "created_at": "2025-08-18T02:25:48Z"
     }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1501,
+    "fields": {
+      "book": 1,
+      "year": 1981,
+      "sales": 37432
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1502,
+    "fields": {
+      "book": 2,
+      "year": 1966,
+      "sales": 12661
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1503,
+    "fields": {
+      "book": 3,
+      "year": 1983,
+      "sales": 49914
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1504,
+    "fields": {
+      "book": 5,
+      "year": 1968,
+      "sales": 33910
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1505,
+    "fields": {
+      "book": 6,
+      "year": 2009,
+      "sales": 42274
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1506,
+    "fields": {
+      "book": 7,
+      "year": 1972,
+      "sales": 30815
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1507,
+    "fields": {
+      "book": 8,
+      "year": 2000,
+      "sales": 14935
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1508,
+    "fields": {
+      "book": 9,
+      "year": 1982,
+      "sales": 20859
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1509,
+    "fields": {
+      "book": 10,
+      "year": 1991,
+      "sales": 14778
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1510,
+    "fields": {
+      "book": 11,
+      "year": 1977,
+      "sales": 36669
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1511,
+    "fields": {
+      "book": 12,
+      "year": 1970,
+      "sales": 45776
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1512,
+    "fields": {
+      "book": 13,
+      "year": 2015,
+      "sales": 9394
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1513,
+    "fields": {
+      "book": 14,
+      "year": 1981,
+      "sales": 24391
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1514,
+    "fields": {
+      "book": 15,
+      "year": 1988,
+      "sales": 9129
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1515,
+    "fields": {
+      "book": 16,
+      "year": 1977,
+      "sales": 21220
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1516,
+    "fields": {
+      "book": 17,
+      "year": 1986,
+      "sales": 11117
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1517,
+    "fields": {
+      "book": 18,
+      "year": 1995,
+      "sales": 32668
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1518,
+    "fields": {
+      "book": 19,
+      "year": 1994,
+      "sales": 26846
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1519,
+    "fields": {
+      "book": 20,
+      "year": 1967,
+      "sales": 32350
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1520,
+    "fields": {
+      "book": 21,
+      "year": 1985,
+      "sales": 27716
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1521,
+    "fields": {
+      "book": 22,
+      "year": 1978,
+      "sales": 25033
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1522,
+    "fields": {
+      "book": 23,
+      "year": 1994,
+      "sales": 7199
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1523,
+    "fields": {
+      "book": 24,
+      "year": 2018,
+      "sales": 11192
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1524,
+    "fields": {
+      "book": 25,
+      "year": 1996,
+      "sales": 39991
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1525,
+    "fields": {
+      "book": 26,
+      "year": 2005,
+      "sales": 27123
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1526,
+    "fields": {
+      "book": 27,
+      "year": 1978,
+      "sales": 20520
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1527,
+    "fields": {
+      "book": 28,
+      "year": 1970,
+      "sales": 43666
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1528,
+    "fields": {
+      "book": 29,
+      "year": 1966,
+      "sales": 38660
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1529,
+    "fields": {
+      "book": 30,
+      "year": 1988,
+      "sales": 39687
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1530,
+    "fields": {
+      "book": 31,
+      "year": 1987,
+      "sales": 24190
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1531,
+    "fields": {
+      "book": 32,
+      "year": 2003,
+      "sales": 22017
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1532,
+    "fields": {
+      "book": 33,
+      "year": 1967,
+      "sales": 32205
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1533,
+    "fields": {
+      "book": 34,
+      "year": 1981,
+      "sales": 38515
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1534,
+    "fields": {
+      "book": 35,
+      "year": 1982,
+      "sales": 15574
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1535,
+    "fields": {
+      "book": 36,
+      "year": 1996,
+      "sales": 48164
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1536,
+    "fields": {
+      "book": 37,
+      "year": 2008,
+      "sales": 14889
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1537,
+    "fields": {
+      "book": 38,
+      "year": 2016,
+      "sales": 41417
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1538,
+    "fields": {
+      "book": 39,
+      "year": 2008,
+      "sales": 26241
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1539,
+    "fields": {
+      "book": 40,
+      "year": 1970,
+      "sales": 2854
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1540,
+    "fields": {
+      "book": 41,
+      "year": 1989,
+      "sales": 4073
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1541,
+    "fields": {
+      "book": 42,
+      "year": 2008,
+      "sales": 8451
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1542,
+    "fields": {
+      "book": 43,
+      "year": 1979,
+      "sales": 41793
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1543,
+    "fields": {
+      "book": 44,
+      "year": 1974,
+      "sales": 35056
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1544,
+    "fields": {
+      "book": 45,
+      "year": 1994,
+      "sales": 6023
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1545,
+    "fields": {
+      "book": 46,
+      "year": 2014,
+      "sales": 48425
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1546,
+    "fields": {
+      "book": 47,
+      "year": 2016,
+      "sales": 36131
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1547,
+    "fields": {
+      "book": 48,
+      "year": 1973,
+      "sales": 38009
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1548,
+    "fields": {
+      "book": 49,
+      "year": 1985,
+      "sales": 8154
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1549,
+    "fields": {
+      "book": 50,
+      "year": 2010,
+      "sales": 35215
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1550,
+    "fields": {
+      "book": 51,
+      "year": 1998,
+      "sales": 1463
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1551,
+    "fields": {
+      "book": 52,
+      "year": 1973,
+      "sales": 13041
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1552,
+    "fields": {
+      "book": 53,
+      "year": 2016,
+      "sales": 22654
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1553,
+    "fields": {
+      "book": 54,
+      "year": 1984,
+      "sales": 8786
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1554,
+    "fields": {
+      "book": 55,
+      "year": 1995,
+      "sales": 13689
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1555,
+    "fields": {
+      "book": 56,
+      "year": 1970,
+      "sales": 17867
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1556,
+    "fields": {
+      "book": 57,
+      "year": 2020,
+      "sales": 38328
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1557,
+    "fields": {
+      "book": 58,
+      "year": 1982,
+      "sales": 42372
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1558,
+    "fields": {
+      "book": 59,
+      "year": 1973,
+      "sales": 28229
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1559,
+    "fields": {
+      "book": 60,
+      "year": 2007,
+      "sales": 29705
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1560,
+    "fields": {
+      "book": 61,
+      "year": 2013,
+      "sales": 32438
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1561,
+    "fields": {
+      "book": 62,
+      "year": 2019,
+      "sales": 11885
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1562,
+    "fields": {
+      "book": 63,
+      "year": 1982,
+      "sales": 48904
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1563,
+    "fields": {
+      "book": 64,
+      "year": 1976,
+      "sales": 41542
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1564,
+    "fields": {
+      "book": 65,
+      "year": 2012,
+      "sales": 28274
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1565,
+    "fields": {
+      "book": 66,
+      "year": 2017,
+      "sales": 4184
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1566,
+    "fields": {
+      "book": 67,
+      "year": 1998,
+      "sales": 14088
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1567,
+    "fields": {
+      "book": 68,
+      "year": 2007,
+      "sales": 30418
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1568,
+    "fields": {
+      "book": 69,
+      "year": 1992,
+      "sales": 14978
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1569,
+    "fields": {
+      "book": 70,
+      "year": 1967,
+      "sales": 28724
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1570,
+    "fields": {
+      "book": 71,
+      "year": 2012,
+      "sales": 28682
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1571,
+    "fields": {
+      "book": 72,
+      "year": 2000,
+      "sales": 36663
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1572,
+    "fields": {
+      "book": 73,
+      "year": 2003,
+      "sales": 24582
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1573,
+    "fields": {
+      "book": 74,
+      "year": 1985,
+      "sales": 1034
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1574,
+    "fields": {
+      "book": 75,
+      "year": 1992,
+      "sales": 3747
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1575,
+    "fields": {
+      "book": 76,
+      "year": 2004,
+      "sales": 6659
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1576,
+    "fields": {
+      "book": 77,
+      "year": 2005,
+      "sales": 6232
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1577,
+    "fields": {
+      "book": 78,
+      "year": 1997,
+      "sales": 3270
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1578,
+    "fields": {
+      "book": 79,
+      "year": 2000,
+      "sales": 19521
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1579,
+    "fields": {
+      "book": 80,
+      "year": 1972,
+      "sales": 10221
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1580,
+    "fields": {
+      "book": 81,
+      "year": 1967,
+      "sales": 41695
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1581,
+    "fields": {
+      "book": 82,
+      "year": 2013,
+      "sales": 11595
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1582,
+    "fields": {
+      "book": 83,
+      "year": 1969,
+      "sales": 15184
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1583,
+    "fields": {
+      "book": 84,
+      "year": 1981,
+      "sales": 26020
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1584,
+    "fields": {
+      "book": 85,
+      "year": 1989,
+      "sales": 10457
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1585,
+    "fields": {
+      "book": 86,
+      "year": 1966,
+      "sales": 36161
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1586,
+    "fields": {
+      "book": 87,
+      "year": 2010,
+      "sales": 34154
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1587,
+    "fields": {
+      "book": 88,
+      "year": 1988,
+      "sales": 14939
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1588,
+    "fields": {
+      "book": 89,
+      "year": 2016,
+      "sales": 49342
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1589,
+    "fields": {
+      "book": 90,
+      "year": 2017,
+      "sales": 45188
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1590,
+    "fields": {
+      "book": 92,
+      "year": 1978,
+      "sales": 12948
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1591,
+    "fields": {
+      "book": 93,
+      "year": 2002,
+      "sales": 5539
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1592,
+    "fields": {
+      "book": 94,
+      "year": 2015,
+      "sales": 36665
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1593,
+    "fields": {
+      "book": 95,
+      "year": 1975,
+      "sales": 48604
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1594,
+    "fields": {
+      "book": 96,
+      "year": 2000,
+      "sales": 6839
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1595,
+    "fields": {
+      "book": 97,
+      "year": 1979,
+      "sales": 8558
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1596,
+    "fields": {
+      "book": 98,
+      "year": 2010,
+      "sales": 25061
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1597,
+    "fields": {
+      "book": 99,
+      "year": 1992,
+      "sales": 20681
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1598,
+    "fields": {
+      "book": 100,
+      "year": 1996,
+      "sales": 33256
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1599,
+    "fields": {
+      "book": 101,
+      "year": 1979,
+      "sales": 34387
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1600,
+    "fields": {
+      "book": 102,
+      "year": 1974,
+      "sales": 25053
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1601,
+    "fields": {
+      "book": 103,
+      "year": 1975,
+      "sales": 31143
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1602,
+    "fields": {
+      "book": 104,
+      "year": 2020,
+      "sales": 25933
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1603,
+    "fields": {
+      "book": 105,
+      "year": 1981,
+      "sales": 43136
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1604,
+    "fields": {
+      "book": 106,
+      "year": 1991,
+      "sales": 42423
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1605,
+    "fields": {
+      "book": 107,
+      "year": 2020,
+      "sales": 7367
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1606,
+    "fields": {
+      "book": 108,
+      "year": 1985,
+      "sales": 9729
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1607,
+    "fields": {
+      "book": 109,
+      "year": 2003,
+      "sales": 4474
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1608,
+    "fields": {
+      "book": 110,
+      "year": 1984,
+      "sales": 33538
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1609,
+    "fields": {
+      "book": 111,
+      "year": 1984,
+      "sales": 43273
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1610,
+    "fields": {
+      "book": 112,
+      "year": 1994,
+      "sales": 20448
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1611,
+    "fields": {
+      "book": 113,
+      "year": 2013,
+      "sales": 44721
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1612,
+    "fields": {
+      "book": 114,
+      "year": 1995,
+      "sales": 23219
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1613,
+    "fields": {
+      "book": 115,
+      "year": 1986,
+      "sales": 2029
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1614,
+    "fields": {
+      "book": 116,
+      "year": 1975,
+      "sales": 21482
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1615,
+    "fields": {
+      "book": 117,
+      "year": 1968,
+      "sales": 18817
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1616,
+    "fields": {
+      "book": 118,
+      "year": 2011,
+      "sales": 33770
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1617,
+    "fields": {
+      "book": 119,
+      "year": 1995,
+      "sales": 13865
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1618,
+    "fields": {
+      "book": 120,
+      "year": 1970,
+      "sales": 21431
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1619,
+    "fields": {
+      "book": 121,
+      "year": 1977,
+      "sales": 32726
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1620,
+    "fields": {
+      "book": 122,
+      "year": 1999,
+      "sales": 5706
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1621,
+    "fields": {
+      "book": 123,
+      "year": 1997,
+      "sales": 15141
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1622,
+    "fields": {
+      "book": 125,
+      "year": 1972,
+      "sales": 29860
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1623,
+    "fields": {
+      "book": 127,
+      "year": 2012,
+      "sales": 25295
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1624,
+    "fields": {
+      "book": 128,
+      "year": 1994,
+      "sales": 28579
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1625,
+    "fields": {
+      "book": 129,
+      "year": 1985,
+      "sales": 4306
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1626,
+    "fields": {
+      "book": 130,
+      "year": 1979,
+      "sales": 14975
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1627,
+    "fields": {
+      "book": 131,
+      "year": 1973,
+      "sales": 10517
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1628,
+    "fields": {
+      "book": 132,
+      "year": 1970,
+      "sales": 12725
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1629,
+    "fields": {
+      "book": 133,
+      "year": 1992,
+      "sales": 27940
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1630,
+    "fields": {
+      "book": 134,
+      "year": 1983,
+      "sales": 31872
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1631,
+    "fields": {
+      "book": 135,
+      "year": 1967,
+      "sales": 38610
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1632,
+    "fields": {
+      "book": 136,
+      "year": 2004,
+      "sales": 28768
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1633,
+    "fields": {
+      "book": 137,
+      "year": 2011,
+      "sales": 44735
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1634,
+    "fields": {
+      "book": 138,
+      "year": 1971,
+      "sales": 26267
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1635,
+    "fields": {
+      "book": 139,
+      "year": 2007,
+      "sales": 12504
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1636,
+    "fields": {
+      "book": 140,
+      "year": 2008,
+      "sales": 10001
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1637,
+    "fields": {
+      "book": 141,
+      "year": 1981,
+      "sales": 19331
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1638,
+    "fields": {
+      "book": 142,
+      "year": 1999,
+      "sales": 31596
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1639,
+    "fields": {
+      "book": 143,
+      "year": 2003,
+      "sales": 17187
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1640,
+    "fields": {
+      "book": 144,
+      "year": 2018,
+      "sales": 48390
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1641,
+    "fields": {
+      "book": 145,
+      "year": 2015,
+      "sales": 12941
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1642,
+    "fields": {
+      "book": 146,
+      "year": 1996,
+      "sales": 45142
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1643,
+    "fields": {
+      "book": 147,
+      "year": 1989,
+      "sales": 40626
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1644,
+    "fields": {
+      "book": 148,
+      "year": 1979,
+      "sales": 6430
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1645,
+    "fields": {
+      "book": 149,
+      "year": 2003,
+      "sales": 10988
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1646,
+    "fields": {
+      "book": 150,
+      "year": 2014,
+      "sales": 38915
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1647,
+    "fields": {
+      "book": 151,
+      "year": 2007,
+      "sales": 36943
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1648,
+    "fields": {
+      "book": 152,
+      "year": 2009,
+      "sales": 13216
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1649,
+    "fields": {
+      "book": 154,
+      "year": 2006,
+      "sales": 49568
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1650,
+    "fields": {
+      "book": 155,
+      "year": 2004,
+      "sales": 35819
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1651,
+    "fields": {
+      "book": 156,
+      "year": 2008,
+      "sales": 45391
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1652,
+    "fields": {
+      "book": 157,
+      "year": 1971,
+      "sales": 17563
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1653,
+    "fields": {
+      "book": 158,
+      "year": 1999,
+      "sales": 3696
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1654,
+    "fields": {
+      "book": 159,
+      "year": 2008,
+      "sales": 31559
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1655,
+    "fields": {
+      "book": 160,
+      "year": 1980,
+      "sales": 9930
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1656,
+    "fields": {
+      "book": 162,
+      "year": 1973,
+      "sales": 16927
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1657,
+    "fields": {
+      "book": 163,
+      "year": 1971,
+      "sales": 8552
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1658,
+    "fields": {
+      "book": 165,
+      "year": 2017,
+      "sales": 10617
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1659,
+    "fields": {
+      "book": 166,
+      "year": 2011,
+      "sales": 1923
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1660,
+    "fields": {
+      "book": 167,
+      "year": 1981,
+      "sales": 47076
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1661,
+    "fields": {
+      "book": 168,
+      "year": 1972,
+      "sales": 27071
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1662,
+    "fields": {
+      "book": 169,
+      "year": 1983,
+      "sales": 24382
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1663,
+    "fields": {
+      "book": 170,
+      "year": 1975,
+      "sales": 38684
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1664,
+    "fields": {
+      "book": 171,
+      "year": 2000,
+      "sales": 32936
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1665,
+    "fields": {
+      "book": 172,
+      "year": 2013,
+      "sales": 20061
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1666,
+    "fields": {
+      "book": 173,
+      "year": 1984,
+      "sales": 6672
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1667,
+    "fields": {
+      "book": 174,
+      "year": 1983,
+      "sales": 38189
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1668,
+    "fields": {
+      "book": 175,
+      "year": 1976,
+      "sales": 41591
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1669,
+    "fields": {
+      "book": 176,
+      "year": 1989,
+      "sales": 23239
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1670,
+    "fields": {
+      "book": 177,
+      "year": 1982,
+      "sales": 17621
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1671,
+    "fields": {
+      "book": 178,
+      "year": 2008,
+      "sales": 22836
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1672,
+    "fields": {
+      "book": 179,
+      "year": 1997,
+      "sales": 5289
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1673,
+    "fields": {
+      "book": 180,
+      "year": 2014,
+      "sales": 13949
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1674,
+    "fields": {
+      "book": 181,
+      "year": 2007,
+      "sales": 31616
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1675,
+    "fields": {
+      "book": 182,
+      "year": 2004,
+      "sales": 37487
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1676,
+    "fields": {
+      "book": 183,
+      "year": 2017,
+      "sales": 14009
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1677,
+    "fields": {
+      "book": 184,
+      "year": 1973,
+      "sales": 45910
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1678,
+    "fields": {
+      "book": 185,
+      "year": 1978,
+      "sales": 46219
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1679,
+    "fields": {
+      "book": 186,
+      "year": 1978,
+      "sales": 41181
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1680,
+    "fields": {
+      "book": 187,
+      "year": 2007,
+      "sales": 30147
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1681,
+    "fields": {
+      "book": 188,
+      "year": 2000,
+      "sales": 13455
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1682,
+    "fields": {
+      "book": 189,
+      "year": 1985,
+      "sales": 25497
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1683,
+    "fields": {
+      "book": 190,
+      "year": 2015,
+      "sales": 48321
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1684,
+    "fields": {
+      "book": 191,
+      "year": 2002,
+      "sales": 18108
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1685,
+    "fields": {
+      "book": 192,
+      "year": 1994,
+      "sales": 47277
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1686,
+    "fields": {
+      "book": 193,
+      "year": 1968,
+      "sales": 6933
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1687,
+    "fields": {
+      "book": 194,
+      "year": 1996,
+      "sales": 10582
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1688,
+    "fields": {
+      "book": 195,
+      "year": 1971,
+      "sales": 42422
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1689,
+    "fields": {
+      "book": 196,
+      "year": 1998,
+      "sales": 4443
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1690,
+    "fields": {
+      "book": 197,
+      "year": 2007,
+      "sales": 47447
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1691,
+    "fields": {
+      "book": 198,
+      "year": 1966,
+      "sales": 32511
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1692,
+    "fields": {
+      "book": 199,
+      "year": 1999,
+      "sales": 17948
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1693,
+    "fields": {
+      "book": 200,
+      "year": 1980,
+      "sales": 5936
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1694,
+    "fields": {
+      "book": 201,
+      "year": 2004,
+      "sales": 1471
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1695,
+    "fields": {
+      "book": 202,
+      "year": 2016,
+      "sales": 37105
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1696,
+    "fields": {
+      "book": 203,
+      "year": 1994,
+      "sales": 785
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1697,
+    "fields": {
+      "book": 204,
+      "year": 2019,
+      "sales": 2991
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1698,
+    "fields": {
+      "book": 205,
+      "year": 2004,
+      "sales": 14722
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1699,
+    "fields": {
+      "book": 206,
+      "year": 1997,
+      "sales": 31360
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1700,
+    "fields": {
+      "book": 207,
+      "year": 2005,
+      "sales": 32693
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1701,
+    "fields": {
+      "book": 208,
+      "year": 2016,
+      "sales": 37864
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1702,
+    "fields": {
+      "book": 209,
+      "year": 1999,
+      "sales": 821
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1703,
+    "fields": {
+      "book": 210,
+      "year": 1985,
+      "sales": 36805
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1704,
+    "fields": {
+      "book": 211,
+      "year": 1996,
+      "sales": 23881
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1705,
+    "fields": {
+      "book": 212,
+      "year": 1966,
+      "sales": 15890
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1706,
+    "fields": {
+      "book": 213,
+      "year": 2009,
+      "sales": 44259
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1707,
+    "fields": {
+      "book": 214,
+      "year": 2010,
+      "sales": 43359
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1708,
+    "fields": {
+      "book": 215,
+      "year": 1997,
+      "sales": 26744
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1709,
+    "fields": {
+      "book": 216,
+      "year": 2020,
+      "sales": 44076
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1710,
+    "fields": {
+      "book": 218,
+      "year": 1982,
+      "sales": 23921
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1711,
+    "fields": {
+      "book": 219,
+      "year": 1966,
+      "sales": 17328
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1712,
+    "fields": {
+      "book": 220,
+      "year": 2016,
+      "sales": 21815
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1713,
+    "fields": {
+      "book": 221,
+      "year": 1969,
+      "sales": 29152
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1714,
+    "fields": {
+      "book": 222,
+      "year": 1971,
+      "sales": 34405
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1715,
+    "fields": {
+      "book": 223,
+      "year": 2010,
+      "sales": 15288
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1716,
+    "fields": {
+      "book": 224,
+      "year": 1999,
+      "sales": 26669
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1717,
+    "fields": {
+      "book": 225,
+      "year": 1989,
+      "sales": 20028
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1718,
+    "fields": {
+      "book": 226,
+      "year": 2008,
+      "sales": 999
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1719,
+    "fields": {
+      "book": 227,
+      "year": 1976,
+      "sales": 2340
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1720,
+    "fields": {
+      "book": 229,
+      "year": 1972,
+      "sales": 5590
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1721,
+    "fields": {
+      "book": 230,
+      "year": 2014,
+      "sales": 9351
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1722,
+    "fields": {
+      "book": 231,
+      "year": 2011,
+      "sales": 2906
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1723,
+    "fields": {
+      "book": 232,
+      "year": 1981,
+      "sales": 48034
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1724,
+    "fields": {
+      "book": 233,
+      "year": 2003,
+      "sales": 45081
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1725,
+    "fields": {
+      "book": 234,
+      "year": 1981,
+      "sales": 43125
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1726,
+    "fields": {
+      "book": 235,
+      "year": 2014,
+      "sales": 28223
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1727,
+    "fields": {
+      "book": 236,
+      "year": 1986,
+      "sales": 21004
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1728,
+    "fields": {
+      "book": 237,
+      "year": 1976,
+      "sales": 43605
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1729,
+    "fields": {
+      "book": 238,
+      "year": 1990,
+      "sales": 15571
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1730,
+    "fields": {
+      "book": 239,
+      "year": 1997,
+      "sales": 31892
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1731,
+    "fields": {
+      "book": 241,
+      "year": 2014,
+      "sales": 870
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1732,
+    "fields": {
+      "book": 242,
+      "year": 2015,
+      "sales": 23249
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1733,
+    "fields": {
+      "book": 243,
+      "year": 2001,
+      "sales": 15558
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1734,
+    "fields": {
+      "book": 244,
+      "year": 1983,
+      "sales": 25661
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1735,
+    "fields": {
+      "book": 245,
+      "year": 1969,
+      "sales": 12741
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1736,
+    "fields": {
+      "book": 246,
+      "year": 1991,
+      "sales": 6676
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1737,
+    "fields": {
+      "book": 248,
+      "year": 2003,
+      "sales": 7248
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1738,
+    "fields": {
+      "book": 249,
+      "year": 2014,
+      "sales": 1863
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1739,
+    "fields": {
+      "book": 250,
+      "year": 1977,
+      "sales": 30818
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1740,
+    "fields": {
+      "book": 252,
+      "year": 2005,
+      "sales": 43643
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1741,
+    "fields": {
+      "book": 253,
+      "year": 1984,
+      "sales": 13699
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1742,
+    "fields": {
+      "book": 254,
+      "year": 2013,
+      "sales": 7790
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1743,
+    "fields": {
+      "book": 255,
+      "year": 1998,
+      "sales": 46095
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1744,
+    "fields": {
+      "book": 256,
+      "year": 1971,
+      "sales": 37469
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1745,
+    "fields": {
+      "book": 257,
+      "year": 2020,
+      "sales": 5525
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1746,
+    "fields": {
+      "book": 258,
+      "year": 2000,
+      "sales": 12620
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1747,
+    "fields": {
+      "book": 259,
+      "year": 1993,
+      "sales": 1771
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1748,
+    "fields": {
+      "book": 260,
+      "year": 2014,
+      "sales": 2577
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1749,
+    "fields": {
+      "book": 261,
+      "year": 2005,
+      "sales": 1183
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1750,
+    "fields": {
+      "book": 262,
+      "year": 2003,
+      "sales": 8526
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1751,
+    "fields": {
+      "book": 263,
+      "year": 2008,
+      "sales": 19647
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1752,
+    "fields": {
+      "book": 265,
+      "year": 2001,
+      "sales": 19809
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1753,
+    "fields": {
+      "book": 267,
+      "year": 1990,
+      "sales": 5168
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1754,
+    "fields": {
+      "book": 268,
+      "year": 1974,
+      "sales": 40152
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1755,
+    "fields": {
+      "book": 269,
+      "year": 2002,
+      "sales": 17732
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1756,
+    "fields": {
+      "book": 270,
+      "year": 1977,
+      "sales": 5801
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1757,
+    "fields": {
+      "book": 271,
+      "year": 1992,
+      "sales": 3347
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1758,
+    "fields": {
+      "book": 272,
+      "year": 2005,
+      "sales": 11134
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1759,
+    "fields": {
+      "book": 273,
+      "year": 2010,
+      "sales": 11438
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1760,
+    "fields": {
+      "book": 275,
+      "year": 1971,
+      "sales": 5631
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1761,
+    "fields": {
+      "book": 276,
+      "year": 2010,
+      "sales": 12017
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1762,
+    "fields": {
+      "book": 277,
+      "year": 1984,
+      "sales": 48613
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1763,
+    "fields": {
+      "book": 278,
+      "year": 1966,
+      "sales": 14651
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1764,
+    "fields": {
+      "book": 279,
+      "year": 2012,
+      "sales": 8106
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1765,
+    "fields": {
+      "book": 280,
+      "year": 1984,
+      "sales": 20256
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1766,
+    "fields": {
+      "book": 281,
+      "year": 1970,
+      "sales": 30981
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1767,
+    "fields": {
+      "book": 282,
+      "year": 1981,
+      "sales": 2302
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1768,
+    "fields": {
+      "book": 283,
+      "year": 1995,
+      "sales": 34687
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1769,
+    "fields": {
+      "book": 284,
+      "year": 2016,
+      "sales": 39732
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1770,
+    "fields": {
+      "book": 285,
+      "year": 1966,
+      "sales": 24570
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1771,
+    "fields": {
+      "book": 287,
+      "year": 2017,
+      "sales": 24140
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1772,
+    "fields": {
+      "book": 288,
+      "year": 2012,
+      "sales": 3797
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1773,
+    "fields": {
+      "book": 289,
+      "year": 1969,
+      "sales": 34308
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1774,
+    "fields": {
+      "book": 290,
+      "year": 1989,
+      "sales": 23254
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1775,
+    "fields": {
+      "book": 291,
+      "year": 2004,
+      "sales": 20678
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1776,
+    "fields": {
+      "book": 292,
+      "year": 1970,
+      "sales": 19571
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1777,
+    "fields": {
+      "book": 293,
+      "year": 2008,
+      "sales": 34861
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1778,
+    "fields": {
+      "book": 294,
+      "year": 1968,
+      "sales": 36145
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1779,
+    "fields": {
+      "book": 295,
+      "year": 1999,
+      "sales": 13340
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1780,
+    "fields": {
+      "book": 296,
+      "year": 2003,
+      "sales": 14850
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1781,
+    "fields": {
+      "book": 298,
+      "year": 1970,
+      "sales": 16819
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1782,
+    "fields": {
+      "book": 299,
+      "year": 2013,
+      "sales": 34485
+    }
+  },
+  {
+    "model": "sales.sale",
+    "pk": 1783,
+    "fields": {
+      "book": 300,
+      "year": 1969,
+      "sales": 17693
+    }
   }
 ]
