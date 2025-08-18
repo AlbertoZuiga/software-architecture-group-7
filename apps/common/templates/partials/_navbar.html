@@ -1,39 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="/">Book Review Platform</a>
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-book me-2"></i>
+            Book Review Platform
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
                 {% for name, url in links.items %}
                     <li class="nav-item">
-                        <a class="nav-link{% if request.path == url %} active{% endif %}" href="{{ url }}">{{ name }}</a>
+                        <a class="nav-link{% if request.path == url %} active fw-medium{% endif %}" href="{{ url }}">{{ name }}</a>
                     </li>
                 {% endfor %}
                 <li class="nav-item">
-                    <a class="nav-link{% if request.path == '/stats/' %} active{% endif %}" href="/stats/">Stats</a>
+                    <a class="nav-link{% if request.path == '/stats/' %} active fw-medium{% endif %}" href="/stats/">
+                        <i class="bi bi-graph-up me-1"></i>Stats
+                    </a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <span class="nav-link disabled">
-                            <i class="bi bi-person-circle"></i>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i>
                             {{ user.username }}
-                        </span>
-                    </li>
-                    <li class="nav-item">
-                        <form method="post" action="{% url 'logout' %}" class="d-inline">
-                            {% csrf_token %}
-                            <button class="nav-link btn btn-link " type="submit">Logout</button>
-                        </form>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" style="background-color: var(--bg-secondary); border-color: var(--bg-accent);">
+                            <li>
+                                <form method="post" action="{% url 'logout' %}" class="d-inline w-100">
+                                    {% csrf_token %}
+                                    <button class="dropdown-item text-danger" type="submit">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">
+                            <i class="bi bi-person-plus me-1"></i>Sign Up
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-2" href="{% url 'login' %}">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
-

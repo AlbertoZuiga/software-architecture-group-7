@@ -1,5 +1,39 @@
-<footer class="bg-dark text-white text-center py-3 mt-4">
+<footer class="mt-5 py-4">
     <div class="container">
-        <p class="mb-0">&copy; 2025 - Group 7</p>
+        <div class="row g-4 text-center text-md-start">
+            <div class="col-md-4">
+                <h5 class="mb-3 text-primary">Book Review Platform</h5>
+                <p class="text-muted mb-0">Discover your next favorite book through our community's honest reviews and ratings.</p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="mb-3 text-primary">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'books:index' %}" class="text-muted text-decoration-none mb-2 d-block">Books</a></li>
+                    <li><a href="{% url 'authors:index' %}" class="text-muted text-decoration-none mb-2 d-block">Authors</a></li>
+                    <li><a href="/stats/" class="text-muted text-decoration-none mb-2 d-block">Statistics</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="mb-3 text-primary">Connect</h5>
+                <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+                    <a href="#" class="text-muted text-decoration-none">
+                        <i class="bi bi-twitter fs-5"></i>
+                    </a>
+                    <a href="#" class="text-muted text-decoration-none">
+                        <i class="bi bi-facebook fs-5"></i>
+                    </a>
+                    <a href="#" class="text-muted text-decoration-none">
+                        <i class="bi bi-instagram fs-5"></i>
+                    </a>
+                    <a href="#" class="text-muted text-decoration-none">
+                        <i class="bi bi-github fs-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4" style="border-color: var(--bg-accent);">
+        <div class="text-center text-muted">
+            <p class="mb-0">&copy; 2025 Book Review Platform - Group 7. All rights reserved.</p>
+        </div>
     </div>
 </footer>

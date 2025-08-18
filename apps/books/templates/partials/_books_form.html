@@ -1,75 +1,113 @@
-<form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
+<form method="post" action="{{ form_action }}">
     {% csrf_token %}
 
-     <!-- Name -->
-    <div class="mb-3">
-        <label for="name" class="form-label">Book Title</label>
-        <input 
-            id="name"
-            type="text"
-            name="name"
-            class="form-control {% if errors.name %}is-invalid{% endif %}"
-            maxlength="200"
-            value="{{ form_values.name|default:initial_name }}"
-            required
-        >
-        {% if errors.name %}
-            <div class="invalid-feedback">{{ errors.name }}</div>
-        {% endif %}
-    </div>
-
-    <!-- Author -->
-    <div class="mb-3">
-        <label for="author" class="form-label">Author</label>
-        <select 
-            id="author"
-            name="author"
-            class="form-select {% if errors.author %}is-invalid{% endif %}"
-            required
-        >
-            {% for author in authors %}
-                <option value="{{ author.id }}"
-                    {% if form_values.author|default:initial_author == author.id %}selected{% endif %}
+    <div class="row g-4">
+        <!-- Name -->
+        <div class="col-12">
+            <div class="form-group">
+                <label for="name" class="form-label">Book Title</label>
+                <input 
+                    id="name"
+                    type="text"
+                    name="name"
+                    class="form-control bg-dark border-secondary text-light {% if errors.name %}is-invalid{% endif %}"
+                    maxlength="200"
+                    value="{{ form_values.name|default:initial_name }}"
+                    placeholder="Enter book title"
+                    required
                 >
-                    {{ author.name }}
-                </option>
-            {% endfor %}
-        </select>
-        {% if errors.author %}
-            <div class="invalid-feedback">{{ errors.author }}</div>
-        {% endif %}
+                {% if errors.name %}
+                    <div class="invalid-feedback">{{ errors.name }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Author -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="author" class="form-label">Author</label>
+                <select 
+                    id="author"
+                    name="author"
+                    class="form-select bg-dark border-secondary text-light {% if errors.author %}is-invalid{% endif %}"
+                    required
+                >
+                    <option value="" disabled selected>Select an author</option>
+                    {% for author in authors %}
+                        <option value="{{ author.id }}"
+                            {% if form_values.author|default:initial_author == author.id %}selected{% endif %}
+                        >
+                            {{ author.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                {% if errors.author %}
+                    <div class="invalid-feedback">{{ errors.author }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Published at -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="published_at" class="form-label">Publication Date</label>
+                <input 
+                    id="published_at"
+                    type="date"
+                    name="published_at"
+                    class="form-control bg-dark border-secondary text-light {% if errors.published_at %}is-invalid{% endif %}"
+                    value="{{ form_values.published_at|default:initial_published_at|date:'Y-m-d' }}"
+                    required
+                >
+                {% if errors.published_at %}
+                    <div class="invalid-feedback">{{ errors.published_at }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="col-12">
+            <div class="form-group">
+                <label for="summary" class="form-label">Summary</label>
+                <textarea 
+                    id="summary"
+                    name="summary"
+                    class="form-control bg-dark border-secondary text-light {% if errors.summary %}is-invalid{% endif %}"
+                    rows="4"
+                    placeholder="Write a brief summary of the book"
+                    required
+                >{{ form_values.summary|default:initial_summary }}</textarea>
+                {% if errors.summary %}
+                    <div class="invalid-feedback">{{ errors.summary }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg me-2"></i>{{ submit_label }}
+            </button>
+        </div>
     </div>
 
-    <!-- Summary -->
-    <div class="mb-3">
-        <label for="summary" class="form-label">Summary</label>
-        <textarea 
-            id="summary"
-            name="summary"
-            class="form-control {% if errors.summary %}is-invalid{% endif %}"
-            rows="4"
-            required
-        >{{ form_values.summary|default:initial_summary }}</textarea>
-        {% if errors.summary %}
-            <div class="invalid-feedback">{{ errors.summary }}</div>
-        {% endif %}
-    </div>
-
-    <!-- Published at -->
-    <div class="mb-3">
-        <label for="published_at" class="form-label">Publication Date</label>
-        <input 
-            id="published_at"
-            type="date"
-            name="published_at"
-            class="form-control {% if errors.published_at %}is-invalid{% endif %}"
-            value="{{ form_values.published_at|default:initial_published_at|date:'Y-m-d' }}"
-            required
-        >
-        {% if errors.published_at %}
-            <div class="invalid-feedback">{{ errors.published_at }}</div>
-        {% endif %}
-    </div>
-
-    <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+    <style>
+        .form-control:focus,
+        .form-select:focus {
+            background-color: var(--bg-dark);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+        }
+        
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236c757d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        }
+        
+        .invalid-feedback {
+            color: var(--bs-danger);
+        }
+    </style>
 </form>

@@ -2,9 +2,342 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <h1>Welcome to the Book Review Platform</h1>
-        <p>This is the homepage.</p>
-        <img src="{% static 'images/bookshelf.jpg' %}" alt="Homepage Image" class="img-fluid mt-4">
+    <!-- Hero Section -->
+    <div class="hero-section position-relative text-white mb-5">
+        <img src="{% static 'images/bookshelf.jpg' %}" alt="Homepage Image" class="w-100 hero-image" style="height: 60vh; object-fit: cover; filter: brightness(0.6);">
+        <div class="position-absolute top-50 start-50 translate-middle text-center" style="z-index: 2;">
+            <h1 class="display-3 fw-bold mb-4">Welcome to the Book Review Platform</h1>
+            <p class="lead mb-4">Discover, Review, and Share Your Reading Journey</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{% url 'books:index' %}" class="btn btn-primary btn-lg px-4">Browse Books</a>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg px-4">Join Now</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+    <!-- Features Section -->
+    <div class="container mb-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="display-5 mb-3 text-primary">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h3 class="card-title h4">Extensive Library</h3>
+                        <p class="card-text text-muted">Explore our vast collection of books from various genres and authors.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="display-5 mb-3 text-primary">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <h3 class="card-title h4">Read Reviews</h3>
+                        <p class="card-text text-muted">Get insights from our community's honest and detailed book reviews.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="display-5 mb-3 text-primary">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3 class="card-title h4">Join the Community</h3>
+                        <p class="card-text text-muted">Connect with fellow readers and share your literary experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bg-light py-5 mb-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-4">
+                    <h2 class="display-5 fw-bold text-primary">{{ books_count|default:"200+" }}</h2>
+                    <p class="text-muted">Books Available</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-5 fw-bold text-primary">{{ authors_count|default:"50+" }}</h2>
+                    <p class="text-muted">Featured Authors</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-5 fw-bold text-primary">{{ reviews_count|default:"1000+" }}</h2>
+                    <p class="text-muted">Community Reviews</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="container mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="h1 mb-4">Start Your Reading Journey Today</h2>
+                <p class="lead mb-4">Join our community of book lovers and discover your next favorite read.</p>
+                <a href="{% url 'books:index' %}" class="btn btn-primary btn-lg">Explore Books</a>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/bookshelf.jpg' %}" alt="Books" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* CSS Variables for theming */
+        :root {
+            /* Background colors - maintaining good contrast while being gentle on eyes */
+            --bg-primary: #121212;      /* Slightly darker for better contrast */
+            --bg-secondary: #1e1e1e;    /* Adjusted for better distinction */
+            --bg-accent: #282828;       /* Lighter for better visibility */
+            
+            /* Text colors - softer whites and better contrast */
+            --text-primary: #eaeaea;    /* Softer white for main text */
+            --text-secondary: #c8c8c8;  /* Medium contrast for secondary text */
+            --text-muted: #8b8b8b;      /* Increased contrast for muted text */
+            
+            /* Brand colors - adjusted for WCAG AA compliance */
+            --primary-color: #7175ff;    /* Brighter and more visible */
+            --primary-hover: #5c61ff;    /* Adjusted for distinction */
+            --accent-color: #9f75ff;     /* More vibrant for better visibility */
+            
+            /* RGB versions for opacity/alpha operations */
+            --primary-rgb: 113, 117, 255;
+            --accent-rgb: 159, 117, 255;
+            
+            /* System */
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Global Styles */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Improve text readability */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        p {
+            color: var(--text-secondary);
+        }
+
+        .lead {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Card improvements */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--bg-accent);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .hover-card {
+            transition: var(--transition);
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: rgba(var(--primary-rgb), 0.2);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        /* Buttons with improved contrast */
+        .btn {
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff; /* Keep white for buttons to maintain contrast */
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+        }
+
+        .btn-primary:focus {
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.3);
+        }
+
+        .btn-outline-light {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+            background-color: var(--bg-accent);
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        /* Stats Section with improved contrast */
+        .bg-light {
+            background-color: var(--bg-secondary) !important;
+            border-top: 1px solid var(--bg-accent);
+            border-bottom: 1px solid var(--bg-accent);
+        }
+
+        .display-5 {
+            font-weight: 700;
+            color: var(--accent-color);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-muted {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+        }
+
+        /* Text Colors with better contrast */
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        /* Cards and Features with improved readability */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--bg-accent);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Icons with better visibility */
+        .bi {
+            display: inline-block;
+            line-height: 1;
+            vertical-align: -.125em;
+        }
+
+        .card .display-5 .bi {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Responsive Design with better readability */
+        @media (max-width: 768px) {
+            .display-3 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-section {
+                height: auto;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .display-5 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .display-3 {
+                font-size: 2rem;
+            }
+
+            .lead {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+            }
+
+            .card-title {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Refined Animations */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+                filter: blur(5px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .card, .hero-section, .stats-section {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Focus styles for better accessibility */
+        :focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Selection style */
+        ::selection {
+            background-color: rgba(var(--primary-rgb), 0.2);
+            color: var(--text-primary);
+        }
+    </style>
 {% endblock %}

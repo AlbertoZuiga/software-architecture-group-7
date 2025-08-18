@@ -1,62 +1,138 @@
 {% extends "base.html" %}
 
-{% block title %}Author List{% endblock %}
+{% block title %}Authors | Book Review Platform{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4">Author List</h2>
+<div class="container py-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-4 mb-0">Authors</h1>
+            <p class="lead text-muted mt-2">Discover talented writers from around the world</p>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="col-md-4 text-md-end">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addAuthorForm">
+                <i class="bi bi-plus-lg me-2"></i>Add New Author
+            </button>
+        </div>
+        {% endif %}
+    </div>
 
     {% if user.is_authenticated %}
-        {% url 'authors:create' as create_url %}
-    {% include "partials/_authors_form.html" with form_action=create_url submit_label="Add Author" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
+    <div class="collapse mb-4" id="addAuthorForm">
+        <div class="card card-body">
+            {% url 'authors:create' as create_url %}
+            {% include "partials/_authors_form.html" with form_action=create_url submit_label="Add Author" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
+        </div>
+    </div>
     {% endif %}
 
-    <div class="list-group">
+    <div class="row g-4">
         {% for author in authors %}
-            <a href="{% url 'authors:show' author.id %}" class="list-group-item list-group-item-action">
-                {{ author.name }}
+        <div class="col-md-6 col-lg-4">
+            <a href="{% url 'authors:show' author.id %}" class="text-decoration-none">
+                <div class="card h-100 hover-card bg-dark border-secondary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-primary bg-opacity-15 p-3 me-3">
+                                <i class="bi bi-person text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="h5 mb-1 text-light">{{ author.name }}</h3>
+                                <p class="text-secondary small mb-0">{{ author.country }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-secondary small">
+                                <i class="bi bi-book me-2"></i>{{ author.books_count }} books
+                            </span>
+                            <i class="bi bi-chevron-right text-secondary"></i>
+                        </div>
+                    </div>
+                </div>
             </a>
+        </div>
         {% empty %}
-            <div class="alert alert-info">No authors available.</div>
+        <div class="col-12">
+            <div class="card card-body text-center py-5">
+                <i class="bi bi-emoji-neutral display-4 text-muted mb-3"></i>
+                <h3 class="h4">No Authors Available</h3>
+                <p class="text-muted mb-0">Check back later for updates.</p>
+            </div>
+        </div>
         {% endfor %}
     </div>
 
     {% if authors.has_other_pages %}
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination">
+    <nav aria-label="Page navigation" class="mt-5">
+        <ul class="pagination justify-content-center">
             {% if authors.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ authors.previous_page_number }}" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
+                    <a class="page-link" href="?page={{ authors.previous_page_number }}" aria-label="Previous">
+                        <i class="bi bi-chevron-left"></i>
                     </a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <span class="page-link">&laquo;</span>
+                    <span class="page-link">
+                        <i class="bi bi-chevron-left"></i>
+                    </span>
                 </li>
             {% endif %}
 
             {% for num in authors.paginator.page_range %}
                 {% if authors.number == num %}
-                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
                 {% elif num > authors.number|add:'-3' and num < authors.number|add:'3' %}
-                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
                 {% endif %}
             {% endfor %}
 
             {% if authors.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ authors.next_page_number }}" aria-label="Siguiente">
-                        <span aria-hidden="true">&raquo;</span>
+                    <a class="page-link" href="?page={{ authors.next_page_number }}" aria-label="Next">
+                        <i class="bi bi-chevron-right"></i>
                     </a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <span class="page-link">&raquo;</span>
+                    <span class="page-link">
+                        <i class="bi bi-chevron-right"></i>
+                    </span>
                 </li>
             {% endif %}
         </ul>
     </nav>
     {% endif %}
+
+    <style>
+        .page-link {
+            background-color: var(--bg-secondary);
+            border-color: var(--bg-accent);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+        
+        .page-link:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .page-item.disabled .page-link {
+            background-color: var(--bg-secondary);
+            border-color: var(--bg-accent);
+            color: var(--text-muted);
+        }
+    </style>
 </div>
 {% endblock %}

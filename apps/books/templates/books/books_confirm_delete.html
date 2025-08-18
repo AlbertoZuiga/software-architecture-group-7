@@ -1,22 +1,99 @@
 {% extends "base.html" %}
 {% block title %}Delete {{ book.name }}{% endblock %}
 {% block content %}
-<div class="container py-5" style="max-width: 760px;">
-  <div class="surface-alt p-4 p-md-5 rounded-4 border position-relative overflow-hidden">
-    <div class="mb-4">
-      <h1 class="h4 mb-2 text-danger">Delete Book</h1>
-      <p class="text-dim mb-0">This action cannot be undone. Are you sure you want to delete <strong>{{ book.name }}</strong> and all its associated reviews and sales?</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'books:index' %}" class="text-primary">
+                            <i class="bi bi-book me-1"></i>Books
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'books:show' book.id %}" class="text-primary">
+                            {{ book.name }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">Delete</li>
+                </ol>
+            </nav>
+
+            <div class="card bg-dark border-danger">
+                <div class="card-header border-danger p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="rounded-circle bg-danger bg-opacity-10 p-3">
+                                <i class="bi bi-exclamation-triangle text-danger fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1 text-danger">Delete Book</h4>
+                            <p class="text-danger mb-0 opacity-75">This action cannot be undone</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body p-4">
+                    <p class="mb-4">
+                        You are about to delete "<strong>{{ book.name }}</strong>" and all its associated data, including:
+                    </p>
+                    
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-3">
+                            <i class="bi bi-star text-warning me-2"></i>
+                            All reviews and ratings
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-graph-up text-success me-2"></i>
+                            All sales records
+                        </li>
+                        <li>
+                            <i class="bi bi-link-45deg text-primary me-2"></i>
+                            All references to this book
+                        </li>
+                    </ul>
+
+                    <div class="card bg-dark border-secondary mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="text-muted mb-1">Title</div>
+                                    <div>{{ book.name }}</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-muted mb-1">Author</div>
+                                    <div>{{ book.author.name }}</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-muted mb-1">Published</div>
+                                    <div>{{ book.published_at|date:"d/m/Y" }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="post" class="d-flex gap-3">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash me-2"></i>Delete Permanently
+                        </button>
+                        <a href="{% url 'books:show' book.id %}" class="btn btn-outline-light">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <dl class="row small mb-4">
-      <dt class="col-sm-3 text-dim">Title</dt><dd class="col-sm-9">{{ book.name }}</dd>
-      <dt class="col-sm-3 text-dim">Author</dt><dd class="col-sm-9">{{ book.author.name }}</dd>
-      <dt class="col-sm-3 text-dim">Published</dt><dd class="col-sm-9">{{ book.published_at|date:"d/m/Y" }}</dd>
-    </dl>
-    <form method="post" class="d-flex flex-wrap gap-3 align-items-center">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger px-4"><i class="bi bi-trash me-2"></i>Delete Permanently</button>
-      <a href="{% url 'books:show' book.id %}" class="btn btn-outline-accent px-4">Cancel</a>
-    </form>
-  </div>
+
+    <style>
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--text-primary);
+        }
+    </style>
 </div>
 {% endblock %}
