@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load humanize %}
 
-{% block title %}Editar autor{% endblock %}
+{% block title %}Edit Author{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">Editar autor de "{{ author.name }}"</h2>
+    <h2 class="mb-4">Edit author "{{ author.name }}"</h2>
 
     <a href="{% url 'authors:show' author.id %}" class="btn btn-secondary mb-3">
-        ← Volver
+        ← Back
     </a>
 
     {% url 'authors:update' author.id as update_url %}
 
-    {% include "partials/_authors_form.html" with form_action=update_url submit_label="💾 Guardar cambios" initial_name=author.name initial_country=author.country initial_date_of_birth=author.date_of_birth|date:'Y-m-d' initial_description=author.description %}
+    {% include "partials/_authors_form.html" with form_action=update_url submit_label="💾 Save changes" initial_name=author.name initial_country=author.country initial_date_of_birth=author.date_of_birth|date:'Y-m-d' initial_description=author.description %}
 </div>
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Lista de Autores{% endblock %}
+{% block title %}Author List{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">Lista de Autores</h2>
+    <h2 class="mb-4">Author List</h2>
 
     {% if user.is_authenticated %}
         {% url 'authors:create' as create_url %}
-    {% include "partials/_authors_form.html" with form_action=create_url submit_label="Agregar autor" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
+    {% include "partials/_authors_form.html" with form_action=create_url submit_label="Add Author" initial_name="" initial_country="" initial_date_of_birth="" initial_description="" %}
     {% endif %}
 
     <div class="list-group">
@@ -17,7 +17,7 @@
                 {{ author.name }}
             </a>
         {% empty %}
-            <div class="alert alert-info">No hay autores disponibles.</div>
+            <div class="alert alert-info">No authors available.</div>
         {% endfor %}
     </div>
 

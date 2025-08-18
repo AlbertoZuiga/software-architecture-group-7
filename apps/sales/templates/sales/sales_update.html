@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load humanize %}
 
-{% block title %}Editar venta{% endblock %}
+{% block title %}Edit sale{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">Editar venta de "{{ book.name }}"</h2>
+    <h2 class="mb-4">Edit sale of "{{ book.name }}"</h2>
 
     <a href="{% url 'sales:index' book.id %}" class="btn btn-secondary mb-3">
-        ← Volver a ventas
+        ← Back to sales
     </a>
 
     {% url 'sales:update' book.id sale.id as update_url %}
 
-    {% include "partials/_sales_form.html" with form_action=update_url submit_label="💾 Guardar cambios" initial_year=sale.year initial_sales=sale.sales %}
+    {% include "partials/_sales_form.html" with form_action=update_url submit_label="💾 Save changes" initial_year=sale.year initial_sales=sale.sales %}
 </div>
 {% endblock %}

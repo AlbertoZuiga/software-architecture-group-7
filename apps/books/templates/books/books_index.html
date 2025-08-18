@@ -1,27 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}Lista de Libros{% endblock %}
+{% block title %}Book List{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">Lista de Libros</h2>
+    <h2 class="mb-4">Book List</h2>
 
     {% if user.is_authenticated %}
         {% url 'books:create' as create_url %}
-        {% include "partials/_books_form.html" with form_action=create_url submit_label="Agregar libro" initial_name="" initial_summary="" initial_published_at="" initial_author="" %}
+        {% include "partials/_books_form.html" with form_action=create_url submit_label="Add Book" initial_name="" initial_summary="" initial_published_at="" initial_author="" %}
     {% endif %}
 
     <form method="get" class="row g-2 mb-4">
         <div class="col-sm-10">
-            <input name="q" value="{{ q|default:'' }}" class="form-control" placeholder="Buscar por palabras en resumen o título">
+            <input name="q" value="{{ q|default:'' }}" class="form-control" placeholder="Search by title or summary">
         </div>
         <div class="col-sm-2 d-grid">
-            <button class="btn btn-primary" type="submit">Buscar</button>
+            <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
 
     {% if q %}
-        <p class="text-muted">Resultados para: "<strong>{{ q }}</strong>" ({{ books.paginator.count }})</p>
+        <p class="text-muted">Results for: "<strong>{{ q }}</strong>" ({{ books.paginator.count }})</p>
     {% endif %}
 
     <div class="list-group">
@@ -30,7 +30,7 @@
                 {{ book.name }}
             </a>
         {% empty %}
-            <div class="alert alert-info">No hay libros disponibles.</div>
+            <div class="alert alert-info">No books available.</div>
         {% endfor %}
     </div>
 
@@ -39,7 +39,7 @@
         <ul class="pagination">
             {% if books.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ books.previous_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}" aria-label="Anterior">
+                    <a class="page-link" href="?page={{ books.previous_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -59,7 +59,7 @@
 
             {% if books.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ books.next_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}" aria-label="Siguiente">
+                    <a class="page-link" href="?page={{ books.next_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

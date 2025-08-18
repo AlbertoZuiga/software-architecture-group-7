@@ -1,7 +1,7 @@
 <form method="post" action="{{ form_action }}" class="mb-4 border rounded p-3 bg-light">
     {% csrf_token %}
     <div class="mb-3">
-        <label for="year" class="form-label">Año ({{book.published_at.year}}-{{ current_year }})</label>
+        <label for="year" class="form-label">Year ({{book.published_at.year}}-{{ current_year }})</label>
         <input 
             id="year" 
             type="number" 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="sales" class="form-label">Cantidad de ventas</label>
+        <label for="sales" class="form-label">Number of Sales</label>
         <input 
             id="sales" 
             type="number" 

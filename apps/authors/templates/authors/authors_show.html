@@ -10,41 +10,41 @@
             <h2 class="card-title">{{ author.name }}</h2>
 
             <p class="card-subtitle mb-2 text-muted">
-                <strong>País:</strong> {{ author.country }}
+                <strong>Country:</strong> {{ author.country }}
             </p>
 
             <p class="card-text mt-3">
-                <strong>Cantidad de Libros:</strong> {{ author.books_count }}
+                <strong>Number of Books:</strong> {{ author.books_count }}
             </p>
 
             {% if author.date_of_birth %}
             <p class="card-text mt-2">
-                <strong>Fecha de nacimiento:</strong> {{ author.date_of_birth|date:"d/m/Y" }}
+                <strong>Date of Birth:</strong> {{ author.date_of_birth|date:"d/m/Y" }}
             </p>
             {% endif %}
 
             {% if author.description %}
             <div class="card-text mt-2">
-                <strong>Descripción:</strong><br>
+                <strong>Description:</strong><br>
                 <div class="small text-muted">{{ author.description|linebreaksbr }}</div>
             </div>
             {% endif %}
 
             <p class="card-text mt-4">
-                <strong>Ventas Totales:</strong> {{ author.total_sales|intcomma }}
+                <strong>Total Sales:</strong> {{ author.total_sales|intcomma }}
             </p>
 
             <a href="{% url 'authors:index' %}" class="btn btn-outline-primary mt-4">
-                ← Volver a la lista
+                ← Back to List
             </a>
 
             {% if user.is_authenticated %}
                 <a href="{% url 'authors:update' author.id %}" class="btn btn-warning mt-4 ms-2">
-                    ✏️ Editar autor
+                    ✏️ Edit Author
                 </a>
-                <form method="post" action="{% url 'authors:delete' author.id %}" class="d-inline mt-4 ms-2" onsubmit="return confirm('¿Eliminar autor? Esta acción no se puede deshacer.');">
+                <form method="post" action="{% url 'authors:delete' author.id %}" class="d-inline mt-4 ms-2" onsubmit="return confirm('Delete author? This action cannot be undone.');">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger mt-4 ms-2">🗑️ Eliminar</button>
+                    <button type="submit" class="btn btn-danger mt-4 ms-2">🗑️ Delete</button>
                 </form>
             {% endif %}
         </div>

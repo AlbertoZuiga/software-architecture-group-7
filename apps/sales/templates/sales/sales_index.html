@@ -1,64 +1,64 @@
 {% extends "base.html" %}
 {% load humanize %}
 
-{% block title %}Ventas de {{ book.name }}{% endblock %}
+{% block title %}Sales of {{ book.name }}{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">Ventas del libro "{{ book.name }}"</h2>
+    <h2 class="mb-4">Sales of book "{{ book.name }}"</h2>
 
     <a href="{% url 'books:show' book.id %}" class="btn btn-secondary mb-3">
-        ← Volver al libro
+        ← Back to book
     </a>
 
 
     <div class="alert alert-success">
-        <strong>Ventas totales:</strong> {{ book.total_sales|intcomma }}
+        <strong>Total sales:</strong> {{ book.total_sales|intcomma }}
     </div>
 
     {% if user.is_authenticated %}
         {% url 'sales:create' book.id as create_url %}
 
-        {% include "partials/_sales_form.html" with form_action=create_url submit_label="Agregar venta" initial_year="" initial_sales="" %}
+        {% include "partials/_sales_form.html" with form_action=create_url submit_label="Add sale" initial_year="" initial_sales="" %}
     {% else %}
-        <div class="alert alert-info">Inicia sesión para agregar una venta. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
+        <div class="alert alert-info">Please log in to add a sale. <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">Login</a></div>
     {% endif %}
 
     <div class="list-group">
         {% for sale in sales %}
             <div class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
-                    <strong>Año:</strong> {{ sale.year }} <br>
-                    <strong>Ventas:</strong> {{ sale.sales }}
+                    <strong>Year:</strong> {{ sale.year }} <br>
+                    <strong>Sales:</strong> {{ sale.sales }}
                 </div>
 
                 {% if user.is_authenticated %}
                     <form method="get" action="{% url 'sales:update' book.id sale.id %}">
                         <button type="submit" class="btn btn-sm btn-warning ms-2">
-                            ✏ Editar
+                            ✏ Edit
                         </button>
                     </form>
 
-                    <form method="post" action="{% url 'sales:delete' book.id sale.id %}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta venta?');">
+                    <form method="post" action="{% url 'sales:delete' book.id sale.id %}" onsubmit="return confirm('Are you sure you want to delete this sale?');">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-sm btn-danger">
-                            🗑 Eliminar
+                            🗑 Delete
                         </button>
                     </form>
                 {% endif %}
             </div>
         {% empty %}
-            <div class="alert alert-info">No hay ventas registradas para este libro.</div>
+            <div class="alert alert-info">No sales recorded for this book.</div>
         {% endfor %}
     </div>
 
 
     {% if sales.has_other_pages %}
-    <nav aria-label="Paginación" class="mt-4">
+    <nav aria-label="Pagination" class="mt-4">
         <ul class="pagination">
             {% if sales.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ sales.previous_page_number }}" aria-label="Anterior">
+                    <a class="page-link" href="?page={{ sales.previous_page_number }}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -78,7 +78,7 @@
 
             {% if sales.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ sales.next_page_number }}" aria-label="Siguiente">
+                    <a class="page-link" href="?page={{ sales.next_page_number }}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
