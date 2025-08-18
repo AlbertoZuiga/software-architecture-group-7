@@ -1,4 +1,4 @@
-from django.db.models import Avg, Count, Sum
+from django.db.models import Avg, Count, Sum, OuterRef, Subquery
 from django.shortcuts import render
 
 from apps.authors.models import Author
@@ -41,11 +41,19 @@ def stats_page(request):
         .order_by(sort_order)
     )
 
+    author_total_sales_subquery = (
+        Sale.objects
+        .filter(book__author=OuterRef("author"))
+        .values("book__author")
+        .annotate(total_sales=Sum("sales"))
+        .values("total_sales")
+    )
+
     top_selling_books_qs = (
         Book.objects
         .annotate(
             calculated_total_sales=Sum("yearly_sales__sales"),
-            author_total_sales=Sum("author__books__yearly_sales__sales"),
+            author_total_sales=Subquery(author_total_sales_subquery),
         )
         .order_by("-calculated_total_sales")[:50]
         .select_related("author")
