@@ -5,25 +5,94 @@
 {% block content %}
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<style>
+    /* Dark theme overrides for DataTables */
+    .dataTables_wrapper {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .dataTables_length select,
+    .dataTables_filter input {
+        background-color: #2b3035 !important;
+        border: 1px solid #495057 !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    .dataTables_length select option {
+        background-color: #2b3035;
+    }
+    .dataTables_info {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+    .paginate_button {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    .paginate_button.current {
+        background: #0d6efd !important;
+        border-color: #0d6efd !important;
+        color: white !important;
+    }
+    .paginate_button:hover:not(.current) {
+        background: #2b3035 !important;
+        border-color: #495057 !important;
+    }
+    table.dataTable tbody tr {
+        background-color: #212529 !important;
+    }
+    table.dataTable tbody tr:hover {
+        background-color: #2b3035 !important;
+    }
+    .table-dark {
+        --bs-table-striped-bg: #2b3035;
+    }
+    .filter-input, .filter-operator {
+        background-color: #2b3035 !important;
+        border-color: #495057 !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    .filter-operator option {
+        background-color: #2b3035;
+    }
+</style>
 
-<div class="container mt-4">
-    <h2 class="mb-4">Statistics</h2>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-primary bg-opacity-15 p-3 me-3">
+                    <i class="bi bi-bar-chart-line text-primary fs-4"></i>
+                </div>
+                <div>
+                    <h1 class="h2 mb-1 text-light">Statistics Dashboard</h1>
+                    <p class="text-secondary mb-0">Comprehensive overview of books, authors, and sales performance</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Table 1: Authors Statistics -->
-    <h3 class="mt-4">Authors Statistics</h3>
+    <div class="card bg-dark border-secondary mb-4">
+        <div class="card-header border-secondary p-3">
+            <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-info bg-opacity-15 p-2 me-3">
+                    <i class="bi bi-people text-info"></i>
+                </div>
+                <h3 class="card-title mb-0 text-light">Authors Statistics</h3>
+            </div>
+        </div>
+        <div class="card-body p-4">
     <div class="table-responsive">
-        <table id="authorsTable" class="table table-bordered table-striped">
-            <thead class="table-primary">
+        <table id="authorsTable" class="table table-dark table-striped table-bordered border-secondary">
+            <thead class="bg-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col" class="text-center">#</th>
                     <th scope="col">
-                        <a href="?sort=name&direction={% if current_sort_field == 'name' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}">
-                            Author
+                        <a href="?sort=name&direction={% if current_sort_field == 'name' and current_sort_direction == 'asc' %}desc{% else %}asc{% endif %}" 
+                           class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="bi bi-person me-2"></i>Author
                             {% if current_sort_field == 'name' %}
                                 {% if current_sort_direction == 'asc' %}
-                                    <i class="bi bi-arrow-up"></i>
+                                    <i class="bi bi-arrow-up ms-2"></i>
                                 {% else %}
-                                    <i class="bi bi-arrow-down"></i>
+                                    <i class="bi bi-arrow-down ms-2"></i>
                                 {% endif %}
                             {% endif %}
                         </a>
@@ -124,19 +193,39 @@
         </table>
     </div>
 
+    </div>
+    </div>
+
     <!-- Table 2: Top 10 Rated Books -->
-    <h3 class="mt-4">Top 10 Rated Books</h3>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-primary">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Average Score</th>
-                    <th scope="col">Best review with most upvotes</th>
-                    <th scope="col">Worst review with most upvotes</th>
-                </tr>
-            </thead>
+    <div class="card bg-dark border-secondary mb-4">
+        <div class="card-header border-secondary p-3">
+            <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-warning bg-opacity-15 p-2 me-3">
+                    <i class="bi bi-star text-warning"></i>
+                </div>
+                <h3 class="card-title mb-0 text-light">Top 10 Rated Books</h3>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-bordered border-secondary">
+                    <thead class="bg-dark">
+                        <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col">
+                                <i class="bi bi-book me-2"></i>Book Name
+                            </th>
+                            <th scope="col">
+                                <i class="bi bi-star-half me-2"></i>Average Score
+                            </th>
+                            <th scope="col">
+                                <i class="bi bi-hand-thumbs-up me-2"></i>Best Review
+                            </th>
+                            <th scope="col">
+                                <i class="bi bi-hand-thumbs-down me-2"></i>Worst Review
+                            </th>
+                        </tr>
+                    </thead>
             <tbody>
                 {% for book in top_rated_books %}
                 <tr>
@@ -151,19 +240,39 @@
         </table>
     </div>
 
+    </div>
+    </div>
+
     <!-- Table 3: Top 50 Selling Books -->
-    <h3 class="mt-4">Top 50 Selling Books</h3>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-primary">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Total Sales</th>
-                    <th scope="col">Author Total Sales</th>
-                    <th scope="col">Top 5 in Year of Publication</th>
-                </tr>
-            </thead>
+    <div class="card bg-dark border-secondary mb-4">
+        <div class="card-header border-secondary p-3">
+            <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-success bg-opacity-15 p-2 me-3">
+                    <i class="bi bi-graph-up-arrow text-success"></i>
+                </div>
+                <h3 class="card-title mb-0 text-light">Top 50 Selling Books</h3>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-bordered border-secondary">
+                    <thead class="bg-dark">
+                        <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col">
+                                <i class="bi bi-book me-2"></i>Book Name
+                            </th>
+                            <th scope="col">
+                                <i class="bi bi-cart me-2"></i>Total Sales
+                            </th>
+                            <th scope="col">
+                                <i class="bi bi-person-badge me-2"></i>Author Sales
+                            </th>
+                            <th scope="col">
+                                <i class="bi bi-trophy me-2"></i>Top 5 in Publication Year
+                            </th>
+                        </tr>
+                    </thead>
             <tbody>
                 {% for book in top_selling_books %}
                 <tr>
@@ -173,9 +282,13 @@
                     <td>{{ book.author_total_sales }}</td>
                     <td>
                         {% if book.is_top_5_in_year %}
-                            <span class="badge bg-success">Yes</span>
+                            <span class="badge bg-success bg-opacity-25 text-success border border-success">
+                                <i class="bi bi-check-circle me-1"></i>Yes
+                            </span>
                         {% else %}
-                            <span class="badge bg-danger">No</span>
+                            <span class="badge bg-danger bg-opacity-25 text-danger border border-danger">
+                                <i class="bi bi-x-circle me-1"></i>No
+                            </span>
                         {% endif %}
                     </td>
                 </tr>
@@ -185,6 +298,7 @@
     </div>
 </div>
 
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
