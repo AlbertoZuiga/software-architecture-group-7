@@ -43,22 +43,22 @@ def sales_create(request: HttpRequest, book_id: int) -> HttpResponse:
     try:
         year_val = int(year_raw)
         if year_val < book.published_at.year or year_val > CURRENT_YEAR:
-            errors["year"] = "Debe estar entre el año de publicación y el año actual"
+            errors["year"] = "Must be between publication year and current year"
     except (TypeError, ValueError):
-        errors["year"] = "Año inválido"
+        errors["year"] = "Invalid year"
 
     if not errors.get("year"):
         if Sale.objects.filter(book=book, year=year_val).exists():
-            errors["year"] = "Ya existe una venta para este año en este libro"
+            errors["year"] = "A sale already exists for this year in this book"
 
     try:
         sales_val = int(sales_raw)
         if sales_val < 0:
-            errors["sales"] = "Debe ser un número positivo"
+            errors["sales"] = "Must be a positive number"
         elif sales_val > MAX_SALES:
-            errors["sales"] = f"No puede superar {MAX_SALES} ventas"
+            errors["sales"] = f"Cannot exceed {MAX_SALES} sales"
     except (TypeError, ValueError):
-        errors["sales"] = "Cantidad de ventas inválida"
+        errors["sales"] = "Invalid sales amount"
 
     if errors:
         sale_list = Sale.objects.filter(book=book).order_by("-id")
@@ -97,22 +97,22 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
         try:
             year_val = int(year_raw)
             if year_val < book.published_at.year or year_val > CURRENT_YEAR:
-                errors["year"] = f"Debe estar entre {book.published_at.year} y {CURRENT_YEAR}"
+                errors["year"] = f"Must be between {book.published_at.year} and {CURRENT_YEAR}"
         except (TypeError, ValueError):
-            errors["year"] = "Año inválido"
+            errors["year"] = "Invalid year"
 
         if not errors.get("year"):
             if year_val != sale.year and Sale.objects.filter(book=book, year=year_val).exists():
-                errors["year"] = "Ya existe una venta para este año en este libro"
+                errors["year"] = "A sale already exists for this year in this book"
 
         try:
             sales_val = int(sales_raw)
             if sales_val < 0:
-                errors["sales"] = "Debe ser un número positivo"
+                errors["sales"] = "Must be a positive number"
             elif sales_val > MAX_SALES:
-                errors["sales"] = f"No puede superar {MAX_SALES} ventas"
+                errors["sales"] = f"Cannot exceed {MAX_SALES} sales"
         except (TypeError, ValueError):
-            errors["sales"] = "Cantidad de ventas inválida"
+            errors["sales"] = "Invalid sales amount"
 
         if errors:
             return render(
@@ -133,7 +133,7 @@ def sales_update(request: HttpRequest, book_id: int, sale_id: int) -> HttpRespon
         sale.save()
         return redirect("sales:index", book_id=book.id)
 
-    # GET request: mostrar el formulario de edición
+    # GET request: show edit form
     return render(
         request,
         "sales/sales_update.html",

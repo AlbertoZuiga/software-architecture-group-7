@@ -40,18 +40,18 @@ def authors_create(request):
         form_values["description"] = description
 
         if not name:
-            errors["name"] = "El nombre es obligatorio."
+            errors["name"] = "Name is required."
         if not country:
-            errors["country"] = "El país es obligatorio."
+            errors["country"] = "Country is required."
 
         dob = None
         if date_of_birth_raw:
             try:
                 dob = datetime.strptime(date_of_birth_raw, "%Y-%m-%d").date()
                 if dob > datetime.now().date():
-                    errors["date_of_birth"] = "La fecha de nacimiento no puede ser futura."
+                    errors["date_of_birth"] = "Birth date cannot be in the future."
             except ValueError:
-                errors["date_of_birth"] = "Fecha inválida (YYYY-MM-DD)"
+                errors["date_of_birth"] = "Invalid date format (YYYY-MM-DD)"
 
         if not errors:
             Author.objects.create(
@@ -89,18 +89,18 @@ def authors_update(request, author_id):
         form_values["description"] = description
 
         if not name:
-            errors["name"] = "El nombre es obligatorio."
+            errors["name"] = "Name is required."
         if not country:
-            errors["country"] = "El país es obligatorio."
+            errors["country"] = "Country is required."
 
         dob = None
         if date_of_birth_raw:
             try:
                 dob = datetime.strptime(date_of_birth_raw, "%Y-%m-%d").date()
                 if dob > datetime.now().date():
-                    errors["date_of_birth"] = "La fecha de nacimiento no puede ser futura."
+                    errors["date_of_birth"] = "Birth date cannot be in the future."
             except ValueError:
-                errors["date_of_birth"] = "Fecha inválida (YYYY-MM-DD)"
+                errors["date_of_birth"] = "Invalid date format (YYYY-MM-DD)"
 
         if not errors:
             author.name = name

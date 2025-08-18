@@ -17,13 +17,13 @@ def create_review(request: HttpRequest, book_id: int) -> HttpResponse:
     score_raw = request.POST.get("score")
     errors = {}
     if not review_text:
-        errors["review"] = "El texto es requerido"
+        errors["review"] = "Review text is required"
     try:
         score_val = int(score_raw)
         if score_val < 1 or score_val > 5:
-            errors["score"] = "Debe estar entre 1 y 5"
+            errors["score"] = "Must be between 1 and 5"
     except (TypeError, ValueError):
-        errors["score"] = "Puntaje inválido"
+        errors["score"] = "Invalid score"
 
     if errors:
         reviews = book.reviews.all().order_by("-up_votes", "-score")
@@ -72,13 +72,13 @@ def edit_review(request: HttpRequest, review_id: int) -> HttpResponse:
         score_raw = request.POST.get("score")
         errors = {}
         if not text:
-            errors["review"] = "El texto es requerido"
+            errors["review"] = "Review text is required"
         try:
             score_val = int(score_raw)
             if score_val < 1 or score_val > 5:
-                errors["score"] = "Debe estar entre 1 y 5"
+                errors["score"] = "Must be between 1 and 5"
         except (TypeError, ValueError):
-            errors["score"] = "Puntaje inválido"
+            errors["score"] = "Invalid score"
         if not errors:
             review.review = text
             review.score = score_val

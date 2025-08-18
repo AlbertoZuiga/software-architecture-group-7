@@ -35,7 +35,7 @@ def books_index(request):
             "erorrs": {},
             "form_values": {},
             "authors": authors,
-            "submit_label": "Crear",
+            "submit_label": "Create",
         },
     )
 
@@ -78,9 +78,9 @@ def books_create(request):
         MAX_SUMMARY_LENGTH = 2000
 
         if len(name) > MAX_NAME_LENGTH:
-            errors["name"] = f"El nombre no puede exceder {MAX_NAME_LENGTH} caracteres."
+            errors["name"] = f"Name cannot exceed {MAX_NAME_LENGTH} characters."
         if len(summary) > MAX_SUMMARY_LENGTH:
-            errors["summary"] = f"El resumen no puede exceder {MAX_SUMMARY_LENGTH} caracteres."
+            errors["summary"] = f"Summary cannot exceed {MAX_SUMMARY_LENGTH} characters."
 
         published_at_str = request.POST.get("published_at", "").strip()
         author_id = request.POST.get("author", "").strip()
@@ -104,24 +104,24 @@ def books_create(request):
         author = Author.objects.get(id=author_id) if author_id else None
 
         if not name:
-            errors["name"] = "El nombre es obligatorio."
+            errors["name"] = "Name is required."
         if not summary:
-            errors["summary"] = "El resumen es obligatorio."
+            errors["summary"] = "Summary is required."
         if not published_at:
-            errors["published_at"] = "La fecha de publicación es obligatoria."
+            errors["published_at"] = "Publication date is required."
         if not author_id:
-            errors["author"] = "El autor es obligatorio."
+            errors["author"] = "Author is required."
         elif not author:
-            errors["author"] = "El autor seleccionado no existe."
+            errors["author"] = "Selected author does not exist."
 
         if published_at and author and author.date_of_birth:
             if published_at < author.date_of_birth:
                 errors["published_at"] = (
-                    "La fecha de publicación no puede ser anterior"
-                    " a la fecha de nacimiento del autor."
+                    "Publication date cannot be earlier "
+                    "than the author's date of birth."
                 )
             elif published_at > timezone.now().date():
-                errors["published_at"] = "La fecha de publicación no puede ser en el futuro."
+                errors["published_at"] = "Publication date cannot be in the future."
 
         if not errors:
             Book.objects.create(
@@ -145,7 +145,7 @@ def books_create(request):
             "form_values": form_values,
             "authors": authors,
             "books": books,
-            "submit_label": "Crear"
+            "submit_label": "Create"
         },
     )
 
@@ -174,29 +174,29 @@ def books_update(request, book_id):
                 "%Y-%m-%d"
             ).date() if published_at_str else None
         except ValueError:
-            errors["published_at"] = "Formato de fecha inválido. Use YYYY-MM-DD."
+            errors["published_at"] = "Invalid date format. Use YYYY-MM-DD."
             published_at = None
 
         if not name:
-            errors["name"] = "El nombre es obligatorio."
+            errors["name"] = "Name is required."
         if not summary:
-            errors["summary"] = "El resumen es obligatorio."
+            errors["summary"] = "Summary is required."
         if not published_at:
-            errors["published_at"] = "La fecha de publicación es obligatoria."
+            errors["published_at"] = "Publication date is required."
         if not author_id:
-            errors["author"] = "El autor es obligatorio."
+            errors["author"] = "Author is required."
         elif not Author.objects.filter(id=author_id).exists():
-            errors["author"] = "El autor seleccionado no existe."
+            errors["author"] = "Selected author does not exist."
         else:
             author = Author.objects.get(id=author_id)
             if published_at and author.date_of_birth:
                 if published_at < author.date_of_birth:
                     errors["published_at"] = (
-                    "La fecha de publicación no puede ser anterior "
-                    "a la fecha de nacimiento del autor."
+                    "Publication date cannot be earlier "
+                    "than the author's date of birth."
                     )
                 elif published_at > timezone.now().date():
-                    errors["published_at"] = "La fecha de publicación no puede ser en el futuro."
+                    errors["published_at"] = "Publication date cannot be in the future."
 
         if not errors:
             book.name = name
@@ -222,7 +222,7 @@ def books_update(request, book_id):
             "errors": errors,
             "form_values": form_values,
             "authors": authors,
-            "submit_label": "Actualizar",
+            "submit_label": "Update",
         },
     )
 
