@@ -1,15 +1,153 @@
 
-<form method="post" action="{% url 'reviews:create' book.id %}" class="mb-4 border rounded p-3 bg-light">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label class="form-label">Rating (1-5)</label>
-        <input type="number" name="score" min="1" max="5" class="form-control" value="{{ form_values.score|default:'' }}" required>
-        {% if errors.score %}<div class="text-danger small">{{ errors.score }}</div>{% endif %}
+<div class="card bg-dark border-secondary">
+    <div class="card-header border-secondary p-4">
+        <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+                <div class="rounded-circle bg-primary bg-opacity-15 p-3">
+                    <i class="bi bi-star text-primary"></i>
+                </div>
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h5 class="mb-1 text-light">Write a Review</h5>
+                <p class="text-secondary mb-0">Share your thoughts about this book</p>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Review</label>
-        <textarea name="review" rows="3" class="form-control" required>{{ form_values.review|default:'' }}</textarea>
-        {% if errors.review %}<div class="text-danger small">{{ errors.review }}</div>{% endif %}
+
+    <div class="card-body p-4">
+        <form method="post" action="{% url 'reviews:create' book.id %}">
+            {% csrf_token %}
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="review-score" class="form-label text-light">
+                            <i class="bi bi-star-fill me-2"></i>Rating
+                        </label>
+                        <div class="input-group">
+                            <input 
+                                id="review-score"
+                                type="number" 
+                                name="score" 
+                                min="1" 
+                                max="5" 
+                                class="form-control bg-dark border-secondary text-light {% if errors.score %}is-invalid{% endif %}" 
+                                value="{{ form_values.score|default:'' }}"
+                                placeholder="1-5"
+                                required
+                            >
+                            <span class="input-group-text bg-dark border-secondary text-secondary">
+                                <i class="bi bi-stars"></i>
+                            </span>
+                        </div>
+                        {% if errors.score %}
+                            <div class="invalid-feedback d-block">{{ errors.score }}</div>
+                        {% endif %}
+                        <div class="form-text text-secondary mt-2">
+                            Rate from 1 (lowest) to 5 (highest)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="review-text" class="form-label text-light">
+                            <i class="bi bi-chat-text me-2"></i>Your Review
+                        </label>
+                        <textarea 
+                            id="review-text"
+                            name="review" 
+                            rows="4" 
+                            class="form-control bg-dark border-secondary text-light {% if errors.review %}is-invalid{% endif %}" 
+                            placeholder="Write your thoughts about the book..."
+                            required
+                        >{{ form_values.review|default:'' }}</textarea>
+                        {% if errors.review %}
+                            <div class="invalid-feedback d-block">{{ errors.review }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send me-2"></i>Submit Review
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-    <button type="submit" class="btn btn-primary">Add Review</button>
-</form>
+</div>
+
+<style>
+    /* Form Control Styles */
+    .form-control {
+        transition: var(--transition);
+    }
+    
+    .form-control:focus {
+        background-color: var(--bg-dark);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+        color: var(--text-primary);
+    }
+    
+    .form-control::placeholder {
+        color: var(--text-muted);
+    }
+    
+    /* Input Group Enhancements */
+    .input-group-text {
+        transition: var(--transition);
+    }
+    
+    .input-group:focus-within .input-group-text {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+    
+    /* Label Styles */
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+        transition: var(--transition);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1rem rgba(var(--primary-rgb), 0.15);
+    }
+    
+    /* Error States */
+    .invalid-feedback {
+        color: #ff6b6b;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+    
+    .form-control.is-invalid {
+        border-color: #ff6b6b;
+        box-shadow: none;
+    }
+    
+    .form-control.is-invalid:focus {
+        border-color: #ff6b6b;
+        box-shadow: 0 0 0 0.25rem rgba(255, 107, 107, 0.25);
+    }
+
+    /* Card Animation */
+    .card {
+        transition: var(--transition);
+    }
+
+    .rounded-circle {
+        transition: var(--transition);
+    }
+
+    .card:hover .rounded-circle {
+        transform: scale(1.1);
+    }
+</style>
