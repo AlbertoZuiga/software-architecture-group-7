@@ -1,161 +1,203 @@
-# Software Architecture Group 7
+# Book Review Platform
 
-This project is a **Django-based book review platform** with modular apps for authors, books, reviews, and sales. It is fully containerized using Docker for easy setup.
+A modern, modular Django-based application for cataloging, reviewing, and tracking book sales, with support for both cached and non-cached deployments.
 
----
+## Overview
 
-## **Getting Started**
+This project is a book review platform built with Django, featuring a modular architecture with separate apps for authors, books, reviews, and sales data. The platform allows users to browse books, leave reviews, upvote existing reviews, and track book sales statistics. The application is fully containerized using Docker for easy deployment.
 
-Clone the repository and navigate into the project folder:
+## Features
+
+- **Author Management**: Create, view, and update author profiles
+- **Book Catalog**: Browse and search books with detailed information
+- **Review System**: Add book reviews with ratings and upvote functionality
+- **Sales Tracking**: Record and display book sales statistics
+- **Caching Support**: Optional Redis caching for improved performance
+- **Responsive Design**: Mobile-friendly user interface
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- Git
+
+## Installation & Setup
+
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/AlbertoZuiga/software-architecture-group-7.git
 cd software-architecture-group-7
 ```
 
+2. Choose one of the deployment options:
+
 ### Deployment Options
 
 #### Option 1: Application + Database (without cache)
 
-Build and start the containers using standard Docker Compose:
+Build and start the application with PostgreSQL only:
 
 ```bash
 docker-compose up --build -d
 ```
 
-This will start the application with PostgreSQL but without Redis cache.
+This configuration uses Django's DummyCache backend, which functions as a no-op cache.
 
 #### Option 2: Application + Database + Redis Cache
 
-Build and start the containers with both the base and cache configuration:
+Build and start the application with PostgreSQL and Redis caching:
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.cache.yml up --build -d
 ```
 
-This will start the application with both PostgreSQL and Redis cache enabled.
+This configuration activates Redis for caching frequently accessed data like author information, book details, and review scores.
 
-> The backend service will be available at `http://localhost:8000/` in both deployment options.
+> The application will be available at `http://localhost:8000/` in both deployment options.
 
----
+### Initial Setup
 
-## **Folder Structure**
+After deployment, run the following commands to set up the database:
 
-```
-├── apps
-│   ├── __init__.py
-│   ├── authors
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── migrations
-│   │   │   ├── __init__.py
-│   │   │   └── 0001_initial.py
-│   │   ├── models.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── books
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── migrations
-│   │   │   ├── __init__.py
-│   │   │   └── 0001_initial.py
-│   │   ├── models.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── common
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── migrations
-│   │   │   └── __init__.py
-│   │   ├── models.py
-│   │   ├── tests.py
-│   │   └── views.py
-│   ├── reviews
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── migrations
-│   │   │   ├── __init__.py
-│   │   │   └── 0001_initial.py
-│   │   ├── models.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   └── sales
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── migrations
-│       │   ├── __init__.py
-│       │   └── 0001_initial.py
-│       ├── models.py
-│       ├── tests.py
-│       ├── urls.py
-│       └── views.py
-├── book_review_web
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── data_fixture.json
-├── docker-compose.yml
-├── Dockerfile
-├── manage.py
-├── README.md
-└── requirements.txt
-```
-
----
-
-## **Available Commands**
-
-- Run migrations:
+1. Apply migrations:
 
 ```bash
 docker-compose exec backend python manage.py migrate
 ```
 
-- Run seeds:
+2. Load sample data (optional):
 
 ```bash
 docker-compose exec backend python manage.py loaddata fixtures/*
 ```
 
-- Connect to console:
-
-```bash
-docker exec -it nombre_del_contenedor python manage.py shell
-```
-
-- Create a superuser:
+3. Create an admin user:
 
 ```bash
 docker-compose exec backend python manage.py createsuperuser
 ```
 
-- Run tests:
+## Architecture
 
-```bash
-docker-compose exec backend python manage.py test
+The project follows a modular Django architecture with separate apps for different functionalities:
+
+### Key Components
+
+- **apps/authors**: Author information and management
+- **apps/books**: Book catalog and details
+- **apps/reviews**: User reviews and rating system
+- **apps/sales**: Book sales data and statistics
+- **apps/common**: Shared functionality and utilities
+- **book_review_web**: Core Django project settings and configuration
+
+### Caching Implementation
+
+The application supports optional Redis caching for improved performance:
+
+- **Cache Keys**: Follow a standardized format (e.g., "author:1", "book:5", "review_score:42")
+- **Cache Duration**: 5 minutes by default
+- **Invalidation**: Automatic cache invalidation via Django signals when data changes
+
+## Usage
+
+### Admin Interface
+
+Access the Django admin interface at `http://localhost:8000/admin/` to manage all data.
+
+### Main Application
+
+The main application is accessible at `http://localhost:8000/` with the following sections:
+
+- **Authors**: Browse and manage author information
+- **Books**: View the book catalog with filtering and search
+- **Reviews**: Read and write book reviews
+- **Statistics**: View sales statistics for books
+
+## Development
+
+### Project Structure
+
+```
+├── apps/                   # Django applications
+│   ├── authors/            # Author management
+│   ├── books/              # Book catalog
+│   ├── common/             # Shared utilities
+│   ├── reviews/            # Review system
+│   └── sales/              # Sales tracking
+├── book_review_web/        # Django project settings
+├── fixtures/               # Sample data
+├── static/                 # Static assets
+├── docker-compose.yml      # Base deployment configuration
+├── docker-compose.cache.yml # Redis cache configuration
+├── Dockerfile              # Container definition
+└── requirements.txt        # Python dependencies
 ```
 
----
+### Common Commands
 
-## **Environment Variables**
+#### Docker Commands
 
-- `DATABASE_URL` is used by the backend to connect to PostgreSQL.
-- Default database: `book_review`
-- Default user: `postgres`
-- Default password: `postgres`
+- Start all services:
 
----
+  ```bash
+  docker-compose up -d
+  ```
 
-## **Notes**
+- Stop all services:
 
-- Make sure Docker is installed and running.
+  ```bash
+  docker-compose down
+  ```
+
+- View logs:
+  ```bash
+  docker-compose logs -f
+  ```
+
+#### Django Management Commands
+
+- Run migrations:
+
+  ```bash
+  docker-compose exec backend python manage.py migrate
+  ```
+
+- Access Django shell:
+
+  ```bash
+  docker-compose exec backend python manage.py shell
+  ```
+
+- Run tests:
+  ```bash
+  docker-compose exec backend python manage.py test
+  ```
+
+## Environment Variables
+
+The application uses the following environment variables:
+
+| Variable       | Description               | Default                                            |
+| -------------- | ------------------------- | -------------------------------------------------- |
+| `DATABASE_URL` | PostgreSQL connection URL | `postgres://postgres:postgres@db:5432/book_review` |
+| `USE_CACHE`    | Enable Redis caching      | `false` or `true` depending on deployment          |
+| `REDIS_HOST`   | Redis server hostname     | `redis`                                            |
+| `REDIS_PORT`   | Redis server port         | `6379`                                             |
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -am 'Add new feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Troubleshooting
+
+- **Connection Issues**: Ensure all containers are running with `docker-compose ps`
+- **Database Errors**: Verify PostgreSQL container is healthy with `docker-compose logs db`
+- **Cache Not Working**: Check Redis connection with `docker-compose exec redis redis-cli ping`
