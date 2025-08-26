@@ -15,4 +15,8 @@ class Author(models.Model):
 
     @property
     def books_count(self) -> int:
+        """
+        Count the number of books by this author
+        Using simple property instead of cached_method as properties don't work well with method decorators
+        """
         return self.books.count()

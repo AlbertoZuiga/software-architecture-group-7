@@ -11,20 +11,33 @@ from .models import Author, Book
 
 
 def books_index(request):
+    from django.core.cache import cache
+
     query = (request.GET.get("q") or "").strip()
-    book_list = Book.objects.all()
 
     if query:
         vector = SearchVector("summary", "name")
         search_query = SearchQuery(query)
-        book_list = book_list.annotate(search=vector).filter(search=search_query)
+        book_list = Book.objects.all().annotate(search=vector).filter(search=search_query)
+    else:
+        cache_key = "books_index:all"
+        book_list = cache.get(cache_key)
+
+        if book_list is None:
+            book_list = Book.objects.all()
+
+            cache.set(cache_key, book_list, 300)
 
     paginator = Paginator(book_list, 10)
 
     page_number = request.GET.get("page")
     books = paginator.get_page(page_number)
 
-    authors = Author.objects.all()
+    cache_key = "authors:all"
+    authors = cache.get(cache_key)
+    if authors is None:
+        authors = Author.objects.all()
+        cache.set(cache_key, authors, 300)
 
     return render(
         request,
@@ -41,13 +54,36 @@ def books_index(request):
 
 
 def books_show(request, book_id):
-    book = Book.objects.get(id=book_id)
-    book.recompute_total_sales()
+    from apps.common.cache_utils import get_from_cache_or_db
+    from django.core.cache import cache
 
-    reviews = Review.objects.filter(book=book).prefetch_related("reviewupvotes", "user")
+    def fetch_book():
+        try:
+            book = Book.objects.get(id=book_id)
+            book.recompute_total_sales()
+            return book
+        except Book.DoesNotExist:
+            return None
 
-    for review in reviews:
-        review.recompute_up_votes_count()
+    book = get_from_cache_or_db("book", book_id, fetch_book)
+    if not book:
+        return redirect("books:index")
+
+
+    reviews_cache_key = f"book_reviews:{book_id}"
+    reviews = None
+
+    if not request.user.is_authenticated:
+        reviews = cache.get(reviews_cache_key)
+
+    if reviews is None:
+        reviews = Review.objects.filter(book=book).prefetch_related("reviewupvotes", "user")
+
+        for review in reviews:
+            review.recompute_up_votes_count()
+
+        if not request.user.is_authenticated:
+            cache.set(reviews_cache_key, reviews, 300)
 
     user_upvoted_review_ids = []
     if request.user.is_authenticated:

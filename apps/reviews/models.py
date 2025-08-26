@@ -4,6 +4,8 @@ from django.db import IntegrityError, models
 from apps.books.models import Book
 
 
+from apps.common.cache_utils import cached_method, get_cache_key, invalidate_cache, cache
+
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
     review = models.TextField()
@@ -23,6 +25,7 @@ class Review(models.Model):
     def add_upvote(self, user):
         try:
             ReviewUpvote.objects.create(review=self, user=user)
+            invalidate_cache("review_score", self.id)
             return True
         except IntegrityError:
             return False
@@ -31,13 +34,24 @@ class Review(models.Model):
         try:
             upvote = ReviewUpvote.objects.get(review=self, user=user)
             upvote.delete()
+            invalidate_cache("review_score", self.id)
             return True
         except ReviewUpvote.DoesNotExist:
             return False
 
     def recompute_up_votes_count(self):
-        self.up_votes = self.reviewupvotes.count()
-        self.save()
+        # Get from cache or compute
+        cache_key = get_cache_key("review_score", self.id)
+        cached_count = cache.get(cache_key)
+
+        if cached_count is None:
+            count = self.reviewupvotes.count()
+            cache.set(cache_key, count, 300)  # Cache for 5 minutes
+            self.up_votes = count
+        else:
+            self.up_votes = cached_count
+
+        self.save(update_fields=["up_votes"])
 
 
 class ReviewUpvote(models.Model):

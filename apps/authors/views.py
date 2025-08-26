@@ -12,7 +12,16 @@ CURRENT_YEAR = datetime.now().year
 
 
 def authors_index(request):
-    author_list = Author.objects.all()
+    from django.core.cache import cache
+    
+    # For index views, we use a simpler cache key without query params to avoid excessive cache entries
+    cache_key = "authors_index:all"
+    author_list = cache.get(cache_key)
+    
+    if author_list is None:
+        author_list = Author.objects.all()
+        cache.set(cache_key, author_list, 300)  # Cache for 5 minutes
+    
     paginator = Paginator(author_list, 10)
 
     page_number = request.GET.get("page")
@@ -22,11 +31,16 @@ def authors_index(request):
 
 
 def authors_show(request, author_id):
-    author = (
-        Author.objects
-        .annotate(total_sales=Coalesce(Sum("books__yearly_sales__sales"), 0))
-        .get(id=author_id)
-    )
+    from apps.common.cache_utils import get_from_cache_or_db
+
+    def fetch_author():
+        return (
+            Author.objects
+            .annotate(total_sales=Coalesce(Sum("books__yearly_sales__sales"), 0))
+            .get(id=author_id)
+        )
+
+    author = get_from_cache_or_db("author", author_id, fetch_author)
     return render(request, "authors/authors_show.html", {"author": author})
 
 

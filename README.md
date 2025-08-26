@@ -13,13 +13,29 @@ git clone https://github.com/AlbertoZuiga/software-architecture-group-7.git
 cd software-architecture-group-7
 ```
 
-Build and start the containers using Docker Compose:
+### Deployment Options
+
+#### Option 1: Application + Database (without cache)
+
+Build and start the containers using standard Docker Compose:
 
 ```bash
 docker-compose up --build -d
 ```
 
-> The backend service will be available at `http://localhost:8000/`.
+This will start the application with PostgreSQL but without Redis cache.
+
+#### Option 2: Application + Database + Redis Cache
+
+Build and start the containers with both the base and cache configuration:
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.cache.yml up --build -d
+```
+
+This will start the application with both PostgreSQL and Redis cache enabled.
+
+> The backend service will be available at `http://localhost:8000/` in both deployment options.
 
 ---
 
@@ -99,31 +115,31 @@ docker-compose up --build -d
 
 ## **Available Commands**
 
-* Run migrations:
+- Run migrations:
 
 ```bash
 docker-compose exec backend python manage.py migrate
 ```
 
-* Run seeds:
+- Run seeds:
 
 ```bash
 docker-compose exec backend python manage.py loaddata fixtures/*
 ```
 
-* Connect to console:
+- Connect to console:
 
 ```bash
 docker exec -it nombre_del_contenedor python manage.py shell
 ```
 
-* Create a superuser:
+- Create a superuser:
 
 ```bash
 docker-compose exec backend python manage.py createsuperuser
 ```
 
-* Run tests:
+- Run tests:
 
 ```bash
 docker-compose exec backend python manage.py test
@@ -133,13 +149,13 @@ docker-compose exec backend python manage.py test
 
 ## **Environment Variables**
 
-* `DATABASE_URL` is used by the backend to connect to PostgreSQL.
-* Default database: `book_review`
-* Default user: `postgres`
-* Default password: `postgres`
+- `DATABASE_URL` is used by the backend to connect to PostgreSQL.
+- Default database: `book_review`
+- Default user: `postgres`
+- Default password: `postgres`
 
 ---
 
 ## **Notes**
 
-* Make sure Docker is installed and running.
+- Make sure Docker is installed and running.
