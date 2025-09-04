@@ -1,6 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 from apps.authors.models import Author
+
+
+def get_book_cover_upload_path(instance, filename):
+    return f"{settings.BOOK_COVERS_UPLOAD_PATH}{filename}"
 
 
 class Book(models.Model):
@@ -8,7 +13,7 @@ class Book(models.Model):
     name = models.CharField(max_length=255)
     summary = models.TextField(max_length=2000)
     published_at = models.DateField()
-    cover_image = models.ImageField(upload_to='books/', null=True, blank=True, help_text="Imagen de portada del libro")
+    cover_image = models.ImageField(upload_to=get_book_cover_upload_path, null=True, blank=True, help_text="Imagen de portada del libro")
 
     total_sales = models.PositiveIntegerField(default=0)
 

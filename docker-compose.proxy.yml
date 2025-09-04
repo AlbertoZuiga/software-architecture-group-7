@@ -25,6 +25,8 @@ services:
       DATABASE_URL: postgres://postgres:postgres@db:5432/book_review
       USE_CACHE: "false"
       USE_REVERSE_PROXY: "true"
+      AUTHOR_PHOTOS_UPLOAD_PATH: "authors/"
+      BOOK_COVERS_UPLOAD_PATH: "books/"
     depends_on:
       db:
         condition: service_healthy

@@ -134,6 +134,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+AUTHOR_PHOTOS_UPLOAD_PATH = os.environ.get('AUTHOR_PHOTOS_UPLOAD_PATH', 'authors/')
+BOOK_COVERS_UPLOAD_PATH = os.environ.get('BOOK_COVERS_UPLOAD_PATH', 'books/')
+
 # Flag to decide if Django should serve media files
 USE_REVERSE_PROXY = os.environ.get('USE_REVERSE_PROXY', 'false').lower() == 'true'
 

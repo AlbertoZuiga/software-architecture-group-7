@@ -1,4 +1,9 @@
 from django.db import models
+from django.conf import settings
+
+
+def get_author_photo_upload_path(instance, filename):
+    return f"{settings.AUTHOR_PHOTOS_UPLOAD_PATH}{filename}"
 
 
 class Author(models.Model):
@@ -6,7 +11,7 @@ class Author(models.Model):
     country = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to='authors/', null=True, blank=True, help_text="Foto del autor")
+    photo = models.ImageField(upload_to=get_author_photo_upload_path, null=True, blank=True, help_text="Foto del autor")
 
     class Meta:
         ordering = ["name"]
