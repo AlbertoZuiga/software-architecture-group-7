@@ -12,7 +12,16 @@ CURRENT_YEAR = datetime.now().year
 
 
 def authors_index(request):
-    author_list = Author.objects.all()
+    from django.core.cache import cache
+    
+    # For index views, we use a simpler cache key without query params to avoid excessive cache entries
+    cache_key = "authors_index:all"
+    author_list = cache.get(cache_key)
+    
+    if author_list is None:
+        author_list = Author.objects.all()
+        cache.set(cache_key, author_list, 300)  # Cache for 5 minutes
+    
     paginator = Paginator(author_list, 10)
 
     page_number = request.GET.get("page")
@@ -22,11 +31,16 @@ def authors_index(request):
 
 
 def authors_show(request, author_id):
-    author = (
-        Author.objects
-        .annotate(total_sales=Coalesce(Sum("books__yearly_sales__sales"), 0))
-        .get(id=author_id)
-    )
+    from apps.common.cache_utils import get_from_cache_or_db
+
+    def fetch_author():
+        return (
+            Author.objects
+            .annotate(total_sales=Coalesce(Sum("books__yearly_sales__sales"), 0))
+            .get(id=author_id)
+        )
+
+    author = get_from_cache_or_db("author", author_id, fetch_author)
     return render(request, "authors/authors_show.html", {"author": author})
 
 
@@ -39,6 +53,7 @@ def authors_create(request):
         country = request.POST.get("country", "").strip()
         date_of_birth_raw = request.POST.get("date_of_birth", "").strip()
         description = request.POST.get("description", "").strip()
+        photo = request.FILES.get("photo")
 
         form_values["name"] = name
         form_values["country"] = country
@@ -60,9 +75,16 @@ def authors_create(request):
                 errors["date_of_birth"] = "Invalid date format (YYYY-MM-DD)"
 
         if not errors:
-            Author.objects.create(
-                name=name, country=country, date_of_birth=dob, description=description
-            )
+            author_data = {
+                'name': name,
+                'country': country,
+                'date_of_birth': dob,
+                'description': description
+            }
+            if photo:
+                author_data['photo'] = photo
+                
+            Author.objects.create(**author_data)
             return redirect("authors:index")
 
     author_list = Author.objects.all()
@@ -88,6 +110,7 @@ def authors_update(request, author_id):
         country = request.POST.get("country", "").strip()
         date_of_birth_raw = request.POST.get("date_of_birth", "").strip()
         description = request.POST.get("description", "").strip()
+        photo = request.FILES.get("photo")
 
         form_values["name"] = name
         form_values["country"] = country
@@ -113,7 +136,9 @@ def authors_update(request, author_id):
             author.country = country
             author.date_of_birth = dob
             author.description = description
-            author.save(update_fields=["name", "country", "date_of_birth", "description"])
+            if photo:
+                author.photo = photo
+            author.save()
             return redirect("authors:index")
 
     return render(

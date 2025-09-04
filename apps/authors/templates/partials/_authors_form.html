@@ -1,4 +1,4 @@
-<form method="post" action="{{ form_action }}">
+<form method="post" action="{{ form_action }}" enctype="multipart/form-data">
     {% csrf_token %}
     
     <div class="row g-4">
@@ -58,6 +58,28 @@
                 >
                 {% if errors.date_of_birth %}
                     <div class="invalid-feedback">{{ errors.date_of_birth }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Photo Field -->
+        <div class="col-12">
+            <div class="form-group">
+                <label for="photo" class="form-label text-light">
+                    <i class="bi bi-camera me-2"></i>Author Photo
+                </label>
+                <input 
+                    id="photo"
+                    type="file"
+                    name="photo"
+                    class="form-control bg-dark border-secondary text-light"
+                    accept="image/*"
+                >
+                {% if initial_photo %}
+                    <div class="mt-2">
+                        <small class="text-muted">Current photo:</small>
+                        <img src="{{ initial_photo.url }}" alt="Current author photo" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                    </div>
                 {% endif %}
             </div>
         </div>

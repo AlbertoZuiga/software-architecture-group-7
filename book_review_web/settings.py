@@ -125,10 +125,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),  # Ensure this points to your static directory
 ]
+
+# Media files configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTHOR_PHOTOS_UPLOAD_PATH = os.environ.get('AUTHOR_PHOTOS_UPLOAD_PATH', 'authors/')
+BOOK_COVERS_UPLOAD_PATH = os.environ.get('BOOK_COVERS_UPLOAD_PATH', 'books/')
+
+# Flag to decide if Django should serve media files
+USE_REVERSE_PROXY = os.environ.get('USE_REVERSE_PROXY', 'false').lower() == 'true'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -139,3 +149,26 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "books:index"
 LOGOUT_REDIRECT_URL = "books:index"
+
+# Cache configuration
+USE_CACHE = os.environ.get('USE_CACHE', '').lower() == 'true'
+REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+REDIS_PORT = int(os.environ.get('REDIS_PORT', 6379))
+
+if USE_CACHE:
+    CACHES = {
+        'default': {
+            # Use django-redis backend instead of Django's native RedisCache
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/1',
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
