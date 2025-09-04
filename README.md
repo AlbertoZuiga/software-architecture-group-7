@@ -63,9 +63,7 @@ docker-compose -f docker-compose.proxy.yml up --build -d
 
 The application will be available at:
 
-- Default stack: [http://localhost:8000/](http://localhost:8000/)
-- Cache stack: [http://localhost:8001/](http://localhost:8001/)
-- Proxy stack: [http://localhost:8002/](http://localhost:8002/)
+- [http://localhost:8000/](http://localhost:8000/)
 
 ---
 
