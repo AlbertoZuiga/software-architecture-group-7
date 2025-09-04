@@ -1,21 +1,55 @@
+networks:
+  cache_network:
+    name: cache_network
+
 services:
-  redis:
+  cache_db:
+    image: postgres:16
+    container_name: cache_postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: book_review
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5433:5432"
+    volumes:
+      - cache_postgres_data:/var/lib/postgresql/data
+
+  cache_redis:
     image: redis:7-alpine
-    container_name: redis_container
+    container_name: cache_redis_container
     ports:
       - "6379:6379"
     restart: unless-stopped
     volumes:
-      - redis_data:/data
+      - cache_redis_data:/data
 
-  backend:
+  cache_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cache_backend_container
     environment:
+      DATABASE_URL: postgres://postgres:postgres@cache_db:5432/book_review
       USE_CACHE: "true"
-      REDIS_HOST: "redis"
+      REDIS_HOST: "cache_redis"
       REDIS_PORT: "6379"
     depends_on:
-      redis:
+      cache_db:
+        condition: service_healthy
+      cache_redis:
         condition: service_started
+    ports:
+      - "8001:8000"
+    restart: unless-stopped
+    volumes:
+      - .:/app
 
 volumes:
-  redis_data:
+  cache_postgres_data:
+  cache_redis_data:

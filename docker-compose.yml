@@ -23,7 +23,6 @@ services:
     container_name: backend_container
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/book_review
-      USE_CACHE: "false"
     depends_on:
       db:
         condition: service_healthy

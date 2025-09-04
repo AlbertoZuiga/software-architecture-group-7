@@ -33,7 +33,7 @@ cd software-architecture-group-7
 
 ### Deployment Options
 
-#### Option 1: Application + Database (without cache)
+#### Option 1: Application + Database
 
 Build and start the application with PostgreSQL only:
 
@@ -41,19 +41,33 @@ Build and start the application with PostgreSQL only:
 docker-compose up --build -d
 ```
 
-This configuration uses Django's DummyCache backend, which functions as a no-op cache.
+Only the main app and database are started.
 
 #### Option 2: Application + Database + Redis Cache
 
 Build and start the application with PostgreSQL and Redis caching:
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.cache.yml up --build -d
+docker-compose -f docker-compose.cache.yml up --build -d
 ```
 
-This configuration activates Redis for caching frequently accessed data like author information, book details, and review scores.
+This configuration activates Redis for caching frequently accessed data like author information, book details, and review scores. The cache stack runs on separate ports and can be isolated from the default stack.
 
-> The application will be available at `http://localhost:8000/` in both deployment options.
+#### Option 3: Application + Database + Reverse Proxy
+
+Build and start the application with PostgreSQL and a reverse proxy:
+
+```bash
+docker-compose -f docker-compose.proxy.yml up --build -d
+```
+
+The application will be available at:
+
+- Default stack: [http://localhost:8000/](http://localhost:8000/)
+- Cache stack: [http://localhost:8001/](http://localhost:8001/)
+- Proxy stack: [http://localhost:8002/](http://localhost:8002/)
+
+---
 
 ### Initial Setup
 

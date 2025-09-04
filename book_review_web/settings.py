@@ -137,8 +137,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTHOR_PHOTOS_UPLOAD_PATH = os.environ.get('AUTHOR_PHOTOS_UPLOAD_PATH', 'authors/')
 BOOK_COVERS_UPLOAD_PATH = os.environ.get('BOOK_COVERS_UPLOAD_PATH', 'books/')
 
-# Flag to decide if Django should serve media files
-USE_REVERSE_PROXY = os.environ.get('USE_REVERSE_PROXY', 'false').lower() == 'true'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -149,6 +147,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "books:index"
 LOGOUT_REDIRECT_URL = "books:index"
+
+# Flag to decide if Django should serve media files
+USE_REVERSE_PROXY = os.environ.get('USE_REVERSE_PROXY', 'false').lower() == 'true'
 
 # Cache configuration
 USE_CACHE = os.environ.get('USE_CACHE', '').lower() == 'true'
