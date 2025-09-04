@@ -49,9 +49,13 @@
                 <div class="card h-100 hover-card bg-dark border-secondary">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle bg-primary bg-opacity-15 p-3 me-3">
-                                <i class="bi bi-person text-primary"></i>
-                            </div>
+                            {% if author.photo %}
+                                <img src="{{ author.photo.url }}" alt="{{ author.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            {% else %}
+                                <div class="rounded-circle bg-primary bg-opacity-15 p-3 me-3">
+                                    <i class="bi bi-person text-primary"></i>
+                                </div>
+                            {% endif %}
                             <div>
                                 <h3 class="h5 mb-1 text-light">{{ author.name }}</h3>
                                 <p class="text-secondary small mb-0">{{ author.country }}</p>

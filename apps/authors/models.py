@@ -6,6 +6,7 @@ class Author(models.Model):
     country = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to='authors/', null=True, blank=True, help_text="Foto del autor")
 
     class Meta:
         ordering = ["name"]

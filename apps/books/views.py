@@ -110,6 +110,7 @@ def books_create(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         summary = request.POST.get("summary", "").strip()
+        cover_image = request.FILES.get("cover_image")
         MAX_NAME_LENGTH = 255
         MAX_SUMMARY_LENGTH = 2000
 
@@ -160,9 +161,16 @@ def books_create(request):
                 errors["published_at"] = "Publication date cannot be in the future."
 
         if not errors:
-            Book.objects.create(
-                name=name, summary=summary, published_at=published_at, author_id=author_id
-            )
+            book_data = {
+                'name': name,
+                'summary': summary,
+                'published_at': published_at,
+                'author_id': author_id
+            }
+            if cover_image:
+                book_data['cover_image'] = cover_image
+            
+            Book.objects.create(**book_data)
             return redirect("books:index")
 
     authors = Author.objects.all()
@@ -196,6 +204,7 @@ def books_update(request, book_id):
         summary = request.POST.get("summary", "").strip()
         published_at_str = request.POST.get("published_at", "").strip()
         author_id = request.POST.get("author", "").strip()
+        cover_image = request.FILES.get("cover_image")
 
         form_values = {
             "name": name,
@@ -239,6 +248,8 @@ def books_update(request, book_id):
             book.summary = summary
             book.published_at = published_at
             book.author_id = author_id
+            if cover_image:
+                book.cover_image = cover_image
             book.save()
             return redirect("books:index")
     else:

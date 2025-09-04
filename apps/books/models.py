@@ -8,6 +8,7 @@ class Book(models.Model):
     name = models.CharField(max_length=255)
     summary = models.TextField(max_length=2000)
     published_at = models.DateField()
+    cover_image = models.ImageField(upload_to='books/', null=True, blank=True, help_text="Imagen de portada del libro")
 
     total_sales = models.PositiveIntegerField(default=0)
 

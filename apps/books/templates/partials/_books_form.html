@@ -1,4 +1,4 @@
-<form method="post" action="{{ form_action }}">
+<form method="post" action="{{ form_action }}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="row g-4">
@@ -61,6 +61,26 @@
                 >
                 {% if errors.published_at %}
                     <div class="invalid-feedback">{{ errors.published_at }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Cover Image -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cover_image" class="form-label">Cover Image</label>
+                <input 
+                    id="cover_image"
+                    type="file"
+                    name="cover_image"
+                    class="form-control bg-dark border-secondary text-light"
+                    accept="image/*"
+                >
+                {% if initial_cover_image %}
+                    <div class="mt-2">
+                        <small class="text-muted">Current image:</small>
+                        <img src="{{ initial_cover_image.url }}" alt="Current cover" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                    </div>
                 {% endif %}
             </div>
         </div>

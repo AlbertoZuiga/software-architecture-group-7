@@ -31,7 +31,7 @@
                 
                 <div class="card-body p-4">
                     {% url 'authors:update' author.id as update_url %}
-                    {% include "partials/_authors_form.html" with form_action=update_url submit_label="Save Changes" initial_name=author.name initial_country=author.country initial_date_of_birth=author.date_of_birth|date:'Y-m-d' initial_description=author.description %}
+                    {% include "partials/_authors_form.html" with form_action=update_url submit_label="Save Changes" initial_name=author.name initial_country=author.country initial_date_of_birth=author.date_of_birth|date:'Y-m-d' initial_description=author.description initial_photo=author.photo %}
                 </div>
             </div>
         </div>

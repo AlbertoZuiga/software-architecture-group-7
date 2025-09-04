@@ -53,6 +53,7 @@ def authors_create(request):
         country = request.POST.get("country", "").strip()
         date_of_birth_raw = request.POST.get("date_of_birth", "").strip()
         description = request.POST.get("description", "").strip()
+        photo = request.FILES.get("photo")
 
         form_values["name"] = name
         form_values["country"] = country
@@ -74,9 +75,16 @@ def authors_create(request):
                 errors["date_of_birth"] = "Invalid date format (YYYY-MM-DD)"
 
         if not errors:
-            Author.objects.create(
-                name=name, country=country, date_of_birth=dob, description=description
-            )
+            author_data = {
+                'name': name,
+                'country': country,
+                'date_of_birth': dob,
+                'description': description
+            }
+            if photo:
+                author_data['photo'] = photo
+                
+            Author.objects.create(**author_data)
             return redirect("authors:index")
 
     author_list = Author.objects.all()
@@ -102,6 +110,7 @@ def authors_update(request, author_id):
         country = request.POST.get("country", "").strip()
         date_of_birth_raw = request.POST.get("date_of_birth", "").strip()
         description = request.POST.get("description", "").strip()
+        photo = request.FILES.get("photo")
 
         form_values["name"] = name
         form_values["country"] = country
@@ -127,7 +136,9 @@ def authors_update(request, author_id):
             author.country = country
             author.date_of_birth = dob
             author.description = description
-            author.save(update_fields=["name", "country", "date_of_birth", "description"])
+            if photo:
+                author.photo = photo
+            author.save()
             return redirect("authors:index")
 
     return render(

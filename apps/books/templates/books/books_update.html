@@ -31,7 +31,7 @@
                 
                 <div class="card-body p-4">
                     {% url 'books:update' book.id as update_url %}
-                    {% include "partials/_books_form.html" with form_action=update_url submit_label="Save Changes" initial_name=book.name initial_summary=book.summary initial_published_at=book.published_at initial_author=book.author %}
+                    {% include "partials/_books_form.html" with form_action=update_url submit_label="Save Changes" initial_name=book.name initial_summary=book.summary initial_published_at=book.published_at initial_author=book.author initial_cover_image=book.cover_image %}
                 </div>
             </div>
         </div>
