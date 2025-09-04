@@ -134,6 +134,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Flag to decide if Django should serve media files
+USE_REVERSE_PROXY = os.environ.get('USE_REVERSE_PROXY', 'false').lower() == 'true'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
