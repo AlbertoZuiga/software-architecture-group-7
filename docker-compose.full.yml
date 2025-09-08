@@ -1,4 +1,22 @@
 services:
+  full_elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: elasticsearch_container
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - full_elasticsearch_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   full_db:
     image: postgres:16
     container_name: postgres_container
@@ -38,11 +56,15 @@ services:
       USE_REVERSE_PROXY: "true"
       AUTHOR_PHOTOS_UPLOAD_PATH: "authors/"
       BOOK_COVERS_UPLOAD_PATH: "books/"
+      ELASTICSEARCH_HOST: full_elasticsearch
+      ELASTICSEARCH_PORT: 9200
     depends_on:
       full_db:
         condition: service_healthy
       full_redis:
         condition: service_started
+      full_elasticsearch:
+        condition: service_healthy
     ports:
       - "8001:8000"
     healthcheck:
@@ -75,3 +97,4 @@ volumes:
   full_redis_data:
   full_static_data:
   full_media_data:
+  full_elasticsearch_data:
