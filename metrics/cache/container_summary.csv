@@ -1,0 +1,16 @@
+scenario,container,avg_cpu,avg_mem
+1,cache_backend_container,1.0225,94.57
+1,cache_postgres_container,0.0,87.3
+1,cache_redis_container,0.7275,9.6405
+10,cache_backend_container,1.1215,94.571
+10,cache_postgres_container,0.4952,84.4162
+10,cache_redis_container,0.607,9.6665
+100,cache_backend_container,1.569,94.6367
+100,cache_postgres_container,0.8512,73.1765
+100,cache_redis_container,0.7303,9.6364
+1000,cache_backend_container,6.7808,95.0182
+1000,cache_postgres_container,6.6092,77.6715
+1000,cache_redis_container,0.6028,9.5342
+5000,cache_backend_container,17.2312,94.9098
+5000,cache_postgres_container,24.5718,75.8732
+5000,cache_redis_container,0.3675,9.4875
