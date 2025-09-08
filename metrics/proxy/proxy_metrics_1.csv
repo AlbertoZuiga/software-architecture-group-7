@@ -1,0 +1,22 @@
+timestamp,container,cpu,mem
+1757308138,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308138,proxy_backend_container,1.57%,108.6MiB / 7.724GiB
+1757308138,proxy_postgres_container,0.00%,64.93MiB / 7.724GiB
+1757308146,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308146,proxy_backend_container,0.32%,108.4MiB / 7.724GiB
+1757308146,proxy_postgres_container,0.00%,67.19MiB / 7.724GiB
+1757308153,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308153,proxy_backend_container,3.23%,108.4MiB / 7.724GiB
+1757308153,proxy_postgres_container,0.00%,67.42MiB / 7.724GiB
+1757308161,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308161,proxy_backend_container,1.93%,108.6MiB / 7.724GiB
+1757308161,proxy_postgres_container,0.00%,67.18MiB / 7.724GiB
+1757308168,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308168,proxy_backend_container,3.94%,108.9MiB / 7.724GiB
+1757308168,proxy_postgres_container,0.00%,67.12MiB / 7.724GiB
+1757308176,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308176,proxy_backend_container,2.33%,108.3MiB / 7.724GiB
+1757308176,proxy_postgres_container,0.00%,67.27MiB / 7.724GiB
+1757308183,proxy_nginx_container,0.00%,12.31MiB / 7.724GiB
+1757308183,proxy_backend_container,0.63%,108.7MiB / 7.724GiB
+1757308183,proxy_postgres_container,0.00%,67.21MiB / 7.724GiB

@@ -1,0 +1,16 @@
+scenario,container,avg_cpu,avg_mem
+1,proxy_backend_container,1.9929,108.5571
+1,proxy_nginx_container,0.0,12.31
+1,proxy_postgres_container,0.0,66.9029
+10,proxy_backend_container,2.4378,113.0829
+10,proxy_nginx_container,0.0,13.0976
+10,proxy_postgres_container,0.1249,56.3393
+100,proxy_backend_container,3.929,104.0341
+100,proxy_nginx_container,0.0707,12.2637
+100,proxy_postgres_container,1.6702,62.5932
+1000,proxy_backend_container,11.05,106.315
+1000,proxy_nginx_container,0.384,12.4445
+1000,proxy_postgres_container,11.752,86.9645
+5000,proxy_backend_container,34.2595,107.6341
+5000,proxy_nginx_container,1.4371,12.531
+5000,proxy_postgres_container,40.2593,80.1429
