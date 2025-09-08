@@ -10,9 +10,11 @@ This project is a book review platform built with Django, featuring a modular ar
 
 - **Author Management**: Create, view, and update author profiles
 - **Book Catalog**: Browse and search books with detailed information
+- **Enhanced Search**: ElasticSearch integration for fast, fuzzy text search (optional)
 - **Review System**: Add book reviews with ratings and upvote functionality
 - **Sales Tracking**: Record and display book sales statistics
 - **Caching Support**: Optional Redis caching for improved performance
+- **Reverse Proxy**: Optional Nginx configuration for better performance and custom domains
 - **Responsive Design**: Mobile-friendly user interface
 
 ## Prerequisites
@@ -33,7 +35,7 @@ cd software-architecture-group-7
 
 ### Deployment Options
 
-#### Option 1: Application + Database
+#### Option 1: Application + Database (Default)
 
 Build and start the application with PostgreSQL only:
 
@@ -41,7 +43,7 @@ Build and start the application with PostgreSQL only:
 docker-compose up --build -d
 ```
 
-Only the main app and database are started.
+Only the main app and database are started. The application will be available at [http://localhost:8000/](http://localhost:8000/).
 
 #### Option 2: Application + Database + Redis Cache
 
@@ -51,43 +53,72 @@ Build and start the application with PostgreSQL and Redis caching:
 docker-compose -f docker-compose.cache.yml up --build -d
 ```
 
-This configuration activates Redis for caching frequently accessed data like author information, book details, and review scores. The cache stack runs on separate ports and can be isolated from the default stack.
+This configuration activates Redis for caching frequently accessed data like author information, book details, and review scores. The application will be available at [http://localhost:8000/](http://localhost:8000/).
 
-#### Option 3: Application + Database + Reverse Proxy
+#### Option 3: Application + Database + ElasticSearch
 
-Build and start the application with PostgreSQL and a reverse proxy:
+Build and start the application with PostgreSQL and ElasticSearch for enhanced search:
+
+```bash
+docker-compose -f docker-compose.elasticsearch.yml up --build -d
+```
+
+This configuration adds ElasticSearch for improved text search functionality. The application will be available at [http://localhost:8000/](http://localhost:8000/).
+
+#### Option 4: Application + Database + Reverse Proxy
+
+Build and start the application with PostgreSQL and Nginx reverse proxy:
 
 ```bash
 docker-compose -f docker-compose.proxy.yml up --build -d
 ```
 
-The application will be available at:
+This configuration adds Nginx as a reverse proxy for better static file handling and request management. The application will be available at:
 
-- [http://localhost:8000/](http://localhost:8000/)
+- [http://localhost](http://localhost)
+- **Custom domain**: [app.localhost](app.localhost) (requires hosts file modification)
+
+To use the custom domain, add the following line to your system's hosts file:
+- **Windows**: `C:\Windows\System32\drivers\etc\hosts`
+- **Linux/Mac**: `/etc/hosts`
+
+```
+127.0.0.1 app.localhost
+```
+
+#### Option 5: Full Setup (Application + Database + Cache + Search + Proxy)
+
+Build and start the complete application with all components:
+
+```bash
+docker-compose -f docker-compose.full.yml up --build -d
+```
+
+This configuration includes PostgreSQL, Redis cache, ElasticSearch, and Nginx reverse proxy for maximum performance. The application will be available at:
+
+- [http://localhost](http://localhost)
+- **Custom domain**: [http://app.localhost/](http://app.localhost/) (requires hosts file modification)
+
+To use the custom domain, add the following line to your system's hosts file:
+- **Windows**: `C:\Windows\System32\drivers\etc\hosts`
+- **Linux/Mac**: `/etc/hosts`
+
+```
+127.0.0.1 app.localhost
+```
 
 ---
 
-### Initial Setup
 
-After deployment, run the following commands to set up the database:
 
-1. Apply migrations:
+### Login Credentials
 
-```bash
-docker-compose exec backend python manage.py migrate
-```
+You can access the application with the following credentials:
 
-2. Load sample data (optional):
+- **Username**: `admin`
+- **Password**: `admin1234`
 
-```bash
-docker-compose exec backend python manage.py loaddata fixtures/*
-```
-
-3. Create an admin user:
-
-```bash
-docker-compose exec backend python manage.py createsuperuser
-```
+These credentials provide full administrative access to the application.
 
 ## Architecture
 
@@ -112,10 +143,6 @@ The application supports optional Redis caching for improved performance:
 
 ## Usage
 
-### Admin Interface
-
-Access the Django admin interface at `http://localhost:8000/admin/` to manage all data.
-
 ### Main Application
 
 The main application is accessible at `http://localhost:8000/` with the following sections:
@@ -125,91 +152,6 @@ The main application is accessible at `http://localhost:8000/` with the followin
 - **Reviews**: Read and write book reviews
 - **Statistics**: View sales statistics for books
 
-## Development
 
-### Project Structure
 
-```
-├── apps/                   # Django applications
-│   ├── authors/            # Author management
-│   ├── books/              # Book catalog
-│   ├── common/             # Shared utilities
-│   ├── reviews/            # Review system
-│   └── sales/              # Sales tracking
-├── book_review_web/        # Django project settings
-├── fixtures/               # Sample data
-├── static/                 # Static assets
-├── docker-compose.yml      # Base deployment configuration
-├── docker-compose.cache.yml # Redis cache configuration
-├── Dockerfile              # Container definition
-└── requirements.txt        # Python dependencies
-```
 
-### Common Commands
-
-#### Docker Commands
-
-- Start all services:
-
-  ```bash
-  docker-compose up -d
-  ```
-
-- Stop all services:
-
-  ```bash
-  docker-compose down
-  ```
-
-- View logs:
-  ```bash
-  docker-compose logs -f
-  ```
-
-#### Django Management Commands
-
-- Run migrations:
-
-  ```bash
-  docker-compose exec backend python manage.py migrate
-  ```
-
-- Access Django shell:
-
-  ```bash
-  docker-compose exec backend python manage.py shell
-  ```
-
-- Run tests:
-  ```bash
-  docker-compose exec backend python manage.py test
-  ```
-
-## Environment Variables
-
-The application uses the following environment variables:
-
-| Variable       | Description               | Default                                            |
-| -------------- | ------------------------- | -------------------------------------------------- |
-| `DATABASE_URL` | PostgreSQL connection URL | `postgres://postgres:postgres@db:5432/book_review` |
-| `USE_CACHE`    | Enable Redis caching      | `false` or `true` depending on deployment          |
-| `REDIS_HOST`   | Redis server hostname     | `redis`                                            |
-| `REDIS_PORT`   | Redis server port         | `6379`                                             |
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -am 'Add new feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Troubleshooting
-
-- **Connection Issues**: Ensure all containers are running with `docker-compose ps`
-- **Database Errors**: Verify PostgreSQL container is healthy with `docker-compose logs db`
-- **Cache Not Working**: Check Redis connection with `docker-compose exec redis redis-cli ping`
