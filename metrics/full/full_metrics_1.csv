@@ -1,0 +1,11 @@
+timestamp,container,cpu,mem
+1757317955,full_nginx_container,0.11%,10.15MiB / 7.653GiB
+1757317955,full_backend_container,2.65%,104.3MiB / 7.653GiB
+1757317955,postgres_container,0.21%,24.21MiB / 7.653GiB
+1757317955,full_redis_container,0.65%,9.625MiB / 7.653GiB
+1757317955,elasticsearch_container,4.81%,986.5MiB / 7.653GiB
+1757317963,full_nginx_container,0.00%,10.14MiB / 7.653GiB
+1757317963,full_backend_container,1.11%,104.3MiB / 7.653GiB
+1757317963,postgres_container,0.19%,26MiB / 7.653GiB
+1757317963,full_redis_container,0.80%,9.625MiB / 7.653GiB
+1757317963,elasticsearch_container,0.59%,986.5MiB / 7.653GiB
