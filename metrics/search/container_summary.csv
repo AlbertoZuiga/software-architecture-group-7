@@ -1,0 +1,16 @@
+scenario,container,avg_cpu,avg_mem
+1,backend_container,3.4733,121.3
+1,elasticsearch_container,0.3133,1.056
+1,postgres_container,0.0033,77.38
+10,backend_container,2.79,131.5439
+10,elasticsearch_container,0.569,1.0452
+10,postgres_container,0.5661,55.9715
+100,backend_container,3.258,128.5098
+100,elasticsearch_container,1.8707,1.0439
+100,postgres_container,0.8495,62.2524
+1000,backend_container,11.4492,119.7025
+1000,elasticsearch_container,6.4105,1.0403
+1000,postgres_container,4.749,82.2755
+5000,backend_container,36.869,121.36
+5000,elasticsearch_container,11.7412,1.0529
+5000,postgres_container,14.6595,106.1685
