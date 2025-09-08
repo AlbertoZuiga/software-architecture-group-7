@@ -1,0 +1,3 @@
+timestamp,container,cpu,mem
+1757306437,backend_container,1.30%,83.59MiB / 7.653GiB
+1757306437,postgres_container,2.82%,28.77MiB / 7.653GiB
