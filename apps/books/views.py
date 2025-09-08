@@ -6,6 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 from apps.reviews.models import Review, ReviewUpvote
 from apps.common.utils import render_book_detail
+from apps.common.search_service import search_service
 
 from .models import Author, Book
 
@@ -16,9 +17,8 @@ def books_index(request):
     query = (request.GET.get("q") or "").strip()
 
     if query:
-        vector = SearchVector("summary", "name")
-        search_query = SearchQuery(query)
-        book_list = Book.objects.all().annotate(search=vector).filter(search=search_query)
+        # Use the search service which handles ElasticSearch or database search
+        book_list = search_service.search_books(query, Book.objects.all())
     else:
         cache_key = "books_index:all"
         book_list = cache.get(cache_key)

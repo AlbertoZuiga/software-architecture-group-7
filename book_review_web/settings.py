@@ -173,3 +173,7 @@ else:
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
+
+# ElasticSearch configuration
+ELASTICSEARCH_HOST = os.environ.get('ELASTICSEARCH_HOST', 'localhost')
+ELASTICSEARCH_PORT = int(os.environ.get('ELASTICSEARCH_PORT', 9200))
